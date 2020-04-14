@@ -1,0 +1,173 @@
+.ppvx_btn {
+    border-radius: 1.5rem;
+    border: .0625rem solid #0070ba;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+
+    margin: 10;
+}
+
+.ppvx_btn--secondary:visited {
+    color: #ff0000;
+}
+.ppvx_btn:active, .ppvx_btn:focus, .ppvx_btn:hover, .ppvx_btn:visited {
+    color: #9da3a6;
+}
+.ppvx_btn--size_sm {
+    font-size: .8125rem;
+    line-height: 1.125rem;
+    font-family: PayPalSansSmall-Regular,Helvetica Neue,Arial,sans-serif;
+    font-weight: 700;
+    min-width: 3.75rem;
+    padding: .3125rem .875rem;
+}
+
+.ppvx_btn--secondary {
+    background: rgba(0,0,0,0);
+    border-color: #0070ba;
+}
+
+.cw_tile-activityListRow {
+    padding: 0;
+    height: 100%;
+}
+.cw_tile-itemListRow {
+    min-height: 4.3125rem;
+    padding: .5rem 0;
+}
+
+.ppvx_row {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -.75rem;
+    margin-left: -.75rem;
+}
+
+.ppvx_container-fluid {
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cw_tile-itemListLink.cw_tile-itemListLink {
+    text-decoration: none;
+    color: #2c2e2f;
+    font-weight: 400;
+}
+
+.cw_tile-itemListContainer {
+    position: relative;
+    min-height: 4.125rem;
+    border-bottom: 1px dotted #9da3a6;
+    z-index: 1;
+    width: 100%;
+}
+.cw_tile-itemListContainer_hover:after {
+    content: '';
+    position: absolute;
+    background-color: rgba(0,112,186,.1);
+    left: -.75rem;
+    top: 0;
+    height: 100%;
+    width: calc(100% + 1.5rem);
+    z-index: -1;
+    border-left: 3px solid #0070ba;
+    opacity: 0;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+}
+
+.cw_tile-itemList {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+}
+
+.ppvx_col-1 {
+    -ms-flex: 0 0 8.333333%;
+    -webkit-box-flex: 0;
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+}
+
+.cw_tile-itemListCol {
+    padding: 0 .3125rem 0 .75rem;
+    vertical-align: middle;
+}
+
+.cw_tile__activity-txnDateContainer {
+    padding-left: .625rem;
+    text-align: center;
+    color: #2c2e2f;
+}
+
+.cw_tile-container {
+    margin-left: .75rem;
+    margin-right: .75rem;
+    height: 100%;
+    position: relative;
+    background: 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: left;
+    margin: 2.25rem 1.5rem 0 1.5rem;
+    padding-bottom: 0;
+}
+
+.cw_tile-header {
+    padding: 1.125rem 0 .75rem;
+    margin: 0;
+    font-weight: 200;
+    color: #0070ba;
+    width: calc(100% - 2.25rem);
+    display: inline-block;
+}
+
+.container {
+    clear: both;
+}
+
+.col {
+    width: 50%;
+    float: left;
+    vertical-align：top
+}
+
+.card {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    border-radius: 4px;
+    color: #000!important;
+    background-color: #fff!important;
+    padding: 0.01em 16px;
+
+    margin-left: .75rem;
+    margin-right: .75rem;
+    height: 100%;
+    position: relative;
+    -webkit-box-shadow: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.upper_cards {
+    width: 512px;
+    height: 300px;
+    float: left;
+    display: inline;
+}
+
+.whole {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 72px 0 9rem;
+    position: relative;
+}

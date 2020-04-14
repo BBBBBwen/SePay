@@ -50,3 +50,16 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2020-04-13 22:57:28
+--
+-- Table structure for table `tbl_payment`
+--
+
+CREATE TABLE `payments` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `payment_id` varchar(255) NOT NULL,
+ `amount` float(10,2) NOT NULL,
+ `currency` varchar(255) NOT NULL,
+ `payment_status` varchar(255) NOT NULL,
+ `captured_at` datetime NOT NULL DEFAULT current_timestamp(),
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
