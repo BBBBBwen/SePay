@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -140,6 +140,12 @@ return [
         'taglib_begin' => '{',
         // 标签库标签结束标记
         'taglib_end'   => '}',
+        'tpl_replace_string' => array(
+            '__CSS__' => SITE_URL.'/SePay/tp5/public/static/css',
+            '__JS__'  => SITE_URL.'/SePay/tp5/public/static/js',
+            '__IMG__' => SITE_URL.'/SePay/tp5/public/static/images',
+            '__STATIC__' => SITE_URL.'/SePay/tp5/public/static',
+        ),
     ],
 
     // 视图输出字符串内容替换

@@ -9,10 +9,12 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
-//定义引用css、js等文件使用的常量 'SITE_URL'
-define('SITE_URL','http://'.$_SERVER['HTTP_HOST']);
-// 定义应用目录
-define('APP_PATH', __DIR__ . '/../application/');
-// 加载框架引导文件
-require __DIR__ . '/../thinkphp/start.php';
+// 测试入口文件
+$_SERVER['REQUEST_METHOD'] = 'GET';
+// 定义项目测试基础路径
+define('TEST_PATH', __DIR__ . '/');
+// 定义项目路径
+define('APP_PATH', __DIR__ . '/application/');
+// 加载框架基础文件
+require __DIR__ . '/../base.php';
+\think\Loader::addNamespace('tests', TEST_PATH);

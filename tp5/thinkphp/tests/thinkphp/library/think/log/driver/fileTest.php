@@ -2,17 +2,33 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
-//定义引用css、js等文件使用的常量 'SITE_URL'
-define('SITE_URL','http://'.$_SERVER['HTTP_HOST']);
-// 定义应用目录
-define('APP_PATH', __DIR__ . '/../application/');
-// 加载框架引导文件
-require __DIR__ . '/../thinkphp/start.php';
+/**
+ * Test File Log
+ */
+namespace tests\thinkphp\library\think\log\driver;
+
+use think\Log;
+
+class fileTest extends \PHPUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
+        Log::init(['type' => 'file']);
+    }
+
+    public function testRecord()
+    {
+        $record_msg = 'record';
+        Log::record($record_msg, 'notice');
+        $logs = Log::getLog();
+
+        $this->assertEquals([], $logs);
+    }
+}
