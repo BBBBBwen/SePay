@@ -21,7 +21,6 @@ if(!empty($_POST)){
                 $_SESSION['avatar'] = $user['avatar'];
             }
                 $_SESSION['message'] = "Login Success!";
-                header("Location: welcome.php");
         }else{
           $_SESSION['message'] = "Your password is incorrect!";  
         }

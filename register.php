@@ -4,7 +4,7 @@
     $_SESSION['message'] = '';
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $haveError = false;
-        $avatar_path = ('image/'.$_FILES['avatar']['name']);
+        $avatar_path = ('images/'.$_FILES['avatar']['name']);
         if($_POST['password'] != $_POST['confirmpassword']){
             $haveError = true;
             $_SESSION['message'] = "Two Password Do Not Match";}
@@ -49,7 +49,7 @@
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['avatar'] = $avatar_path;    
         $_SESSION['message'] = 'Register Success!';
-        header("Location: welcome.php");
+        header("Location: login.php");
         }}
     
 ?>
