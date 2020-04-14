@@ -19,11 +19,7 @@ return [
     // 用户名
     'username'        => 'root',
     // 密码
-<<<<<<< Updated upstream
-    'password'        => '',
-=======
     'password'        => 'root',
->>>>>>> Stashed changes
     // 端口
     'hostport'        => '',
     // 连接dsn
