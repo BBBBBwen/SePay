@@ -4,6 +4,7 @@
 <?php include_once("../Content/header.php");
     $db = new mysqli('localhost', 'root', 'root', 'SePay');
     $user = $db->query("SELECT * FROM users WHERE id = '".$_SESSION['id']."'")->fetch_assoc();
+    $transaction = $db->query("SELECT * FROM payments WHERE user_id = '".$_SESSION['id']."'");
 ?>
 <body class="">
 
@@ -69,9 +70,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) { ?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>
@@ -81,9 +83,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) {?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>
@@ -93,9 +96,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) {?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>
