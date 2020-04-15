@@ -9,6 +9,7 @@ CREATE TABLE `users`
     `email`    varchar(512)  NOT NULL,
     `balance`  double(20, 2) NOT NULL,
     `avatar`   varchar(512)  NOT NULL,
+    `reg_date` datetime      NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

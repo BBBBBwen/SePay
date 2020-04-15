@@ -28,7 +28,7 @@
                                 <div class="right">
                                     <p><i class=""></i> Name <?php echo $user['username'] ?></p>
                                     <p><i class=""></i> Email <?php echo $user['email'] ?></p>
-                                    <p><i class=""></i> Date</p>
+                                    <p><i class=""></i> Date  <?php echo $user['reg_date'] ?></p>
                                 </div>
                             </span>
 
