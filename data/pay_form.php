@@ -4,19 +4,19 @@
 <?php include_once("../Content/header.php");
 require_once "config.php";
 
-if (isset($_SESSION['id'])) {
-
+if (isset($_SESSION['id']) && isset($_POST['email'])) {
     try {
         $email = $_POST['email'];
         $amount = $_POST['amount'];
         $payment_id = 0;
+        $userID = $_SESSION['id'];
         $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'");
         $isEmailExist = $db->query("SELECT * FROM users WHERE email = '".$email."'");
 
         if ($isEmailExist->num_rows != 0) {
             // Insert transaction data into the database
             $isPaymentExist = $db->query("SELECT * FROM payments WHERE payment_id = '".$payment_id."'");
-            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'");
+            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'")->fetch_assoc();;
             $balance = $user['balance'] + $amount;
             $description = 'transfer money to '.$user['username'];
 

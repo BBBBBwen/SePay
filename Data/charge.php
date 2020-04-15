@@ -21,11 +21,11 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
 
             // Insert transaction data into the database
             $isPaymentExist = $db->query("SELECT * FROM payments WHERE payment_id = '".$payment_id."'");
-            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'");
+            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'")->fetch_assoc();
             $balance = $user['balance'] + $amount;
 
             if($isPaymentExist->num_rows == 0) {
-                $insert = $db->query("INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', 'transaction from bank', '$amount', 'USD', 'Captured')");
+                $insert = $db->query("INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', 'transaction from bank', '$amount', 'AUD', 'Captured')");
                 $update = $db->query("UPDATE users SET balance=".$balance." WHERE id='".$userID."'");
             }
 
