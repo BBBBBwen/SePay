@@ -1,7 +1,10 @@
 <?php include_once("../Content/head.php"); ?>
 <!DOCTYPE html>
 <html>
-<?php include_once("../Content/header.php"); ?>
+<?php include_once("../Content/header.php");
+    $db = new mysqli('localhost', 'root', 'root', 'SePay');
+    $user = $db->query("SELECT * FROM users WHERE id = '".$_SESSION['id']."'")->fetch_assoc();
+?>
 <body class="">
 
 <!-- Page Container -->
@@ -22,8 +25,8 @@
                                                      style="height:106px;width:106px"
                                                      alt="Avatar"></p>
                                 <div class="right">
-                                    <p><i class=""></i> Name</p>
-                                    <p><i class=""></i> Email</p>
+                                    <p><i class=""></i> Name <?php echo $user['username'] ?></p>
+                                    <p><i class=""></i> Email <?php echo $user['email'] ?></p>
                                     <p><i class=""></i> Date</p>
                                 </div>
                             </span>
@@ -46,7 +49,7 @@
                                 <h1>Balance</h1>
                             </div>
                             <div>
-                                <span>$0.0</span>
+                                <span><?php echo $user['balance']?></span>
                             </div>
                             <a role="button" href="card_form.html"
                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Transfer
