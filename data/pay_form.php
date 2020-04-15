@@ -10,13 +10,13 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $amount = $_POST['amount'];
         $payment_id = 0;
         $userID = $_SESSION['id'];
-        $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'");
+        $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'")->fetch_assoc();
         $isEmailExist = $db->query("SELECT * FROM users WHERE email = '".$email."'");
 
-        if ($isEmailExist->num_rows != 0) {
+
+        if ($isEmailExist->num_rows != 0 && $amount <= $user['balance']) {
             // Insert transaction data into the database
             $isPaymentExist = $db->query("SELECT * FROM payments WHERE payment_id = '".$payment_id."'");
-            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'")->fetch_assoc();;
             $balance = $user['balance'] + $amount;
             $description = 'transfer money to '.$user['username'];
 
@@ -27,7 +27,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
             echo "Payment is successful. Your payment id is: ". $payment_id;
         } else {
-            echo 'there is no such user';
+            echo 'there is no such user or no enough balance';
         }
     } catch(Exception $e) {
         echo 'Wrong';

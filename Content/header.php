@@ -19,7 +19,7 @@
                 </li>
                 <li class="nav-item">
                     <?php if (isset($_SESSION['id'])) {
-                        echo '<a href="Wallet.php class="btn btn-outline-primary" title="My Account"><img src="../assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
+                        echo '<a href="Wallet.php" class="btn btn-outline-primary" title="My Account"><img src="../assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
                         echo '<a class="btn btn-outline-danger" href="logout.php">Logout</a>';
                     } else {
                         echo '<a class="btn btn-outline-primary" href="../login.php">Login</a>';
