@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-
+session_start();
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
 
     try {
@@ -33,8 +33,9 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
         } else {
             // payment failed: display message to customer
             echo $response->getMessage();
+            echo 'check';
         }
     } catch(Exception $e) {
-        echo $e->getMessage();
+        echo $e->getMessage();echo 'check';
     }
 }
