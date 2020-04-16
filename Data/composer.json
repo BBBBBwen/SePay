@@ -1,6 +1,0 @@
-{
-    "require": {
-        "league/omnipay": "^3.0",
-        "omnipay/stripe": "^3.1"
-    }
-}

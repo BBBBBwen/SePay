@@ -1,7 +1,11 @@
 <?php include_once("../Content/head.php"); ?>
 <!DOCTYPE html>
 <html>
-<?php include_once("../Content/header.php"); ?>
+<?php include_once("../Content/header.php");
+    $db = new mysqli('localhost', 'root', 'root', 'SePay');
+    $user = $db->query("SELECT * FROM users WHERE id = '".$_SESSION['id']."'")->fetch_assoc();
+    $transaction = $db->query("SELECT * FROM payments WHERE user_id = '".$_SESSION['id']."' ORDER BY captured_at DESC");
+?>
 <body class="">
 
 <!-- Page Container -->
@@ -18,20 +22,20 @@
                             <h4 class="center">My Profile</h4>
                             <hr>
                             <span class="float:left; display:inline">
-                                <p class="left"><img src="../images/1.jpeg" class="circle"
+                                <p class="left"><img src="../<?= $_SESSION['avatar']?>" class="circle"
                                                      style="height:106px;width:106px"
                                                      alt="Avatar"></p>
                                 <div class="right">
-                                    <p><i class=""></i> Name</p>
-                                    <p><i class=""></i> Email</p>
-                                    <p><i class=""></i> Date</p>
+                                    <p><i class=""></i> Name <?php echo $user['username'] ?></p>
+                                    <p><i class=""></i> Email <?php echo $user['email'] ?></p>
+                                    <p><i class=""></i> Date  <?php echo $user['reg_date'] ?></p>
                                 </div>
                             </span>
 
                             <div>
-                                <a role="button" href=""
+                                <a role="button" href="pay_form.php"
                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Send</a>
-                                <a role="button" href=""
+                                <a role="button" href="pay_form.php"
                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Request</a>
                             </div>
                         </div>
@@ -46,7 +50,7 @@
                                 <h1>Balance</h1>
                             </div>
                             <div>
-                                <span>$0.0</span>
+                                <span><?php echo $user['balance']?></span>
                             </div>
                             <a role="button" href="card_form.html"
                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Transfer
@@ -66,9 +70,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) { ?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>
@@ -78,9 +83,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) {?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>
@@ -90,9 +96,10 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Date</p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>Describtion</p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>$0</p>
+                                        <?php if($row = $transaction->fetch_assoc()) {?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
                                     </span>
                         </div>
                     </a>

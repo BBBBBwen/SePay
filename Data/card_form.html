@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="../Css/style.css" />
+<link rel="stylesheet" href="../assets/css/style.css" />
 <script src="https://js.stripe.com/v3/"></script>
 <form action="charge.php" method="post" id="payment-form">
     <div class="form-row">
-        <input type="text" name="amount" placeholder="Enter Amount" />
         <label for="card-element">
             Credit or debit card
         </label>
+        <input type="text" name="amount" placeholder="Enter Amount" />
         <div id="card-element">
             <!-- A Stripe Element will be inserted here. -->
         </div>
@@ -15,4 +15,4 @@
     </div>
     <button>Submit Payment</button>
 </form>
-<script src="card.js"></script>
+<script src="../assets/js/card.js"></script>
