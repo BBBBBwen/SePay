@@ -14,7 +14,7 @@
                     <?php if (isset($_SESSION['id'])) {
                         echo '<a class="btn btn-outline-info" href="Wallet.php"><img src="../assets/images/wallet.png" style="height:23px;width:23px" alt="Wallet"></a>';
                     } else {
-                        echo '<a class="btn btn-outline-primary" href="../register.php">Register</a>';
+                        echo '<a class="btn btn-outline-primary" href="register.php">Register</a>';
                     } ?>
                 </li>
                 <li class="nav-item">
@@ -22,7 +22,7 @@
                         echo '<a href="Wallet.php" class="btn btn-outline-primary" title="My Account"><img src="../assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
                         echo '<a class="btn btn-outline-danger" href="logout.php"><img src="../assets/images/logout.png" style="height:23px;width:23px" alt="Logout"></a>';
                     } else {
-                        echo '<a class="btn btn-outline-primary" href="../login.php">Login</a>';
+                        echo '<a class="btn btn-outline-primary" href="login.php">Login</a>';
                     } ?>
                 </li>
             </ul>

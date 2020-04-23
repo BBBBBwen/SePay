@@ -22,7 +22,7 @@
                             <h4 class="center">My Profile</h4>
                             <hr>
                             <span class="float:left; display:inline">
-                                <p class="left"><img src="../<?= $_SESSION['avatar']?>" class="circle"
+                                <p class="left"><img src="<?= $_SESSION['avatar']?>" class="circle"
                                                      style="height:106px;width:106px"
                                                      alt="Avatar"></p>
                                 <div class="right">
