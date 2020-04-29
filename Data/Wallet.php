@@ -1,10 +1,16 @@
-<?php include_once("../Content/head.php"); ?>
+<?php include_once __DIR__."/../Content/head.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php include_once("../Content/header.php");
-$db = new mysqli('localhost', 'root', 'root', 'SePay');
-$user = $db->query("SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'")->fetch_assoc();
-$transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC");
+<?php include_once __DIR__."/../Content/header.php";
+require_once __DIR__."/connect_database.php";
+$sql = "SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC";
+$stmt = $db->prepare($sql);
+$stmt->execute();
 ?>
 <body>
 
@@ -70,7 +76,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
                                         <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
@@ -84,7 +90,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
                                         <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
@@ -98,7 +104,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
                                         <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
@@ -153,6 +159,6 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
 <br>
 
 <!-- Footer -->
-<?php include_once("../Content/foot.php"); ?>
+<?php include_once __DIR__."/../Content/foot.php"; ?>
 </body>
 </html>

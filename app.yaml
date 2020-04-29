@@ -1,0 +1,22 @@
+runtime: php73
+
+handlers:
+  # Serve a directory as a static resource.
+  - url: /assets/css
+    static_dir: assets/css
+
+  - url: /assets/js
+    static_dir: assets/js
+
+  # Serve images as static resources.
+  - url: /assets/images
+    static_dir: assets/images
+
+  # Serve your app through a front controller at index.php or public/index.php.
+  - url: .*
+    script: auto
+
+env_variables:
+  CLOUDSQL_DSN:  mysql:dbname=SePay;unix_socket=/cloudsql/sesame-pay:australia-southeast1:sesame-pay-datastorage
+  CLOUDSQL_USER: root
+  CLOUDSQL_PASSWORD: 123456

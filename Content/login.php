@@ -1,6 +1,5 @@
 <?php
-require '../Data/connect_database.php';
-session_start();
+require __DIR__.'/../Data/connect_database.php';
 $_SESSION['message'] = '';
 if (!empty($_POST)) {
     if (empty($_POST['email'])) {
@@ -27,7 +26,7 @@ if (!empty($_POST)) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: ../index.php");
+        header("Location: /");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }

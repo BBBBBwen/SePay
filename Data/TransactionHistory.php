@@ -1,10 +1,12 @@
-<?php include_once("../Content/head.php"); ?>
+<?php include_once __DIR__."/../Content/head.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php include_once("../Content/header.php");
-$db = new mysqli('localhost', 'root', 'root', 'SePay');
-$user = $db->query("SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'")->fetch_assoc();
-$transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC");
+<?php include_once __DIR__."/../Content/header.php";
+require_once __DIR__."/connect_database.php";
+
+$sql = "SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC";
+$stmt = $db->prepare($sql);
+$stmt->execute();
 ?>
 <body class="">
 
@@ -16,7 +18,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
             </div>
             <h3 class='cw_tile-header'>Trasaction History</h3>
             <br>
-            <?php while ($row = $transaction->fetch_assoc()) { ?>
+            <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                 <ul class='cw_tile-itemList'>
                     <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
                         <a class='cw_tile-itemListLink'>
@@ -44,7 +46,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
 <br>
 
 <!-- Footer -->
-<?php include_once("../Content/foot.php"); ?>
+<?php include_once __DIR__."/../Content/foot.php"; ?>
 
 </body>
 </html>

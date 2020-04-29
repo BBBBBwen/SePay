@@ -1,11 +1,10 @@
 <?php
-require '../Data/connect_database.php';
-include('../Data/rsa.php');
-session_start();
+require __DIR__.'/../Data/connect_database.php';
+include __DIR__.'/../Data/rsa.php';
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = false;
-    $avatar_path = ('../assets/images/' . $_FILES['avatar']['name']);
+    $avatar_path = ('gs://sesame-pay.appspot.com/images/' . $_FILES['avatar']['name']);
     if ($_POST['password'] != $_POST['confirmpassword']) {
         $haveError = true;
         $_SESSION['message'] = "Two Password Do Not Match";
@@ -30,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $haveError = true;
         $_SESSION['message'] = "Please enter an at least 6 characters payment password";
     }
-    if (copy($_FILES['avatar']['tmp_name'], $avatar_path) == false) {
-        $haveError = true;
-        $_SESSION['message'] = "Avatar upload fail";
-    }
+//    if (copy($_FILES['avatar']['tmp_name'], $avatar_path) == false) {
+//        $haveError = true;
+//        $_SESSION['message'] = "Avatar upload fail";
+//    }
     $sql = "SELECT COUNT(email) AS num FROM users WHERE email=:email";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':email', $_POST['email']);
