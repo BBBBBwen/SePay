@@ -2,15 +2,9 @@
 <!DOCTYPE html>
 <html>
 <?php include_once("../Content/header.php");
-<<<<<<< Updated upstream
-    $db = new mysqli('localhost', 'root', 'root', 'SePay');
-    $user = $db->query("SELECT * FROM users WHERE id = '".$_SESSION['id']."'")->fetch_assoc();
-    $transaction = $db->query("SELECT * FROM payments WHERE user_id = '".$_SESSION['id']."'");
-=======
 $db = new mysqli('localhost', 'root', 'root', 'SePay');
 $user = $db->query("SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'")->fetch_assoc();
 $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC");
->>>>>>> Stashed changes
 ?>
 <body>
 
@@ -28,11 +22,7 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
                             <h4 class="center">My Profile</h4>
                             <hr>
                             <span class="float:left; display:inline">
-<<<<<<< Updated upstream
-                                <p class="left"><img src="../assets/images/1.jpeg" class="circle"
-=======
                                 <p class="left"><img src="<?= $_SESSION['avatar'] ?>" class="circle"
->>>>>>> Stashed changes
                                                      style="height:106px;width:106px"
                                                      alt="Avatar"></p>
                                 <div class="right">
@@ -135,19 +125,19 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
             <div class="popup-body">
                 <form action="charge.php" method="post" id="payment-form">
 
-                        <div id="card-element">
-                            <!-- A Stripe Element will be inserted here. -->
-                        </div>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
 
-                        <!-- Used to display form errors. -->
-                        <div id="card-errors" role="alert"></div>
-                        <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
-                        <div>
-                            <button style="align-content: center"
-                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
-                                Submit Payment
-                            </button>
-                        </div>
+                    <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                    <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
+                    <div>
+                        <button style="align-content: center"
+                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
+                            Submit Payment
+                        </button>
+                    </div>
                 </form>
             </div>
 

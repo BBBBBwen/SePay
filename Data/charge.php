@@ -38,8 +38,6 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
         echo $e->getMessage();
         echo 'check';
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 }
+?>
