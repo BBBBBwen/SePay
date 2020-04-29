@@ -84,9 +84,9 @@ $stmt->execute();
                                             <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
                                         <?php } else {
                                             $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
-                                            $stmt = $db->prepare($sql);
-                                            $stmt->execute();
-                                            $transfer = $stmt->fetch(PDO::FETCH_ASSOC);
+                                            $stmt1 = $db->prepare($sql);
+                                            $stmt1->execute();
+                                            $transfer = $stmt1->fetch(PDO::FETCH_ASSOC);
                                             ?>
                                             <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
                                         <?php } ?>

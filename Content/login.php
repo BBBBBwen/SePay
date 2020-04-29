@@ -14,7 +14,6 @@ if (!empty($_POST)) {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
     if (empty($user)) {
         $_SESSION['message'] = "Your username is not exist! Please <a href=register.php>Register</a> first!";
     } else if ($user && ($_POST['password'] == $user['password'])) {
