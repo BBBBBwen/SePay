@@ -8,10 +8,9 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :transfer_id ORDER BY captured_at DESC";
+$sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
-$stmt->bindValue(':transfer_id', $_SESSION['id']);
 $stmt->execute();
 ?>
 <body>

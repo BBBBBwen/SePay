@@ -4,10 +4,9 @@
 <?php include_once __DIR__ . "/../content/header.php";
 require_once __DIR__ . "/connect_database.php";
 
-$sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :transfer_id ORDER BY captured_at DESC";
+$sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
-$stmt->bindValue(':transfer_id', $_SESSION['id']);
 $stmt->execute();
 ?>
 <body class="">
@@ -20,7 +19,7 @@ $stmt->execute();
                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton"
                    style="width: 15%">Go Back</a>
             </div>
-            <h3 class='cw_tile-header'>Trasaction History</h3>
+            <h3 class='cw_tile-header'>Transaction History</h3>
             <br>
             <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                 <ul class='cw_tile-itemList'>
