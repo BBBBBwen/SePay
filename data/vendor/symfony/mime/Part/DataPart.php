@@ -93,11 +93,11 @@ class DataPart extends TextPart
         $headers = parent::getPreparedHeaders();
 
         if (null !== $this->cid) {
-            $headers->setHeaderBody('Id', 'Content-ID', $this->cid);
+            $headers->setHeaderBody('Id', 'content-ID', $this->cid);
         }
 
         if (null !== $this->filename) {
-            $headers->setHeaderParameter('Content-Disposition', 'filename', $this->filename);
+            $headers->setHeaderParameter('content-Disposition', 'filename', $this->filename);
         }
 
         return $headers;
@@ -107,7 +107,7 @@ class DataPart extends TextPart
     {
         $str = parent::asDebugString();
         if (null !== $this->filename) {
-            $str .= ' filename: '.$this->filename;
+            $str .= ' filename: ' . $this->filename;
         }
 
         return $str;
@@ -115,7 +115,7 @@ class DataPart extends TextPart
 
     private function generateContentId(): string
     {
-        return bin2hex(random_bytes(16)).'@symfony';
+        return bin2hex(random_bytes(16)) . '@symfony';
     }
 
     public function __destruct()

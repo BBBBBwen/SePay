@@ -33,7 +33,7 @@ namespace Omnipay\Common;
  *         Update a stored card
  * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())        (Optional method)
  *         Delete a stored card
-*/
+ */
 interface GatewayInterface
 {
     /**

@@ -50,6 +50,6 @@ final class ResponseHeaderSame extends Constraint
      */
     protected function failureDescription($response): string
     {
-        return 'the Response '.$this->toString();
+        return 'the Response ' . $this->toString();
     }
 }

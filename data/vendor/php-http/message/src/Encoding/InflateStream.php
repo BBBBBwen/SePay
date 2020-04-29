@@ -14,7 +14,7 @@ class InflateStream extends FilteredStream
 {
     /**
      * @param StreamInterface $stream
-     * @param int             $level
+     * @param int $level
      */
     public function __construct(StreamInterface $stream, $level = -1)
     {

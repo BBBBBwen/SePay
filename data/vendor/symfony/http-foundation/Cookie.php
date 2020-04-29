@@ -42,7 +42,7 @@ class Cookie
      * Creates cookie from raw header string.
      *
      * @param string $cookie
-     * @param bool   $decode
+     * @param bool $decode
      *
      * @return static
      */
@@ -67,7 +67,7 @@ class Cookie
         $data = HeaderUtils::combine($parts) + $data;
 
         if (isset($data['max-age'])) {
-            $data['expires'] = time() + (int) $data['max-age'];
+            $data['expires'] = time() + (int)$data['max-age'];
         }
 
         return new static($name, $value, $data['expires'], $data['path'], $data['domain'], $data['secure'], $data['httponly'], $data['raw'], $data['samesite']);
@@ -79,15 +79,15 @@ class Cookie
     }
 
     /**
-     * @param string                        $name     The name of the cookie
-     * @param string|null                   $value    The value of the cookie
-     * @param int|string|\DateTimeInterface $expire   The time the cookie expires
-     * @param string                        $path     The path on the server in which the cookie will be available on
-     * @param string|null                   $domain   The domain that the cookie is available to
-     * @param bool|null                     $secure   Whether the client should send back the cookie only over HTTPS or null to auto-enable this when the request is already using HTTPS
-     * @param bool                          $httpOnly Whether the cookie will be made accessible only through the HTTP protocol
-     * @param bool                          $raw      Whether the cookie value should be sent with no url encoding
-     * @param string|null                   $sameSite Whether the cookie will be available for cross-site requests
+     * @param string $name The name of the cookie
+     * @param string|null $value The value of the cookie
+     * @param int|string|\DateTimeInterface $expire The time the cookie expires
+     * @param string $path The path on the server in which the cookie will be available on
+     * @param string|null $domain The domain that the cookie is available to
+     * @param bool|null $secure Whether the client should send back the cookie only over HTTPS or null to auto-enable this when the request is already using HTTPS
+     * @param bool $httpOnly Whether the cookie will be made accessible only through the HTTP protocol
+     * @param bool $raw Whether the cookie value should be sent with no url encoding
+     * @param string|null $sameSite Whether the cookie will be available for cross-site requests
      *
      * @throws \InvalidArgumentException
      */
@@ -120,7 +120,7 @@ class Cookie
         $this->name = $name;
         $this->value = $value;
         $this->domain = $domain;
-        $this->expire = 0 < $expire ? (int) $expire : 0;
+        $this->expire = 0 < $expire ? (int)$expire : 0;
         $this->path = empty($path) ? '/' : $path;
         $this->secure = $secure;
         $this->httpOnly = $httpOnly;
@@ -154,22 +154,22 @@ class Cookie
 
         $str .= '=';
 
-        if ('' === (string) $this->getValue()) {
-            $str .= 'deleted; expires='.gmdate('D, d-M-Y H:i:s T', time() - 31536001).'; Max-Age=0';
+        if ('' === (string)$this->getValue()) {
+            $str .= 'deleted; expires=' . gmdate('D, d-M-Y H:i:s T', time() - 31536001) . '; Max-Age=0';
         } else {
             $str .= $this->isRaw() ? $this->getValue() : rawurlencode($this->getValue());
 
             if (0 !== $this->getExpiresTime()) {
-                $str .= '; expires='.gmdate('D, d-M-Y H:i:s T', $this->getExpiresTime()).'; Max-Age='.$this->getMaxAge();
+                $str .= '; expires=' . gmdate('D, d-M-Y H:i:s T', $this->getExpiresTime()) . '; Max-Age=' . $this->getMaxAge();
             }
         }
 
         if ($this->getPath()) {
-            $str .= '; path='.$this->getPath();
+            $str .= '; path=' . $this->getPath();
         }
 
         if ($this->getDomain()) {
-            $str .= '; domain='.$this->getDomain();
+            $str .= '; domain=' . $this->getDomain();
         }
 
         if (true === $this->isSecure()) {
@@ -181,7 +181,7 @@ class Cookie
         }
 
         if (null !== $this->getSameSite()) {
-            $str .= '; samesite='.$this->getSameSite();
+            $str .= '; samesite=' . $this->getSameSite();
         }
 
         return $str;

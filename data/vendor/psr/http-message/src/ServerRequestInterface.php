@@ -152,7 +152,7 @@ interface ServerRequestInterface extends RequestInterface
     /**
      * Retrieve any parameters provided in the request body.
      *
-     * If the request Content-Type is either application/x-www-form-urlencoded
+     * If the request content-Type is either application/x-www-form-urlencoded
      * or multipart/form-data, and the request method is POST, this method MUST
      * return the contents of $_POST.
      *
@@ -171,7 +171,7 @@ interface ServerRequestInterface extends RequestInterface
      *
      * These MAY be injected during instantiation.
      *
-     * If the request Content-Type is either application/x-www-form-urlencoded
+     * If the request content-Type is either application/x-www-form-urlencoded
      * or multipart/form-data, and the request method is POST, use this method
      * ONLY to inject the contents of $_POST.
      *
@@ -219,10 +219,10 @@ interface ServerRequestInterface extends RequestInterface
      * This method obviates the need for a hasAttribute() method, as it allows
      * specifying a default value to return if the attribute is not found.
      *
-     * @see getAttributes()
      * @param string $name The attribute name.
      * @param mixed $default Default value to return if the attribute does not exist.
      * @return mixed
+     * @see getAttributes()
      */
     public function getAttribute($name, $default = null);
 
@@ -236,10 +236,10 @@ interface ServerRequestInterface extends RequestInterface
      * immutability of the message, and MUST return an instance that has the
      * updated attribute.
      *
-     * @see getAttributes()
      * @param string $name The attribute name.
      * @param mixed $value The value of the attribute.
      * @return static
+     * @see getAttributes()
      */
     public function withAttribute($name, $value);
 
@@ -253,9 +253,9 @@ interface ServerRequestInterface extends RequestInterface
      * immutability of the message, and MUST return an instance that removes
      * the attribute.
      *
-     * @see getAttributes()
      * @param string $name The attribute name.
      * @return static
+     * @see getAttributes()
      */
     public function withoutAttribute($name);
 }

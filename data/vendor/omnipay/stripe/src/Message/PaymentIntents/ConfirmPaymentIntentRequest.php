@@ -3,6 +3,7 @@
 /**
  * Stripe Payment Intents Authorize Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**
@@ -45,7 +46,7 @@ class ConfirmPaymentIntentRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/payment_intents/' . $this->getPaymentIntentReference() . '/confirm';
+        return $this->endpoint . '/payment_intents/' . $this->getPaymentIntentReference() . '/confirm';
     }
 
     /**

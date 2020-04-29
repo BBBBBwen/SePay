@@ -3,6 +3,7 @@
 /**
  * Stripe Payment Intents Cancel Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**
@@ -39,7 +40,7 @@ class CancelPaymentIntentRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/payment_intents/' . $this->getPaymentIntentReference() . '/cancel';
+        return $this->endpoint . '/payment_intents/' . $this->getPaymentIntentReference() . '/cancel';
     }
 
     /**

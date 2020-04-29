@@ -325,7 +325,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite($sessionId, $data)
     {
-        $maxlifetime = (int) ini_get('session.gc_maxlifetime');
+        $maxlifetime = (int)ini_get('session.gc_maxlifetime');
 
         try {
             // We use a single MERGE SQL query when supported by the database.
@@ -371,7 +371,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     public function updateTimestamp($sessionId, $data)
     {
-        $expiry = time() + (int) ini_get('session.gc_maxlifetime');
+        $expiry = time() + (int)ini_get('session.gc_maxlifetime');
 
         try {
             $updateStmt = $this->pdo->prepare(
@@ -489,25 +489,25 @@ class PdoSessionHandler extends AbstractSessionHandler
         switch ($driver) {
             case 'mysql':
             case 'pgsql':
-                $dsn = $driver.':';
+                $dsn = $driver . ':';
 
                 if (isset($params['host']) && '' !== $params['host']) {
-                    $dsn .= 'host='.$params['host'].';';
+                    $dsn .= 'host=' . $params['host'] . ';';
                 }
 
                 if (isset($params['port']) && '' !== $params['port']) {
-                    $dsn .= 'port='.$params['port'].';';
+                    $dsn .= 'port=' . $params['port'] . ';';
                 }
 
                 if (isset($params['path'])) {
                     $dbName = substr($params['path'], 1); // Remove the leading slash
-                    $dsn .= 'dbname='.$dbName.';';
+                    $dsn .= 'dbname=' . $dbName . ';';
                 }
 
                 return $dsn;
 
             case 'sqlite':
-                return 'sqlite:'.substr($params['path'], 1);
+                return 'sqlite:' . substr($params['path'], 1);
 
             case 'sqlsrv':
                 $dsn = 'sqlsrv:server=';
@@ -517,12 +517,12 @@ class PdoSessionHandler extends AbstractSessionHandler
                 }
 
                 if (isset($params['port']) && '' !== $params['port']) {
-                    $dsn .= ','.$params['port'];
+                    $dsn .= ',' . $params['port'];
                 }
 
                 if (isset($params['path'])) {
                     $dbName = substr($params['path'], 1); // Remove the leading slash
-                    $dsn .= ';Database='.$dbName;
+                    $dsn .= ';Database=' . $dbName;
                 }
 
                 return $dsn;
@@ -626,7 +626,7 @@ class PdoSessionHandler extends AbstractSessionHandler
             $sessionRows = $selectStmt->fetchAll(\PDO::FETCH_NUM);
 
             if ($sessionRows) {
-                $expiry = (int) $sessionRows[0][1];
+                $expiry = (int)$sessionRows[0][1];
                 if ($expiry <= self::MAX_LIFETIME) {
                     $expiry += $sessionRows[0][2];
                 }
@@ -842,21 +842,21 @@ class PdoSessionHandler extends AbstractSessionHandler
     {
         switch (true) {
             case 'mysql' === $this->driver:
-                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :expiry, :time) ".
+                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :expiry, :time) " .
                     "ON DUPLICATE KEY UPDATE $this->dataCol = VALUES($this->dataCol), $this->lifetimeCol = VALUES($this->lifetimeCol), $this->timeCol = VALUES($this->timeCol)";
                 break;
             case 'sqlsrv' === $this->driver && version_compare($this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION), '10', '>='):
                 // MERGE is only available since SQL Server 2008 and must be terminated by semicolon
                 // It also requires HOLDLOCK according to https://weblogs.sqlteam.com/dang/2009/01/31/upsert-race-condition-with-merge/
-                $mergeSql = "MERGE INTO $this->table WITH (HOLDLOCK) USING (SELECT 1 AS dummy) AS src ON ($this->idCol = ?) ".
-                    "WHEN NOT MATCHED THEN INSERT ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (?, ?, ?, ?) ".
+                $mergeSql = "MERGE INTO $this->table WITH (HOLDLOCK) USING (SELECT 1 AS dummy) AS src ON ($this->idCol = ?) " .
+                    "WHEN NOT MATCHED THEN INSERT ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (?, ?, ?, ?) " .
                     "WHEN MATCHED THEN UPDATE SET $this->dataCol = ?, $this->lifetimeCol = ?, $this->timeCol = ?;";
                 break;
             case 'sqlite' === $this->driver:
                 $mergeSql = "INSERT OR REPLACE INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :expiry, :time)";
                 break;
             case 'pgsql' === $this->driver && version_compare($this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION), '9.5', '>='):
-                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :expiry, :time) ".
+                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :expiry, :time) " .
                     "ON CONFLICT ($this->idCol) DO UPDATE SET ($this->dataCol, $this->lifetimeCol, $this->timeCol) = (EXCLUDED.$this->dataCol, EXCLUDED.$this->lifetimeCol, EXCLUDED.$this->timeCol)";
                 break;
             default:

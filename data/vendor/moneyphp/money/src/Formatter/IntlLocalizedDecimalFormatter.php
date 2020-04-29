@@ -25,7 +25,7 @@ final class IntlLocalizedDecimalFormatter implements MoneyFormatter
 
     /**
      * @param \NumberFormatter $formatter
-     * @param Currencies       $currencies
+     * @param Currencies $currencies
      */
     public function __construct(\NumberFormatter $formatter, Currencies $currencies)
     {
@@ -54,14 +54,14 @@ final class IntlLocalizedDecimalFormatter implements MoneyFormatter
             $decimalDigits = substr($valueBase, $valueLength - $subunit);
 
             if (strlen($decimalDigits) > 0) {
-                $formatted .= '.'.$decimalDigits;
+                $formatted .= '.' . $decimalDigits;
             }
         } else {
-            $formatted = '0.'.str_pad('', $subunit - $valueLength, '0').$valueBase;
+            $formatted = '0.' . str_pad('', $subunit - $valueLength, '0') . $valueBase;
         }
 
         if ($negative === true) {
-            $formatted = '-'.$formatted;
+            $formatted = '-' . $formatted;
         }
 
         return $this->formatter->format($formatted);

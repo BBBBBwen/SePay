@@ -3,6 +3,7 @@
 /**
  * Stripe Cancel Subscription Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -76,8 +77,8 @@ class CancelSubscriptionRequest extends AbstractRequest
     public function getEndpoint()
     {
         return $this->endpoint
-            .'/customers/'.$this->getCustomerReference()
-            .'/subscriptions/'.$this->getSubscriptionReference();
+            . '/customers/' . $this->getCustomerReference()
+            . '/subscriptions/' . $this->getSubscriptionReference();
     }
 
     public function getHttpMethod()

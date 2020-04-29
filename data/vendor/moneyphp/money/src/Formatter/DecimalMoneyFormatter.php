@@ -47,14 +47,14 @@ final class DecimalMoneyFormatter implements MoneyFormatter
             $decimalDigits = substr($valueBase, $valueLength - $subunit);
 
             if (strlen($decimalDigits) > 0) {
-                $formatted .= '.'.$decimalDigits;
+                $formatted .= '.' . $decimalDigits;
             }
         } else {
-            $formatted = '0.'.str_pad('', $subunit - $valueLength, '0').$valueBase;
+            $formatted = '0.' . str_pad('', $subunit - $valueLength, '0') . $valueBase;
         }
 
         if ($negative === true) {
-            $formatted = '-'.$formatted;
+            $formatted = '-' . $formatted;
         }
 
         return $formatted;

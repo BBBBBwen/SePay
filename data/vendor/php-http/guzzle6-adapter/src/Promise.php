@@ -108,7 +108,7 @@ final class Promise implements HttpPromise
      * Converts a Guzzle exception into an Httplug exception.
      *
      * @param GuzzleExceptions\GuzzleException $exception
-     * @param RequestInterface                 $request
+     * @param RequestInterface $request
      *
      * @return HttplugException
      */

@@ -3,6 +3,7 @@
 /**
  * Stripe Create Invoice Item Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -197,7 +198,7 @@ class CreateInvoiceItemRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/invoiceitems'
-            .($this->getInvoiceItemReference() != null ? '/'.$this->getInvoiceItemReference() : '');
+        return $this->endpoint . '/invoiceitems'
+            . ($this->getInvoiceItemReference() != null ? '/' . $this->getInvoiceItemReference() : '');
     }
 }

@@ -3,6 +3,7 @@
 /**
  * Stripe Update Customer Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -66,7 +67,7 @@ class UpdateCustomerRequest extends AbstractRequest
     {
         return $this->getParameter('source');
     }
-    
+
     /**
      * Sets the customer's source.
      *
@@ -107,6 +108,6 @@ class UpdateCustomerRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/customers/'.$this->getCustomerReference();
+        return $this->endpoint . '/customers/' . $this->getCustomerReference();
     }
 }

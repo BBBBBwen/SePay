@@ -3,6 +3,7 @@
 /**
  * Stripe Create Payment Method Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**
@@ -83,7 +84,7 @@ class CreatePaymentMethodRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/payment_methods';
+        return $this->endpoint . '/payment_methods';
     }
 
     /**
@@ -95,9 +96,9 @@ class CreatePaymentMethodRequest extends AbstractRequest
 
         return [
             'exp_month' => $data['exp_month'],
-            'exp_year' =>  $data['exp_year'],
-            'number' =>  $data['number'],
-            'cvc' =>  $data['cvc'],
+            'exp_year' => $data['exp_year'],
+            'number' => $data['number'],
+            'cvc' => $data['cvc'],
         ];
     }
 
@@ -111,8 +112,8 @@ class CreatePaymentMethodRequest extends AbstractRequest
         // Take care of optional data by filtering it out.
         return array_filter([
             'email' => $data['email'],
-            'name' =>  $data['name'],
-            'address' =>  array_filter([
+            'name' => $data['name'],
+            'address' => array_filter([
                 'city' => $data['address_city'],
                 'country' => $data['address_country'],
                 'line1' => $data['address_line1'],

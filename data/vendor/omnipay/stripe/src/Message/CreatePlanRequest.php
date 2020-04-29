@@ -172,6 +172,6 @@ class CreatePlanRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/plans';
+        return $this->endpoint . '/plans';
     }
 }

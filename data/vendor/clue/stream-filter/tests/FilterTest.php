@@ -41,7 +41,7 @@ class FilterTest extends PHPUnit_Framework_TestCase
         $stream = $this->createStream();
 
         StreamFilter\append($stream, function ($chunk) {
-            return str_replace(array('a','e','i','o','u'), '', $chunk);
+            return str_replace(array('a', 'e', 'i', 'o', 'u'), '', $chunk);
         });
 
         fwrite($stream, 'hello');
@@ -335,7 +335,8 @@ class FilterTest extends PHPUnit_Framework_TestCase
     public function testAppendInvalidStreamIsRuntimeError()
     {
         if (defined('HHVM_VERSION')) $this->markTestSkipped('Not supported on HHVM (does not reject invalid stream)');
-        StreamFilter\append(false, function () { });
+        StreamFilter\append(false, function () {
+        });
     }
 
     /**
@@ -344,7 +345,8 @@ class FilterTest extends PHPUnit_Framework_TestCase
     public function testPrependInvalidStreamIsRuntimeError()
     {
         if (defined('HHVM_VERSION')) $this->markTestSkipped('Not supported on HHVM (does not reject invalid stream)');
-        StreamFilter\prepend(false, function () { });
+        StreamFilter\prepend(false, function () {
+        });
     }
 
     /**
@@ -375,7 +377,7 @@ class FilterTest extends PHPUnit_Framework_TestCase
     {
         $errors = array();
         set_error_handler(function ($_, $message) use (&$errors) {
-            $errors []= $message;
+            $errors [] = $message;
         });
     }
 

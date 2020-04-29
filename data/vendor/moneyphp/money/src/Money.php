@@ -60,8 +60,8 @@ final class Money implements \JsonSerializable
     ];
 
     /**
-     * @param int|string $amount   Amount, expressed in the smallest units of $currency (eg cents)
-     * @param Currency   $currency
+     * @param int|string $amount Amount, expressed in the smallest units of $currency (eg cents)
+     * @param Currency $currency
      *
      * @throws \InvalidArgumentException If amount is not integer
      */
@@ -76,7 +76,7 @@ final class Money implements \JsonSerializable
             $amount = $numberFromString->getIntegerPart();
         }
 
-        $this->amount = (string) $amount;
+        $this->amount = (string)$amount;
         $this->currency = $currency;
     }
 
@@ -286,15 +286,15 @@ final class Money implements \JsonSerializable
     {
         if (!in_array(
             $roundingMode, [
-                self::ROUND_HALF_DOWN, self::ROUND_HALF_EVEN, self::ROUND_HALF_ODD,
-                self::ROUND_HALF_UP, self::ROUND_UP, self::ROUND_DOWN,
-                self::ROUND_HALF_POSITIVE_INFINITY, self::ROUND_HALF_NEGATIVE_INFINITY,
-            ], true
+            self::ROUND_HALF_DOWN, self::ROUND_HALF_EVEN, self::ROUND_HALF_ODD,
+            self::ROUND_HALF_UP, self::ROUND_UP, self::ROUND_DOWN,
+            self::ROUND_HALF_POSITIVE_INFINITY, self::ROUND_HALF_NEGATIVE_INFINITY,
+        ], true
         )) {
             throw new \InvalidArgumentException(
-                'Rounding mode should be Money::ROUND_HALF_DOWN | '.
-                'Money::ROUND_HALF_EVEN | Money::ROUND_HALF_ODD | '.
-                'Money::ROUND_HALF_UP | Money::ROUND_UP | Money::ROUND_DOWN'.
+                'Rounding mode should be Money::ROUND_HALF_DOWN | ' .
+                'Money::ROUND_HALF_EVEN | Money::ROUND_HALF_ODD | ' .
+                'Money::ROUND_HALF_UP | Money::ROUND_UP | Money::ROUND_DOWN' .
                 'Money::ROUND_HALF_POSITIVE_INFINITY | Money::ROUND_HALF_NEGATIVE_INFINITY'
             );
         }
@@ -305,7 +305,7 @@ final class Money implements \JsonSerializable
      * the multiplied value by the given factor.
      *
      * @param float|int|string $multiplier
-     * @param int              $roundingMode
+     * @param int $roundingMode
      *
      * @return Money
      */
@@ -324,7 +324,7 @@ final class Money implements \JsonSerializable
      * the divided value by the given factor.
      *
      * @param float|int|string $divisor
-     * @param int              $roundingMode
+     * @param int $roundingMode
      *
      * @return Money
      */
@@ -333,7 +333,7 @@ final class Money implements \JsonSerializable
         $this->assertOperand($divisor);
         $this->assertRoundingMode($roundingMode);
 
-        $divisor = (string) Number::fromNumber($divisor);
+        $divisor = (string)Number::fromNumber($divisor);
 
         if ($this->getCalculator()->compare($divisor, '0') === 0) {
             throw new \InvalidArgumentException('Division by zero');
@@ -448,7 +448,7 @@ final class Money implements \JsonSerializable
 
     /**
      * @param string $amount
-     * @param int    $rounding_mode
+     * @param int $rounding_mode
      *
      * @return string
      */
@@ -600,7 +600,7 @@ final class Money implements \JsonSerializable
     public static function registerCalculator($calculator)
     {
         if (is_a($calculator, Calculator::class, true) === false) {
-            throw new \InvalidArgumentException('Calculator must implement '.Calculator::class);
+            throw new \InvalidArgumentException('Calculator must implement ' . Calculator::class);
         }
 
         array_unshift(self::$calculators, $calculator);

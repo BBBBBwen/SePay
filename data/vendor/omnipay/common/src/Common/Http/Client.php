@@ -50,7 +50,8 @@ class Client implements ClientInterface
         array $headers = [],
         $body = null,
         $protocolVersion = '1.1'
-    ) {
+    )
+    {
         $request = $this->requestFactory->createRequest($method, $uri, $headers, $body, $protocolVersion);
 
         return $this->sendRequest($request);

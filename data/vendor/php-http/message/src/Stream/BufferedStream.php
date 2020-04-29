@@ -27,10 +27,10 @@ class BufferedStream implements StreamInterface
     private $written = 0;
 
     /**
-     * @param StreamInterface $stream        Decorated stream
-     * @param bool            $useFileBuffer Whether to use a file buffer (write to a file, if data exceed a certain size)
+     * @param StreamInterface $stream Decorated stream
+     * @param bool $useFileBuffer Whether to use a file buffer (write to a file, if data exceed a certain size)
      *                                       by default, set this to false to only use memory
-     * @param int             $memoryBuffer  In conjunction with using file buffer, limit (in bytes) from which it begins to buffer
+     * @param int $memoryBuffer In conjunction with using file buffer, limit (in bytes) from which it begins to buffer
      *                                       the data in a file
      */
     public function __construct(StreamInterface $stream, $useFileBuffer = true, $memoryBuffer = 2097152)
@@ -39,7 +39,7 @@ class BufferedStream implements StreamInterface
         $this->size = $stream->getSize();
 
         if ($useFileBuffer) {
-            $this->resource = fopen('php://temp/maxmemory:'.$memoryBuffer, 'rw+');
+            $this->resource = fopen('php://temp/maxmemory:' . $memoryBuffer, 'rw+');
         } else {
             $this->resource = fopen('php://memory', 'rw+');
         }

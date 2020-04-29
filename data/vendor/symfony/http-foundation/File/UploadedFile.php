@@ -50,11 +50,11 @@ class UploadedFile extends File
      *
      * Calling any other method on an non-valid instance will cause an unpredictable result.
      *
-     * @param string      $path         The full temporary path to the file
-     * @param string      $originalName The original file name of the uploaded file
-     * @param string|null $mimeType     The type of the file as provided by PHP; null defaults to application/octet-stream
-     * @param int|null    $error        The error constant of the upload (one of PHP's UPLOAD_ERR_XXX constants); null defaults to UPLOAD_ERR_OK
-     * @param bool        $test         Whether the test mode is active
+     * @param string $path The full temporary path to the file
+     * @param string $originalName The original file name of the uploaded file
+     * @param string|null $mimeType The type of the file as provided by PHP; null defaults to application/octet-stream
+     * @param int|null $error The error constant of the upload (one of PHP's UPLOAD_ERR_XXX constants); null defaults to UPLOAD_ERR_OK
+     * @param bool $test Whether the test mode is active
      *                                  Local files are used in test mode hence the code should not enforce HTTP uploads
      *
      * @throws FileException         If file_uploads is disabled
@@ -149,9 +149,9 @@ class UploadedFile extends File
      * It is extracted from the request from which the file has been uploaded.
      * Then it should not be considered as a safe value.
      *
+     * @return int|null The file sizes
      * @deprecated since Symfony 4.1, use getSize() instead.
      *
-     * @return int|null The file sizes
      */
     public function getClientSize()
     {
@@ -189,7 +189,7 @@ class UploadedFile extends File
      * Moves the file to a new location.
      *
      * @param string $directory The destination folder
-     * @param string $name      The new file name
+     * @param string $name The new file name
      *
      * @return File A File object representing the new file
      *
@@ -204,7 +204,9 @@ class UploadedFile extends File
 
             $target = $this->getTargetFile($directory, $name);
 
-            set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
+            set_error_handler(function ($type, $msg) use (&$error) {
+                $error = $msg;
+            });
             $moved = move_uploaded_file($this->getPathname(), $target);
             restore_error_handler();
             if (!$moved) {
@@ -266,17 +268,21 @@ class UploadedFile extends File
         } elseif (0 === strpos($max, '0')) {
             $max = \intval($max, 8);
         } else {
-            $max = (int) $max;
+            $max = (int)$max;
         }
 
         switch (substr($size, -1)) {
-            case 't': $max *= 1024;
+            case 't':
+                $max *= 1024;
             // no break
-            case 'g': $max *= 1024;
+            case 'g':
+                $max *= 1024;
             // no break
-            case 'm': $max *= 1024;
+            case 'm':
+                $max *= 1024;
             // no break
-            case 'k': $max *= 1024;
+            case 'k':
+                $max *= 1024;
         }
 
         return $max;

@@ -41,14 +41,14 @@ final class RelatedPart extends AbstractMultipartPart
 
     private function generateContentId(): string
     {
-        return bin2hex(random_bytes(16)).'@symfony';
+        return bin2hex(random_bytes(16)) . '@symfony';
     }
 
     private function prepareParts(AbstractPart ...$parts): void
     {
         foreach ($parts as $part) {
-            if (!$part->getHeaders()->has('Content-ID')) {
-                $part->getHeaders()->setHeaderBody('Id', 'Content-ID', $this->generateContentId());
+            if (!$part->getHeaders()->has('content-ID')) {
+                $part->getHeaders()->setHeaderBody('Id', 'content-ID', $this->generateContentId());
             }
         }
     }

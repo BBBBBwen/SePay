@@ -97,13 +97,13 @@ final class GmpCalculator implements Calculator
             $result = substr($resultBase, $decimalPlaces * -1);
             $resultLength = strlen($result);
             if ($decimalPlaces > $resultLength) {
-                return '0.'.str_pad('', $decimalPlaces - $resultLength, '0').$result;
+                return '0.' . str_pad('', $decimalPlaces - $resultLength, '0') . $result;
             }
 
-            return substr($resultBase, 0, $decimalPlaces * -1).'.'.$result;
+            return substr($resultBase, 0, $decimalPlaces * -1) . '.' . $result;
         }
 
-        return gmp_strval(gmp_mul(gmp_init($amount), gmp_init((string) $multiplier)));
+        return gmp_strval(gmp_mul(gmp_init($amount), gmp_init((string)$multiplier)));
     }
 
     /**
@@ -117,15 +117,15 @@ final class GmpCalculator implements Calculator
             $decimalPlaces = strlen($divisor->getFractionalPart());
 
             if ($divisor->getIntegerPart()) {
-                $divisor = new Number($divisor->getIntegerPart().$divisor->getFractionalPart());
+                $divisor = new Number($divisor->getIntegerPart() . $divisor->getFractionalPart());
             } else {
                 $divisor = new Number(ltrim($divisor->getFractionalPart(), '0'));
             }
 
-            $amount = gmp_strval(gmp_mul(gmp_init($amount), gmp_init('1'.str_pad('', $decimalPlaces, '0'))));
+            $amount = gmp_strval(gmp_mul(gmp_init($amount), gmp_init('1' . str_pad('', $decimalPlaces, '0'))));
         }
 
-        list($integer, $remainder) = gmp_div_qr(gmp_init($amount), gmp_init((string) $divisor));
+        list($integer, $remainder) = gmp_div_qr(gmp_init($amount), gmp_init((string)$divisor));
 
         if (gmp_cmp($remainder, '0') === 0) {
             return gmp_strval($integer);
@@ -133,8 +133,8 @@ final class GmpCalculator implements Calculator
 
         $divisionOfRemainder = gmp_strval(
             gmp_div_q(
-                gmp_mul($remainder, gmp_init('1'.str_pad('', $this->scale, '0'))),
-                gmp_init((string) $divisor),
+                gmp_mul($remainder, gmp_init('1' . str_pad('', $this->scale, '0'))),
+                gmp_init((string)$divisor),
                 GMP_ROUND_MINUSINF
             )
         );
@@ -143,7 +143,7 @@ final class GmpCalculator implements Calculator
             $divisionOfRemainder = substr($divisionOfRemainder, 1);
         }
 
-        return gmp_strval($integer).'.'.str_pad($divisionOfRemainder, $this->scale, '0', STR_PAD_LEFT);
+        return gmp_strval($integer) . '.' . str_pad($divisionOfRemainder, $this->scale, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -154,7 +154,7 @@ final class GmpCalculator implements Calculator
         $number = Number::fromNumber($number);
 
         if ($number->isInteger()) {
-            return (string) $number;
+            return (string)$number;
         }
 
         if ($number->isNegative()) {
@@ -172,7 +172,7 @@ final class GmpCalculator implements Calculator
         $number = Number::fromNumber($number);
 
         if ($number->isInteger()) {
-            return (string) $number;
+            return (string)$number;
         }
 
         if ($number->isNegative()) {
@@ -198,7 +198,7 @@ final class GmpCalculator implements Calculator
         $number = Number::fromNumber($number);
 
         if ($number->isInteger()) {
-            return (string) $number;
+            return (string)$number;
         }
 
         if ($number->isHalf() === false) {

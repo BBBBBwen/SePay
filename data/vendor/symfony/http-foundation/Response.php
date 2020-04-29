@@ -140,9 +140,9 @@ class Response
         201 => 'Created',
         202 => 'Accepted',
         203 => 'Non-Authoritative Information',
-        204 => 'No Content',
-        205 => 'Reset Content',
-        206 => 'Partial Content',
+        204 => 'No content',
+        205 => 'Reset content',
+        206 => 'Partial content',
         207 => 'Multi-Status',          // RFC4918
         208 => 'Already Reported',      // RFC5842
         226 => 'IM Used',               // RFC3229
@@ -216,7 +216,7 @@ class Response
      *         ->setSharedMaxAge(300);
      *
      * @param mixed $content The response content, see setContent()
-     * @param int   $status  The response status code
+     * @param int $status The response status code
      * @param array $headers An array of response headers
      *
      * @return static
@@ -240,8 +240,8 @@ class Response
     public function __toString()
     {
         return
-            sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText)."\r\n".
-            $this->headers."\r\n".
+            sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText) . "\r\n" .
+            $this->headers . "\r\n" .
             $this->getContent();
     }
 
@@ -268,39 +268,39 @@ class Response
 
         if ($this->isInformational() || $this->isEmpty()) {
             $this->setContent(null);
-            $headers->remove('Content-Type');
-            $headers->remove('Content-Length');
-            // prevent PHP from sending the Content-Type header based on default_mimetype
+            $headers->remove('content-Type');
+            $headers->remove('content-Length');
+            // prevent PHP from sending the content-Type header based on default_mimetype
             ini_set('default_mimetype', '');
         } else {
-            // Content-type based on the Request
-            if (!$headers->has('Content-Type')) {
+            // content-type based on the Request
+            if (!$headers->has('content-Type')) {
                 $format = $request->getRequestFormat(null);
                 if (null !== $format && $mimeType = $request->getMimeType($format)) {
-                    $headers->set('Content-Type', $mimeType);
+                    $headers->set('content-Type', $mimeType);
                 }
             }
 
-            // Fix Content-Type
+            // Fix content-Type
             $charset = $this->charset ?: 'UTF-8';
-            if (!$headers->has('Content-Type')) {
-                $headers->set('Content-Type', 'text/html; charset='.$charset);
-            } elseif (0 === stripos($headers->get('Content-Type'), 'text/') && false === stripos($headers->get('Content-Type'), 'charset')) {
+            if (!$headers->has('content-Type')) {
+                $headers->set('content-Type', 'text/html; charset=' . $charset);
+            } elseif (0 === stripos($headers->get('content-Type'), 'text/') && false === stripos($headers->get('content-Type'), 'charset')) {
                 // add the charset
-                $headers->set('Content-Type', $headers->get('Content-Type').'; charset='.$charset);
+                $headers->set('content-Type', $headers->get('content-Type') . '; charset=' . $charset);
             }
 
-            // Fix Content-Length
+            // Fix content-Length
             if ($headers->has('Transfer-Encoding')) {
-                $headers->remove('Content-Length');
+                $headers->remove('content-Length');
             }
 
             if ($request->isMethod('HEAD')) {
                 // cf. RFC2616 14.13
-                $length = $headers->get('Content-Length');
+                $length = $headers->get('content-Length');
                 $this->setContent(null);
                 if ($length) {
-                    $headers->set('Content-Length', $length);
+                    $headers->set('content-Length', $length);
                 }
             }
         }
@@ -341,15 +341,15 @@ class Response
 
         // headers
         foreach ($this->headers->allPreserveCaseWithoutCookies() as $name => $values) {
-            $replace = 0 === strcasecmp($name, 'Content-Type');
+            $replace = 0 === strcasecmp($name, 'content-Type');
             foreach ($values as $value) {
-                header($name.': '.$value, $replace, $this->statusCode);
+                header($name . ': ' . $value, $replace, $this->statusCode);
             }
         }
 
         // cookies
         foreach ($this->headers->getCookies() as $cookie) {
-            header('Set-Cookie: '.$cookie, false, $this->statusCode);
+            header('Set-Cookie: ' . $cookie, false, $this->statusCode);
         }
 
         // status
@@ -394,7 +394,7 @@ class Response
      *
      * Valid types are strings, numbers, null, and objects that implement a __toString() method.
      *
-     * @param mixed $content Content that can be cast to string
+     * @param mixed $content content that can be cast to string
      *
      * @return $this
      *
@@ -406,7 +406,7 @@ class Response
             throw new \UnexpectedValueException(sprintf('The Response content must be a string or object implementing __toString(), "%s" given.', \gettype($content)));
         }
 
-        $this->content = (string) $content;
+        $this->content = (string)$content;
 
         return $this;
     }
@@ -673,7 +673,7 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Date', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set('Date', $date->format('D, d M Y H:i:s') . ' GMT');
 
         return $this;
     }
@@ -686,10 +686,10 @@ class Response
     public function getAge(): int
     {
         if (null !== $age = $this->headers->get('Age')) {
-            return (int) $age;
+            return (int)$age;
         }
 
-        return max(time() - (int) $this->getDate()->format('U'), 0);
+        return max(time() - (int)$this->getDate()->format('U'), 0);
     }
 
     /**
@@ -744,7 +744,7 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Expires', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set('Expires', $date->format('D, d M Y H:i:s') . ' GMT');
 
         return $this;
     }
@@ -761,15 +761,15 @@ class Response
     public function getMaxAge(): ?int
     {
         if ($this->headers->hasCacheControlDirective('s-maxage')) {
-            return (int) $this->headers->getCacheControlDirective('s-maxage');
+            return (int)$this->headers->getCacheControlDirective('s-maxage');
         }
 
         if ($this->headers->hasCacheControlDirective('max-age')) {
-            return (int) $this->headers->getCacheControlDirective('max-age');
+            return (int)$this->headers->getCacheControlDirective('max-age');
         }
 
         if (null !== $this->getExpires()) {
-            return (int) $this->getExpires()->format('U') - (int) $this->getDate()->format('U');
+            return (int)$this->getExpires()->format('U') - (int)$this->getDate()->format('U');
         }
 
         return null;
@@ -891,7 +891,7 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Last-Modified', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set('Last-Modified', $date->format('D, d M Y H:i:s') . ' GMT');
 
         return $this;
     }
@@ -910,7 +910,7 @@ class Response
      * Sets the ETag value.
      *
      * @param string|null $etag The ETag unique identifier or null to remove the header
-     * @param bool        $weak Whether you want a weak ETag or not
+     * @param bool $weak Whether you want a weak ETag or not
      *
      * @return $this
      *
@@ -922,10 +922,10 @@ class Response
             $this->headers->remove('Etag');
         } else {
             if (0 !== strpos($etag, '"')) {
-                $etag = '"'.$etag.'"';
+                $etag = '"' . $etag . '"';
             }
 
-            $this->headers->set('ETag', (true === $weak ? 'W/' : '').$etag);
+            $this->headers->set('ETag', (true === $weak ? 'W/' : '') . $etag);
         }
 
         return $this;
@@ -981,7 +981,7 @@ class Response
         }
 
         if (isset($options['immutable'])) {
-            $this->setImmutable((bool) $options['immutable']);
+            $this->setImmutable((bool)$options['immutable']);
         }
 
         return $this;
@@ -1005,7 +1005,7 @@ class Response
         $this->setContent(null);
 
         // remove headers that MUST NOT be included with 304 Not Modified responses
-        foreach (['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified'] as $header) {
+        foreach (['Allow', 'content-Encoding', 'content-Language', 'content-Length', 'content-MD5', 'content-Type', 'Last-Modified'] as $header) {
             $this->headers->remove($header);
         }
 
@@ -1045,7 +1045,7 @@ class Response
      * Sets the Vary header.
      *
      * @param string|array $headers
-     * @param bool         $replace Whether to replace the actual value or not (true by default)
+     * @param bool $replace Whether to replace the actual value or not (true by default)
      *
      * @return $this
      *
@@ -1237,8 +1237,8 @@ class Response
      */
     protected function ensureIEOverSSLCompatibility(Request $request): void
     {
-        if (false !== stripos($this->headers->get('Content-Disposition'), 'attachment') && 1 == preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) && true === $request->isSecure()) {
-            if ((int) preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {
+        if (false !== stripos($this->headers->get('content-Disposition'), 'attachment') && 1 == preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) && true === $request->isSecure()) {
+            if ((int)preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {
                 $this->headers->remove('Cache-Control');
             }
         }

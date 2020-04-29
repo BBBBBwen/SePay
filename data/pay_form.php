@@ -1,11 +1,11 @@
 <?php
-include_once __DIR__ . "/../Content/head.php";
+include_once __DIR__ . "/../content/head.php";
 include __DIR__ . '/rsa.php';
 include __DIR__ . '/des.php';
 ?>
 <!DOCTYPE html>
 <html>
-<?php include_once __DIR__ . "/../Content/header.php";
+<?php include_once __DIR__ . "/../content/header.php";
 require_once __DIR__ . "/connect_database.php";
 
 if (isset($_SESSION['id']) && isset($_POST['email'])) {
@@ -118,7 +118,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
 </script>
 <!-- Footer -->
-<?php include_once __DIR__ . '../Content/foot.php'; ?>
+<?php include_once __DIR__ . '../content/foot.php'; ?>
 
 </body>
 </html>

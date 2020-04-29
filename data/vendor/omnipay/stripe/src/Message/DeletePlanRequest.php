@@ -3,6 +3,7 @@
 /**
  * Stripe Delete Plan Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -41,7 +42,7 @@ class DeletePlanRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/plans/'.$this->getId();
+        return $this->endpoint . '/plans/' . $this->getId();
     }
 
     public function getHttpMethod()

@@ -161,7 +161,7 @@ final class Idn
                 }
                 if ($c === $n) {
                     $q = $delta;
-                    for ($k = 36;; $k += 36) {
+                    for ($k = 36; ; $k += 36) {
                         $t = self::calculateThreshold($k, $bias);
                         if ($q < $t) {
                             break;
@@ -184,7 +184,7 @@ final class Idn
             ++$n;
         }
 
-        $output = 'xn--'.$output;
+        $output = 'xn--' . $output;
 
         return \strlen($output) < 1 || 63 < \strlen($output) ? false : strtolower($output);
     }
@@ -225,16 +225,16 @@ final class Idn
 
     private static function adapt($delta, $numPoints, $firstTime)
     {
-        $delta = (int) ($firstTime ? $delta / 700 : $delta / 2);
-        $delta += (int) ($delta / $numPoints);
+        $delta = (int)($firstTime ? $delta / 700 : $delta / 2);
+        $delta += (int)($delta / $numPoints);
 
         $k = 0;
         while ($delta > 35 * 13) {
-            $delta = (int) ($delta / 35);
+            $delta = (int)($delta / 35);
             $k = $k + 36;
         }
 
-        return $k + (int) (36 * $delta / ($delta + 38));
+        return $k + (int)(36 * $delta / ($delta + 38));
     }
 
     private static function decodePart($input)
@@ -258,7 +258,7 @@ final class Idn
             $oldi = $i;
             $w = 1;
 
-            for ($k = 36;; $k += 36) {
+            for ($k = 36; ; $k += 36) {
                 $digit = self::$decodeTable[$input[$pos++]];
                 $i += $digit * $w;
                 $t = self::calculateThreshold($k, $bias);
@@ -271,9 +271,9 @@ final class Idn
             }
 
             $bias = self::adapt($i - $oldi, ++$outputLength, 0 === $oldi);
-            $n = $n + (int) ($i / $outputLength);
+            $n = $n + (int)($i / $outputLength);
             $i = $i % $outputLength;
-            $output = mb_substr($output, 0, $i, 'utf-8').mb_chr($n, 'utf-8').mb_substr($output, $i, $outputLength - 1, 'utf-8');
+            $output = mb_substr($output, 0, $i, 'utf-8') . mb_chr($n, 'utf-8') . mb_substr($output, $i, $outputLength - 1, 'utf-8');
 
             ++$i;
         }

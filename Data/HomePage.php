@@ -1,5 +1,5 @@
-<?php include_once __DIR__."/../Content/head.php";
-include_once __DIR__."/../Content/header.php"; ?>
+<?php include_once __DIR__ . "/../content/head.php";
+include_once __DIR__ . "/../content/header.php"; ?>
 <link rel="stylesheet" href="/assets/css/form.css">
 <?php
 if (isset($_SESSION['username'])) {

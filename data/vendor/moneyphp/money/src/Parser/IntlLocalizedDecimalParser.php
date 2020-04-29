@@ -28,7 +28,7 @@ final class IntlLocalizedDecimalParser implements MoneyParser
 
     /**
      * @param \NumberFormatter $formatter
-     * @param Currencies       $currencies
+     * @param Currencies $currencies
      */
     public function __construct(\NumberFormatter $formatter, Currencies $currencies)
     {
@@ -55,7 +55,7 @@ final class IntlLocalizedDecimalParser implements MoneyParser
 
         if (false === $decimal) {
             throw new ParserException(
-                'Cannot parse '.$money.' to Money. '.$this->formatter->getErrorMessage()
+                'Cannot parse ' . $money . ' to Money. ' . $this->formatter->getErrorMessage()
             );
         }
 
@@ -64,11 +64,11 @@ final class IntlLocalizedDecimalParser implements MoneyParser
          * Currency object.
          */
         if (!$forceCurrency instanceof Currency) {
-            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a '.Currency::class.' instance instead.', E_USER_DEPRECATED);
+            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a ' . Currency::class . ' instance instead.', E_USER_DEPRECATED);
             $forceCurrency = new Currency($forceCurrency);
         }
 
-        $decimal = (string) $decimal;
+        $decimal = (string)$decimal;
         $subunit = $this->currencies->subunitFor($forceCurrency);
         $decimalPosition = strpos($decimal, '.');
 
@@ -88,7 +88,7 @@ final class IntlLocalizedDecimalParser implements MoneyParser
         }
 
         if ('-' === $decimal[0]) {
-            $decimal = '-'.ltrim(substr($decimal, 1), '0');
+            $decimal = '-' . ltrim(substr($decimal, 1), '0');
         } else {
             $decimal = ltrim($decimal, '0');
         }

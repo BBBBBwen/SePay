@@ -34,10 +34,10 @@ class JsonResponse extends Response
     protected $encodingOptions = self::DEFAULT_ENCODING_OPTIONS;
 
     /**
-     * @param mixed $data    The response data
-     * @param int   $status  The response status code
+     * @param mixed $data The response data
+     * @param int $status The response status code
      * @param array $headers An array of response headers
-     * @param bool  $json    If the data is already a JSON string
+     * @param bool $json If the data is already a JSON string
      */
     public function __construct($data = null, int $status = 200, array $headers = [], bool $json = false)
     {
@@ -58,8 +58,8 @@ class JsonResponse extends Response
      *     return JsonResponse::create(['key' => 'value'])
      *         ->setSharedMaxAge(300);
      *
-     * @param mixed $data    The JSON response data
-     * @param int   $status  The response status code
+     * @param mixed $data The JSON response data
+     * @param int $status The response status code
      * @param array $headers An array of response headers
      *
      * @return static
@@ -77,9 +77,9 @@ class JsonResponse extends Response
      *     return JsonResponse::fromJsonString('{"key": "value"}')
      *         ->setSharedMaxAge(300);
      *
-     * @param string|null $data    The JSON response string
-     * @param int         $status  The response status code
-     * @param array       $headers An array of response headers
+     * @param string|null $data The JSON response string
+     * @param int $status The response status code
+     * @param array $headers An array of response headers
      *
      * @return static
      */
@@ -107,7 +107,7 @@ class JsonResponse extends Response
             $pattern = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]*(?:\[(?:"(?:\\\.|[^"\\\])*"|\'(?:\\\.|[^\'\\\])*\'|\d+)\])*?$/u';
             $reserved = [
                 'break', 'do', 'instanceof', 'typeof', 'case', 'else', 'new', 'var', 'catch', 'finally', 'return', 'void', 'continue', 'for', 'switch', 'while',
-                'debugger', 'function', 'this', 'with', 'default', 'if', 'throw', 'delete', 'in', 'try', 'class', 'enum', 'extends', 'super',  'const', 'export',
+                'debugger', 'function', 'this', 'with', 'default', 'if', 'throw', 'delete', 'in', 'try', 'class', 'enum', 'extends', 'super', 'const', 'export',
                 'import', 'implements', 'let', 'private', 'public', 'yield', 'interface', 'package', 'protected', 'static', 'null', 'true', 'false',
             ];
             $parts = explode('.', $callback);
@@ -189,7 +189,7 @@ class JsonResponse extends Response
      */
     public function setEncodingOptions($encodingOptions)
     {
-        $this->encodingOptions = (int) $encodingOptions;
+        $this->encodingOptions = (int)$encodingOptions;
 
         return $this->setData(json_decode($this->data));
     }
@@ -203,15 +203,15 @@ class JsonResponse extends Response
     {
         if (null !== $this->callback) {
             // Not using application/javascript for compatibility reasons with older browsers.
-            $this->headers->set('Content-Type', 'text/javascript');
+            $this->headers->set('content-Type', 'text/javascript');
 
             return $this->setContent(sprintf('/**/%s(%s);', $this->callback, $this->data));
         }
 
         // Only set the header when there is none or when it equals 'text/javascript' (from a previous update with callback)
         // in order to not overwrite a custom definition.
-        if (!$this->headers->has('Content-Type') || 'text/javascript' === $this->headers->get('Content-Type')) {
-            $this->headers->set('Content-Type', 'application/json');
+        if (!$this->headers->has('content-Type') || 'text/javascript' === $this->headers->get('content-Type')) {
+            $this->headers->set('content-Type', 'application/json');
         }
 
         return $this->setContent($this->data);

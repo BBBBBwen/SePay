@@ -34,8 +34,8 @@ final class Number
             throw new \InvalidArgumentException('Empty number is invalid');
         }
 
-        $this->integerPart = $this->parseIntegerPart((string) $integerPart);
-        $this->fractionalPart = $this->parseFractionalPart((string) $fractionalPart);
+        $this->integerPart = $this->parseIntegerPart((string)$integerPart);
+        $this->fractionalPart = $this->parseFractionalPart((string)$fractionalPart);
     }
 
     /**
@@ -147,7 +147,7 @@ final class Number
             return $this->integerPart;
         }
 
-        return $this->integerPart.'.'.$this->fractionalPart;
+        return $this->integerPart . '.' . $this->fractionalPart;
     }
 
     /**
@@ -216,8 +216,8 @@ final class Number
             $zeroPad = $number - min($number, $lengthIntegerPart);
 
             return new self(
-                $sign.substr($integerPart, 0, $integers),
-                rtrim(str_pad('', $zeroPad, '0').substr($integerPart, $integers).$this->fractionalPart, '0')
+                $sign . substr($integerPart, 0, $integers),
+                rtrim(str_pad('', $zeroPad, '0') . substr($integerPart, $integers) . $this->fractionalPart, '0')
             );
         }
 
@@ -227,7 +227,7 @@ final class Number
         $zeroPad = $number - min($number, $lengthFractionalPart);
 
         return new self(
-            $sign.ltrim($integerPart.substr($this->fractionalPart, 0, $lengthFractionalPart - $fractions).str_pad('', $zeroPad, '0'), '0'),
+            $sign . ltrim($integerPart . substr($this->fractionalPart, 0, $lengthFractionalPart - $fractions) . str_pad('', $zeroPad, '0'), '0'),
             substr($this->fractionalPart, $lengthFractionalPart - $fractions)
         );
     }
@@ -295,8 +295,8 @@ final class Number
 
     /**
      * @param string $moneyValue
-     * @param int    $targetDigits
-     * @param int    $havingDigits
+     * @param int $targetDigits
+     * @param int $havingDigits
      *
      * @return string
      */
@@ -310,19 +310,19 @@ final class Number
             $addend = 1;
 
             while ($position > 0) {
-                $newValue = (string) ((int) $moneyValue[$position - 1] + $addend);
+                $newValue = (string)((int)$moneyValue[$position - 1] + $addend);
 
                 if ($newValue >= 10) {
                     $moneyValue[$position - 1] = $newValue[1];
                     $addend = $newValue[0];
                     --$position;
                     if ($position === 0) {
-                        $moneyValue = $addend.$moneyValue;
+                        $moneyValue = $addend . $moneyValue;
                     }
                 } else {
                     if ($moneyValue[$position - 1] === '-') {
                         $moneyValue[$position - 1] = $newValue[0];
-                        $moneyValue = '-'.$moneyValue;
+                        $moneyValue = '-' . $moneyValue;
                     } else {
                         $moneyValue[$position - 1] = $newValue[0];
                     }

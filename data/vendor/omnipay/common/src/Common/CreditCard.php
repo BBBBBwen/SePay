@@ -156,8 +156,8 @@ class CreditCard
      * Note: The fact that this class knows about a particular card brand does not imply
      * that your gateway supports it.
      *
-     * @see self::$supported_cards
      * @return array
+     * @see self::$supported_cards
      */
     public function getSupportedBrands()
     {
@@ -172,8 +172,8 @@ class CreditCard
      *
      * Set $add_to_front to true if the key should be added to the front of the array
      *
-     * @param  string  $name The name of the new supported brand.
-     * @param  string  $expression The regular expression to check if a card is supported.
+     * @param string $name The name of the new supported brand.
+     * @param string $expression The regular expression to check if a card is supported.
      * @return boolean success
      */
     public function addSupportedBrand($name, $expression)
@@ -254,7 +254,7 @@ class CreditCard
         if (null === $value || '' === $value) {
             $value = null;
         } else {
-            $value = (int) gmdate('Y', gmmktime(0, 0, 0, 1, 1, (int) $value));
+            $value = (int)gmdate('Y', gmmktime(0, 0, 0, 1, 1, (int)$value));
         }
 
         return $this->setParameter($key, $value);
@@ -269,8 +269,8 @@ class CreditCard
      * Generally if you want to validate the credit card yourself with custom error
      * messages, you should use your framework's validation library, not this method.
      *
-     * @throws InvalidCreditCardException
      * @return void
+     * @throws InvalidCreditCardException
      */
     public function validate()
     {
@@ -477,7 +477,7 @@ class CreditCard
      */
     public function setExpiryMonth($value)
     {
-        return $this->setParameter('expiryMonth', (int) $value);
+        return $this->setParameter('expiryMonth', (int)$value);
     }
 
     /**
@@ -531,7 +531,7 @@ class CreditCard
      */
     public function setStartMonth($value)
     {
-        return $this->setParameter('startMonth', (int) $value);
+        return $this->setParameter('startMonth', (int)$value);
     }
 
     /**

@@ -44,9 +44,9 @@ class UpdateSubscriptionRequest extends AbstractRequest
     }
 
     /**
-     * @deprecated
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest|UpdateSubscriptionRequest
+     * @deprecated
      */
     public function setPlanId($value)
     {
@@ -95,7 +95,7 @@ class UpdateSubscriptionRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/customers/'.$this->getCustomerReference()
-            .'/subscriptions/'.$this->getSubscriptionReference();
+        return $this->endpoint . '/customers/' . $this->getCustomerReference()
+            . '/subscriptions/' . $this->getSubscriptionReference();
     }
 }

@@ -15,7 +15,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Exception\RfcComplianceException;
 
 /**
- * An ID MIME Header for something like Message-ID or Content-ID (one or more addresses).
+ * An ID MIME Header for something like Message-ID or content-ID (one or more addresses).
  *
  * @author Chris Corbyn
  */
@@ -102,7 +102,7 @@ final class IdentificationHeader extends AbstractHeader
     {
         $addrs = [];
         foreach ($this->idsAsAddresses as $address) {
-            $addrs[] = '<'.$address->toString().'>';
+            $addrs[] = '<' . $address->toString() . '>';
         }
 
         return implode(' ', $addrs);

@@ -18,9 +18,9 @@ class StripeItemBag extends ItemBag
     /**
      * Add an item to the bag
      *
+     * @param ItemInterface|array $item An existing item, or associative array of item parameters
      * @see Item
      *
-     * @param ItemInterface|array $item An existing item, or associative array of item parameters
      */
     public function add($item)
     {

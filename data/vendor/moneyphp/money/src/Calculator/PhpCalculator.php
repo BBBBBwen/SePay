@@ -36,7 +36,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertInteger($result);
 
-        return (string) $result;
+        return (string)$result;
     }
 
     /**
@@ -48,7 +48,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertInteger($result);
 
-        return (string) $result;
+        return (string)$result;
     }
 
     /**
@@ -60,7 +60,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertIntegerBounds($result);
 
-        return (string) Number::fromNumber($result);
+        return (string)Number::fromNumber($result);
     }
 
     /**
@@ -72,7 +72,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertIntegerBounds($result);
 
-        return (string) Number::fromNumber($result);
+        return (string)Number::fromNumber($result);
     }
 
     /**
@@ -100,7 +100,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertIntegerBounds($result);
 
-        return (string) $result;
+        return (string)$result;
     }
 
     /**
@@ -112,20 +112,20 @@ final class PhpCalculator implements Calculator
             $number = Number::fromNumber($number);
 
             if ($number->isHalf()) {
-                return $this->castInteger(ceil((string) $number));
+                return $this->castInteger(ceil((string)$number));
             }
 
-            return $this->castInteger(round((string) $number, 0, Money::ROUND_HALF_UP));
+            return $this->castInteger(round((string)$number, 0, Money::ROUND_HALF_UP));
         }
 
         if (Money::ROUND_HALF_NEGATIVE_INFINITY === $roundingMode) {
             $number = Number::fromNumber($number);
 
             if ($number->isHalf()) {
-                return $this->castInteger(floor((string) $number));
+                return $this->castInteger(floor((string)$number));
             }
 
-            return $this->castInteger(round((string) $number, 0, Money::ROUND_HALF_DOWN));
+            return $this->castInteger(round((string)$number, 0, Money::ROUND_HALF_DOWN));
         }
 
         return $this->castInteger(round($number, 0, $roundingMode));
@@ -148,7 +148,7 @@ final class PhpCalculator implements Calculator
 
         $this->assertIntegerBounds($result);
 
-        return (string) $result;
+        return (string)$result;
     }
 
     /**
@@ -180,7 +180,7 @@ final class PhpCalculator implements Calculator
     {
         $this->assertIntegerBounds($amount);
 
-        return (string) intval($amount);
+        return (string)intval($amount);
     }
 
     /**

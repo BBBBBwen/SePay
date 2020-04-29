@@ -55,9 +55,9 @@ class AcceptHeaderItem
      */
     public function __toString()
     {
-        $string = $this->value.($this->quality < 1 ? ';q='.$this->quality : '');
+        $string = $this->value . ($this->quality < 1 ? ';q=' . $this->quality : '');
         if (\count($this->attributes) > 0) {
-            $string .= '; '.HeaderUtils::toString($this->attributes, ';');
+            $string .= '; ' . HeaderUtils::toString($this->attributes, ';');
         }
 
         return $string;
@@ -151,7 +151,7 @@ class AcceptHeaderItem
      * Returns an attribute by its name.
      *
      * @param string $name
-     * @param mixed  $default
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -181,9 +181,9 @@ class AcceptHeaderItem
     public function setAttribute($name, $value)
     {
         if ('q' === $name) {
-            $this->quality = (float) $value;
+            $this->quality = (float)$value;
         } else {
-            $this->attributes[$name] = (string) $value;
+            $this->attributes[$name] = (string)$value;
         }
 
         return $this;

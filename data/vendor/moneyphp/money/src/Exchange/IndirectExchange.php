@@ -44,7 +44,7 @@ final class IndirectExchange implements Exchange
     private $exchange;
 
     /**
-     * @param Exchange   $exchange
+     * @param Exchange $exchange
      * @param Currencies $currencies
      */
     public function __construct(Exchange $exchange, Currencies $currencies)
@@ -59,7 +59,7 @@ final class IndirectExchange implements Exchange
     public static function registerCalculator($calculator)
     {
         if (is_a($calculator, Calculator::class, true) === false) {
-            throw new \InvalidArgumentException('Calculator must implement '.Calculator::class);
+            throw new \InvalidArgumentException('Calculator must implement ' . Calculator::class);
         }
 
         array_unshift(self::$calculators, $calculator);
@@ -155,7 +155,7 @@ final class IndirectExchange implements Exchange
     }
 
     /**
-     * @param array     $currencies
+     * @param array $currencies
      * @param \stdClass $goalNode
      *
      * @return CurrencyPair[]

@@ -112,7 +112,7 @@ class ResponseBuilder
 
         $reasonPhrase = count($parts) > 2 ? $parts[2] : '';
         $this->response = $this->response
-            ->withStatus((int) $parts[1], $reasonPhrase)
+            ->withStatus((int)$parts[1], $reasonPhrase)
             ->withProtocolVersion(substr($parts[0], 5));
 
         return $this;

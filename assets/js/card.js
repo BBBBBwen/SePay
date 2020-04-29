@@ -29,7 +29,7 @@ var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
 // Handle real-time validation errors from the card Element.
-card.addEventListener('change', function(event) {
+card.addEventListener('change', function (event) {
     var displayError = document.getElementById('card-errors');
     if (event.error) {
         displayError.textContent = event.error.message;
@@ -40,10 +40,10 @@ card.addEventListener('change', function(event) {
 
 // Handle form submission.
 var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    stripe.createToken(card).then(function(result) {
+    stripe.createToken(card).then(function (result) {
         if (result.error) {
             // Inform the user if there was an error.
             var errorElement = document.getElementById('card-errors');
@@ -69,7 +69,7 @@ function stripeTokenHandler(token) {
     form.submit();
 }
 
-function openwindow(){
+function openwindow() {
     //获取弹窗得div
     var modal = document.getElementById('myModal');
     // 获取 <span> 元素，用于关闭弹窗 （X）
@@ -77,12 +77,12 @@ function openwindow(){
     //窗体弹出
     modal.style.display = "block";
     // 点击 <span> (x), 关闭弹窗
-    span.onclick = function() {
+    span.onclick = function () {
         //直接关闭窗口
         modal.style.display = "none";
     }
     // 在用户点击其他地方时，关闭弹窗
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         //点击窗口外内容，关闭窗口
         if (event.target == modal) modal.style.display = "none";
     }

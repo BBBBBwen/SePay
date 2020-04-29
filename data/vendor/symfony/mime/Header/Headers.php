@@ -208,7 +208,7 @@ final class Headers
     {
         $string = '';
         foreach ($this->toArray() as $str) {
-            $string .= $str."\r\n";
+            $string .= $str . "\r\n";
         }
 
         return $string;
@@ -242,7 +242,7 @@ final class Headers
         if ($this->has($name)) {
             $this->get($name)->setBody($body);
         } else {
-            $this->{'add'.$type.'Header'}($name, $body);
+            $this->{'add' . $type . 'Header'}($name, $body);
         }
     }
 

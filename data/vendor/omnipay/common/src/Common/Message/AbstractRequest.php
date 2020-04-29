@@ -112,8 +112,8 @@ abstract class AbstractRequest implements RequestInterface
     /**
      * Create a new Request
      *
-     * @param ClientInterface $httpClient  A HTTP client to make API calls with
-     * @param HttpRequest     $httpRequest A Symfony HTTP request object
+     * @param ClientInterface $httpClient A HTTP client to make API calls with
+     * @param HttpRequest $httpRequest A Symfony HTTP request object
      */
     public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
     {
@@ -219,7 +219,7 @@ abstract class AbstractRequest implements RequestInterface
     {
         foreach (func_get_args() as $key) {
             $value = $this->parameters->get($key);
-            if (! isset($value)) {
+            if (!isset($value)) {
                 throw new InvalidRequestException("The $key parameter is required");
             }
         }
@@ -305,7 +305,7 @@ abstract class AbstractRequest implements RequestInterface
     }
 
     /**
-     * @param  string|int|null $amount
+     * @param string|int|null $amount
      * @return null|Money
      * @throws InvalidRequestException
      */
@@ -334,7 +334,7 @@ abstract class AbstractRequest implements RequestInterface
                 throw new InvalidRequestException('Amount precision is too high for currency.');
             }
 
-            $money = $moneyParser->parse((string) $number, $currency);
+            $money = $moneyParser->parse((string)$number, $currency);
         }
 
         // Check for a negative amount.
@@ -353,8 +353,8 @@ abstract class AbstractRequest implements RequestInterface
     /**
      * Validates and returns the formatted amount.
      *
-     * @throws InvalidRequestException on any validation failure.
      * @return string The amount formatted to the correct number of decimal places for the selected currency.
+     * @throws InvalidRequestException on any validation failure.
      */
     public function getAmount()
     {
@@ -375,7 +375,7 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function setAmount($value)
     {
-        return $this->setParameter('amount', $value !== null ? (string) $value : null);
+        return $this->setParameter('amount', $value !== null ? (string)$value : null);
     }
 
     /**
@@ -388,7 +388,7 @@ abstract class AbstractRequest implements RequestInterface
         $money = $this->getMoney();
 
         if ($money !== null) {
-            return (int) $money->getAmount();
+            return (int)$money->getAmount();
         }
     }
 
@@ -400,7 +400,7 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function setAmountInteger($value)
     {
-        return $this->setParameter('amount', (int) $value);
+        return $this->setParameter('amount', (int)$value);
     }
 
     /**
@@ -449,14 +449,14 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function getCurrencyNumeric()
     {
-        if (! $this->getCurrency()) {
+        if (!$this->getCurrency()) {
             return null;
         }
 
         $currency = new Currency($this->getCurrency());
 
         if ($this->getCurrencies()->contains($currency)) {
-            return (string) $this->getCurrencies()->numericCodeFor($currency);
+            return (string)$this->getCurrencies()->numericCodeFor($currency);
         }
     }
 
@@ -485,7 +485,7 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function formatCurrency($amount)
     {
-        $money = $this->getMoney((string) $amount);
+        $money = $this->getMoney((string)$amount);
         $formatter = new DecimalMoneyFormatter($this->getCurrencies());
 
         return $formatter->format($money);

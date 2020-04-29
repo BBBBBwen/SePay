@@ -32,8 +32,8 @@ class StreamedResponse extends Response
 
     /**
      * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int           $status   The response status code
-     * @param array         $headers  An array of response headers
+     * @param int $status The response status code
+     * @param array $headers An array of response headers
      */
     public function __construct(callable $callback = null, int $status = 200, array $headers = [])
     {
@@ -50,8 +50,8 @@ class StreamedResponse extends Response
      * Factory method for chainability.
      *
      * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int           $status   The response status code
-     * @param array         $headers  An array of response headers
+     * @param int $status The response status code
+     * @param array $headers An array of response headers
      *
      * @return static
      */
@@ -117,9 +117,9 @@ class StreamedResponse extends Response
     /**
      * {@inheritdoc}
      *
+     * @return $this
      * @throws \LogicException when the content is not null
      *
-     * @return $this
      */
     public function setContent($content)
     {

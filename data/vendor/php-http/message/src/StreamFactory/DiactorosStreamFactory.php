@@ -28,7 +28,7 @@ final class DiactorosStreamFactory implements StreamFactory
 
         $stream = new Stream('php://memory', 'rw');
         if (null !== $body && '' !== $body) {
-            $stream->write((string) $body);
+            $stream->write((string)$body);
         }
 
         return $stream;

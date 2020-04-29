@@ -54,6 +54,6 @@ class FetchTransferRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/transfers/'.$this->getTransferReference();
+        return $this->endpoint . '/transfers/' . $this->getTransferReference();
     }
 }

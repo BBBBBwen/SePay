@@ -101,7 +101,7 @@ class ResponseHeaderBag extends HeaderBag
         }
 
         foreach ($this->getCookies() as $cookie) {
-            $headers['set-cookie'][] = (string) $cookie;
+            $headers['set-cookie'][] = (string)$cookie;
         }
 
         return $headers;
@@ -118,7 +118,7 @@ class ResponseHeaderBag extends HeaderBag
             if ($replace) {
                 $this->cookies = [];
             }
-            foreach ((array) $values as $cookie) {
+            foreach ((array)$values as $cookie) {
                 $this->setCookie(Cookie::fromString($cookie));
             }
             $this->headerNames[$uniqueKey] = $key;
@@ -250,8 +250,8 @@ class ResponseHeaderBag extends HeaderBag
      * @param string $name
      * @param string $path
      * @param string $domain
-     * @param bool   $secure
-     * @param bool   $httpOnly
+     * @param bool $secure
+     * @param bool $httpOnly
      * @param string $sameSite
      */
     public function clearCookie($name, $path = '/', $domain = null, $secure = false, $httpOnly = true/*, $sameSite = null*/)
@@ -266,7 +266,7 @@ class ResponseHeaderBag extends HeaderBag
      */
     public function makeDisposition($disposition, $filename, $filenameFallback = '')
     {
-        return HeaderUtils::makeDisposition((string) $disposition, (string) $filename, (string) $filenameFallback);
+        return HeaderUtils::makeDisposition((string)$disposition, (string)$filename, (string)$filenameFallback);
     }
 
     /**
@@ -295,7 +295,7 @@ class ResponseHeaderBag extends HeaderBag
 
         // public if s-maxage is defined, private otherwise
         if (!isset($this->cacheControl['s-maxage'])) {
-            return $header.', private';
+            return $header . ', private';
         }
 
         return $header;
@@ -305,6 +305,6 @@ class ResponseHeaderBag extends HeaderBag
     {
         $now = \DateTime::createFromFormat('U', time());
         $now->setTimezone(new \DateTimeZone('UTC'));
-        $this->set('Date', $now->format('D, d M Y H:i:s').' GMT');
+        $this->set('Date', $now->format('D, d M Y H:i:s') . ' GMT');
     }
 }

@@ -87,7 +87,7 @@ final class CharacterStream
                 case 'utf32':
                 case 'utf-32':
                     $this->fixedWidth = 4;
-                break;
+                    break;
 
                 // 7-8 bit charsets: (us-)?ascii, (iso|iec)-?8859-?[0-9]+, windows-?125[0-9], cp-?[0-9]+, ansi, macintosh,
                 //                   koi-?7, koi-?8-?.+, mik, (cork|t1), v?iscii
@@ -130,7 +130,7 @@ final class CharacterStream
             $to = $start;
             for (; $this->currentPos < $end; ++$this->currentPos) {
                 if (isset($this->map['i'][$this->currentPos])) {
-                    $ret .= substr($this->data, $start, $to - $start).'?';
+                    $ret .= substr($this->data, $start, $to - $start) . '?';
                     $start = $this->map['p'][$this->currentPos];
                 } else {
                     $to = $this->map['p'][$this->currentPos];

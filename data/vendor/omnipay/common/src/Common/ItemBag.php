@@ -37,9 +37,9 @@ class ItemBag implements \IteratorAggregate, \Countable
     /**
      * Return all the items
      *
+     * @return array An array of items
      * @see Item
      *
-     * @return array An array of items
      */
     public function all()
     {
@@ -49,9 +49,9 @@ class ItemBag implements \IteratorAggregate, \Countable
     /**
      * Replace the contents of this bag with the specified items
      *
+     * @param array $items An array of items
      * @see Item
      *
-     * @param array $items An array of items
      */
     public function replace(array $items = array())
     {
@@ -65,9 +65,9 @@ class ItemBag implements \IteratorAggregate, \Countable
     /**
      * Add an item to the bag
      *
+     * @param ItemInterface|array $item An existing item, or associative array of item parameters
      * @see Item
      *
-     * @param ItemInterface|array $item An existing item, or associative array of item parameters
      */
     public function add($item)
     {

@@ -54,14 +54,14 @@ final class Cookie
     private $expires;
 
     /**
-     * @param string         $name
-     * @param string|null    $value
-     * @param int|null       $maxAge
-     * @param string|null    $domain
-     * @param string|null    $path
-     * @param bool           $secure
-     * @param bool           $httpOnly
-     * @param \DateTime|null $expires  Expires attribute is HTTP 1.0 only and should be avoided.
+     * @param string $name
+     * @param string|null $value
+     * @param int|null $maxAge
+     * @param string|null $domain
+     * @param string|null $path
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param \DateTime|null $expires Expires attribute is HTTP 1.0 only and should be avoided.
      *
      * @throws \InvalidArgumentException If name, value or max age is not valid.
      */
@@ -74,7 +74,8 @@ final class Cookie
         $secure = false,
         $httpOnly = false,
         \DateTime $expires = null
-    ) {
+    )
+    {
         $this->validateName($name);
         $this->validateValue($value);
         $this->validateMaxAge($maxAge);
@@ -85,21 +86,21 @@ final class Cookie
         $this->expires = $expires;
         $this->domain = $this->normalizeDomain($domain);
         $this->path = $this->normalizePath($path);
-        $this->secure = (bool) $secure;
-        $this->httpOnly = (bool) $httpOnly;
+        $this->secure = (bool)$secure;
+        $this->httpOnly = (bool)$httpOnly;
     }
 
     /**
      * Creates a new cookie without any attribute validation.
      *
-     * @param string         $name
-     * @param string|null    $value
-     * @param int            $maxAge
-     * @param string|null    $domain
-     * @param string|null    $path
-     * @param bool           $secure
-     * @param bool           $httpOnly
-     * @param \DateTime|null $expires  Expires attribute is HTTP 1.0 only and should be avoided.
+     * @param string $name
+     * @param string|null $value
+     * @param int $maxAge
+     * @param string|null $domain
+     * @param string|null $path
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param \DateTime|null $expires Expires attribute is HTTP 1.0 only and should be avoided.
      */
     public static function createWithoutValidation(
         $name,
@@ -110,7 +111,8 @@ final class Cookie
         $secure = false,
         $httpOnly = false,
         \DateTime $expires = null
-    ) {
+    )
+    {
         $cookie = new self('name', null, null, $domain, $path, $secure, $httpOnly, $expires);
         $cookie->name = $name;
         $cookie->value = $value;
@@ -304,7 +306,7 @@ final class Cookie
             return false;
         }
 
-        return (bool) preg_match(sprintf('/\b%s$/i', preg_quote($this->domain)), $domain);
+        return (bool)preg_match(sprintf('/\b%s$/i', preg_quote($this->domain)), $domain);
     }
 
     /**
@@ -343,7 +345,7 @@ final class Cookie
      */
     public function matchPath($path)
     {
-        return $this->path === $path || (0 === strpos($path, rtrim($this->path, '/').'/'));
+        return $this->path === $path || (0 === strpos($path, rtrim($this->path, '/') . '/'));
     }
 
     /**
@@ -366,7 +368,7 @@ final class Cookie
     public function withSecure($secure)
     {
         $new = clone $this;
-        $new->secure = (bool) $secure;
+        $new->secure = (bool)$secure;
 
         return $new;
     }
@@ -391,7 +393,7 @@ final class Cookie
     public function withHttpOnly($httpOnly)
     {
         $new = clone $this;
-        $new->httpOnly = (bool) $httpOnly;
+        $new->httpOnly = (bool)$httpOnly;
 
         return $new;
     }

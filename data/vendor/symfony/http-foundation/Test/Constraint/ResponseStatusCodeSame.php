@@ -28,7 +28,7 @@ final class ResponseStatusCodeSame extends Constraint
      */
     public function toString(): string
     {
-        return 'status code is '.$this->statusCode;
+        return 'status code is ' . $this->statusCode;
     }
 
     /**
@@ -48,7 +48,7 @@ final class ResponseStatusCodeSame extends Constraint
      */
     protected function failureDescription($response): string
     {
-        return 'the Response '.$this->toString();
+        return 'the Response ' . $this->toString();
     }
 
     /**
@@ -58,6 +58,6 @@ final class ResponseStatusCodeSame extends Constraint
      */
     protected function additionalFailureDescription($response): string
     {
-        return (string) $response;
+        return (string)$response;
     }
 }

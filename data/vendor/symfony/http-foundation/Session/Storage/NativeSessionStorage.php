@@ -391,7 +391,7 @@ class NativeSessionStorage implements SessionStorageInterface
                     $this->emulateSameSite = $value;
                     continue;
                 }
-                ini_set('url_rewriter.tags' !== $key ? 'session.'.$key : $key, $value);
+                ini_set('url_rewriter.tags' !== $key ? 'session.' . $key : $key, $value);
             }
         }
     }

@@ -79,7 +79,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchScheme($scheme)
     {
-        $this->schemes = null !== $scheme ? array_map('strtolower', (array) $scheme) : [];
+        $this->schemes = null !== $scheme ? array_map('strtolower', (array)$scheme) : [];
     }
 
     /**
@@ -129,7 +129,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchIps($ips)
     {
-        $this->ips = null !== $ips ? (array) $ips : [];
+        $this->ips = null !== $ips ? (array)$ips : [];
     }
 
     /**
@@ -139,13 +139,13 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchMethod($method)
     {
-        $this->methods = null !== $method ? array_map('strtoupper', (array) $method) : [];
+        $this->methods = null !== $method ? array_map('strtoupper', (array)$method) : [];
     }
 
     /**
      * Adds a check for request attribute.
      *
-     * @param string $key    The request attribute name
+     * @param string $key The request attribute name
      * @param string $regexp A Regexp
      */
     public function matchAttribute($key, $regexp)
@@ -167,16 +167,16 @@ class RequestMatcher implements RequestMatcherInterface
         }
 
         foreach ($this->attributes as $key => $pattern) {
-            if (!preg_match('{'.$pattern.'}', $request->attributes->get($key))) {
+            if (!preg_match('{' . $pattern . '}', $request->attributes->get($key))) {
                 return false;
             }
         }
 
-        if (null !== $this->path && !preg_match('{'.$this->path.'}', rawurldecode($request->getPathInfo()))) {
+        if (null !== $this->path && !preg_match('{' . $this->path . '}', rawurldecode($request->getPathInfo()))) {
             return false;
         }
 
-        if (null !== $this->host && !preg_match('{'.$this->host.'}i', $request->getHost())) {
+        if (null !== $this->host && !preg_match('{' . $this->host . '}i', $request->getHost())) {
             return false;
         }
 

@@ -104,7 +104,7 @@ class Message extends RawMessage
             $body = new TextPart('');
         }
 
-        return $this->getPreparedHeaders()->toString().$body->toString();
+        return $this->getPreparedHeaders()->toString() . $body->toString();
     }
 
     public function toIterable(): iterable
@@ -136,7 +136,7 @@ class Message extends RawMessage
             throw new LogicException('An email must have a "From" or a "Sender" header to compute a Messsage ID.');
         }
 
-        return bin2hex(random_bytes(16)).strstr($sender->getAddress(), '@');
+        return bin2hex(random_bytes(16)) . strstr($sender->getAddress(), '@');
     }
 
     public function __serialize(): array

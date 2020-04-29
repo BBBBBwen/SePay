@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../Data/connect_database.php';
-include __DIR__ . '/../Data/rsa.php';
+require __DIR__ . '/../data/connect_database.php';
+include __DIR__ . '/../data/rsa.php';
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = false;

@@ -3,6 +3,7 @@
 /**
  * Stripe Create Credit Card Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -97,11 +98,11 @@ class CreateCardRequest extends AbstractRequest
     {
         if ($this->getCustomerReference()) {
             // Create a new card on an existing customer
-            return $this->endpoint.'/customers/'.
-                $this->getCustomerReference().'/cards';
+            return $this->endpoint . '/customers/' .
+                $this->getCustomerReference() . '/cards';
         }
         // Create a new customer and card
-        return $this->endpoint.'/customers';
+        return $this->endpoint . '/customers';
     }
 
     public function getCardData()

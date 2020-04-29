@@ -34,7 +34,7 @@ final class ISOCurrencies implements Currencies
     public function subunitFor(Currency $currency)
     {
         if (!$this->contains($currency)) {
-            throw new UnknownCurrencyException('Cannot find ISO currency '.$currency->getCode());
+            throw new UnknownCurrencyException('Cannot find ISO currency ' . $currency->getCode());
         }
 
         return $this->getCurrencies()[$currency->getCode()]['minorUnit'];
@@ -52,7 +52,7 @@ final class ISOCurrencies implements Currencies
     public function numericCodeFor(Currency $currency)
     {
         if (!$this->contains($currency)) {
-            throw new UnknownCurrencyException('Cannot find ISO currency '.$currency->getCode());
+            throw new UnknownCurrencyException('Cannot find ISO currency ' . $currency->getCode());
         }
 
         return $this->getCurrencies()[$currency->getCode()]['numericCode'];
@@ -92,7 +92,7 @@ final class ISOCurrencies implements Currencies
      */
     private function loadCurrencies()
     {
-        $file = __DIR__.'/../../resources/currency.php';
+        $file = __DIR__ . '/../../resources/currency.php';
 
         if (file_exists($file)) {
             return require $file;

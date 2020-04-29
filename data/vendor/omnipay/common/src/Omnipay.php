@@ -102,12 +102,12 @@ class Omnipay
      *   $gateway = Omnipay::create('ExpressGateway');
      * </code>
      *
-     * @see GatewayFactory
-     *
-     * @param string $method     The factory method to invoke.
-     * @param array  $parameters Parameters passed to the factory method.
+     * @param string $method The factory method to invoke.
+     * @param array $parameters Parameters passed to the factory method.
      *
      * @return mixed
+     * @see GatewayFactory
+     *
      */
     public static function __callStatic($method, $parameters)
     {

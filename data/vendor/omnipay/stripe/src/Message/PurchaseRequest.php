@@ -3,6 +3,7 @@
 /**
  * Stripe Purchase Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**

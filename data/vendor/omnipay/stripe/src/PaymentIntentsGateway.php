@@ -3,6 +3,7 @@
 /**
  * Stripe Payment Intents Gateway.
  */
+
 namespace Omnipay\Stripe;
 
 use Omnipay\Stripe\Message\PaymentIntents\Response;

@@ -3,6 +3,7 @@
 /**
  * Stripe base gateway.
  */
+
 namespace Omnipay\Stripe;
 
 use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
@@ -59,7 +60,7 @@ use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
  * Test modes:
  *
  * Stripe accounts have test-mode API keys as well as live-mode
- * API keys. These keys can be active at the same time. Data
+ * API keys. These keys can be active at the same time. data
  * created with test-mode credentials will never hit the credit
  * card networks and will never cost anyone money.
  *
@@ -88,10 +89,10 @@ use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
  */
 abstract class AbstractGateway extends AbstractOmnipayGateway
 {
-    const BILLING_PLAN_FREQUENCY_DAY    = 'day';
-    const BILLING_PLAN_FREQUENCY_WEEK   = 'week';
-    const BILLING_PLAN_FREQUENCY_MONTH  = 'month';
-    const BILLING_PLAN_FREQUENCY_YEAR   = 'year';
+    const BILLING_PLAN_FREQUENCY_DAY = 'day';
+    const BILLING_PLAN_FREQUENCY_WEEK = 'week';
+    const BILLING_PLAN_FREQUENCY_MONTH = 'month';
+    const BILLING_PLAN_FREQUENCY_YEAR = 'year';
 
     /**
      * @inheritdoc
@@ -130,7 +131,7 @@ abstract class AbstractGateway extends AbstractOmnipayGateway
      * the apiKey parameter when creating the gateway object.
      *
      * Stripe accounts have test-mode API keys as well as live-mode
-     * API keys. These keys can be active at the same time. Data
+     * API keys. These keys can be active at the same time. data
      * created with test-mode credentials will never hit the credit
      * card networks and will never cost anyone money.
      *

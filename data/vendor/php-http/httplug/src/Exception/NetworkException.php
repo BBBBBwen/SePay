@@ -17,9 +17,9 @@ class NetworkException extends TransferException implements PsrNetworkException
     use RequestAwareTrait;
 
     /**
-     * @param string           $message
+     * @param string $message
      * @param RequestInterface $request
-     * @param \Exception|null  $previous
+     * @param \Exception|null $previous
      */
     public function __construct($message, RequestInterface $request, \Exception $previous = null)
     {

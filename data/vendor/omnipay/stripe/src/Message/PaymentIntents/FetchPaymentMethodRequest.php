@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Payment Method Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**

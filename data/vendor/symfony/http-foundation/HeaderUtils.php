@@ -54,13 +54,13 @@ class HeaderUtils
                         "(?:[^"\\\\]|\\\\.)*(?:"|\\\\|$)
                     |
                         # token
-                        [^"'.$quotedSeparators.']+
+                        [^"' . $quotedSeparators . ']+
                     )+
                 (?<!\s)
             |
                 # separator
                 \s*
-                (?<separator>['.$quotedSeparators.'])
+                (?<separator>[' . $quotedSeparators . '])
                 \s*
             /x', trim($header), $matches, PREG_SET_ORDER);
 
@@ -111,11 +111,11 @@ class HeaderUtils
             if (true === $value) {
                 $parts[] = $name;
             } else {
-                $parts[] = $name.'='.self::quote($value);
+                $parts[] = $name . '=' . self::quote($value);
             }
         }
 
-        return implode($separator.' ', $parts);
+        return implode($separator . ' ', $parts);
     }
 
     /**
@@ -131,7 +131,7 @@ class HeaderUtils
             return $s;
         }
 
-        return '"'.addcslashes($s, '"\\"').'"';
+        return '"' . addcslashes($s, '"\\"') . '"';
     }
 
     /**
@@ -146,15 +146,15 @@ class HeaderUtils
     }
 
     /**
-     * Generates a HTTP Content-Disposition field-value.
+     * Generates a HTTP content-Disposition field-value.
      *
-     * @param string $disposition      One of "inline" or "attachment"
-     * @param string $filename         A unicode string
+     * @param string $disposition One of "inline" or "attachment"
+     * @param string $filename A unicode string
      * @param string $filenameFallback A string containing only ASCII characters that
      *                                 is semantically equivalent to $filename. If the filename is already ASCII,
      *                                 it can be omitted, or just copied from $filename
      *
-     * @return string A string suitable for use as a Content-Disposition field-value
+     * @return string A string suitable for use as a content-Disposition field-value
      *
      * @throws \InvalidArgumentException
      *
@@ -187,10 +187,10 @@ class HeaderUtils
 
         $params = ['filename' => $filenameFallback];
         if ($filename !== $filenameFallback) {
-            $params['filename*'] = "utf-8''".rawurlencode($filename);
+            $params['filename*'] = "utf-8''" . rawurlencode($filename);
         }
 
-        return $disposition.'; '.self::toString($params, ';');
+        return $disposition . '; ' . self::toString($params, ';');
     }
 
     private static function groupParts(array $matches, string $separators): array

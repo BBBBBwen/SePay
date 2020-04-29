@@ -29,7 +29,7 @@ final class AggregateMoneyFormatter implements MoneyFormatter
 
         foreach ($formatters as $currencyCode => $formatter) {
             if (false === $formatter instanceof MoneyFormatter) {
-                throw new \InvalidArgumentException('All formatters must implement '.MoneyFormatter::class);
+                throw new \InvalidArgumentException('All formatters must implement ' . MoneyFormatter::class);
             }
 
             $this->formatters[$currencyCode] = $formatter;
@@ -51,6 +51,6 @@ final class AggregateMoneyFormatter implements MoneyFormatter
             return $this->formatters['*']->format($money);
         }
 
-        throw new FormatterException('No formatter found for currency '.$currencyCode);
+        throw new FormatterException('No formatter found for currency ' . $currencyCode);
     }
 }

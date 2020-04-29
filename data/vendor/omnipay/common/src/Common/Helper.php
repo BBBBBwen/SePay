@@ -18,7 +18,7 @@ class Helper
     /**
      * Convert a string to camelCase. Strings already in camelCase will not be harmed.
      *
-     * @param  string  $str The input string
+     * @param string $str The input string
      * @return string camelCased output string
      */
     public static function camelCase($str)
@@ -36,7 +36,7 @@ class Helper
     /**
      * Convert strings with underscores to be all lowercase before camelCase is preformed.
      *
-     * @param  string $str The input string
+     * @param string $str The input string
      * @return string The output string
      */
     protected static function convertToLowercase($str)
@@ -57,7 +57,7 @@ class Helper
     /**
      * Validate a card number according to the Luhn algorithm.
      *
-     * @param  string  $number The card number to validate
+     * @param string $number The card number to validate
      * @return boolean True if the supplied card number is valid
      */
     public static function validateLuhn($number)
@@ -76,14 +76,14 @@ class Helper
      * Parameters are automatically converted to camelCase. Any parameters which do
      * not match a setter on the target object are ignored.
      *
-     * @param mixed $target     The object to set parameters on
+     * @param mixed $target The object to set parameters on
      * @param array $parameters An array of parameters to set
      */
     public static function initialize($target, array $parameters = null)
     {
         if ($parameters) {
             foreach ($parameters as $key => $value) {
-                $method = 'set'.ucfirst(static::camelCase($key));
+                $method = 'set' . ucfirst(static::camelCase($key));
                 if (method_exists($target, $method)) {
                     $target->$method($value);
                 }
@@ -107,7 +107,7 @@ class Helper
             return trim(str_replace('\\', '_', substr($className, 8, -7)), '_');
         }
 
-        return '\\'.$className;
+        return '\\' . $className;
     }
 
     /**
@@ -122,7 +122,7 @@ class Helper
      *      PayPal\Express      => \Omnipay\PayPal\ExpressGateway
      *      PayPal_Express      => \Omnipay\PayPal\ExpressGateway
      *
-     * @param  string  $shortName The short gateway name
+     * @param string $shortName The short gateway name
      * @return string  The fully namespaced gateway class name
      */
     public static function getGatewayClassName($shortName)
@@ -137,6 +137,6 @@ class Helper
             $shortName .= '\\';
         }
 
-        return '\\Omnipay\\'.$shortName.'Gateway';
+        return '\\Omnipay\\' . $shortName . 'Gateway';
     }
 }

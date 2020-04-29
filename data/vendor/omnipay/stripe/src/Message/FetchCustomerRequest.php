@@ -3,6 +3,7 @@
 /**
  * Stripe Delete Customer Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**

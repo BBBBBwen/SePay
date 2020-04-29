@@ -8,28 +8,28 @@ session_start();
 # [START gae_simple_front_controller]
 switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':
-        require 'Data/HomePage.php';
+        require 'data/HomePage.php';
         break;
     case '/login.php':
-        require 'Content/login.php';
+        require 'content/login.php';
         break;
     case '/register.php':
-        require 'Content/register.php';
+        require 'content/register.php';
         break;
     case '/logout.php':
-        require 'Data/logout.php';
+        require 'data/logout.php';
         break;
     case '/Wallet.php':
-        require 'Data/Wallet.php';
+        require 'data/Wallet.php';
         break;
     case '/TransactionHistory.php':
-        require 'Data/TransactionHistory.php';
+        require 'data/TransactionHistory.php';
         break;
     case '/pay_form.php':
-        require 'Data/pay_form.php';
+        require 'data/pay_form.php';
         break;
     case '/charge.php':
-        require 'Data/charge.php';
+        require 'data/charge.php';
         break;
     default:
         http_response_code(404);

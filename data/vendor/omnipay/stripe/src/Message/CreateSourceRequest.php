@@ -2,6 +2,7 @@
 /**
  * CreateSourceRequest
  */
+
 namespace Omnipay\Stripe\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
@@ -66,23 +67,23 @@ class CreateSourceRequest extends AbstractRequest
      */
     public function getData()
     {
-        $data['amount']   = $this->getAmountInteger();
+        $data['amount'] = $this->getAmountInteger();
         $data['currency'] = strtolower($this->getCurrency());
 
         if ($this->getSecure()) {
-            $data['type']                   = 'three_d_secure';
+            $data['type'] = 'three_d_secure';
             $data['three_d_secure']['card'] = $this->getSource();
             $data['redirect']['return_url'] = $this->getSecureRedirectUrl();
         } elseif ($card = $this->getCard()) {
-            $data['type']              = 'card';
-            $data['card']['number']    = $card->getNumber();
+            $data['type'] = 'card';
+            $data['card']['number'] = $card->getNumber();
             $data['card']['exp_month'] = $card->getExpiryMonth();
-            $data['card']['exp_year']  = $card->getExpiryYear();
+            $data['card']['exp_year'] = $card->getExpiryYear();
             if ($card->getCvv()) {
                 $data['card']['cvc'] = $card->getCvv();
             }
             $data['owner']['email'] = $card->getEmail();
-            $data['owner']['name']  = $card->getName();
+            $data['owner']['name'] = $card->getName();
         }
 
         return $data;

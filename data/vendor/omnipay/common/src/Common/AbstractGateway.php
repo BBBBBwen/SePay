@@ -62,8 +62,8 @@ abstract class AbstractGateway implements GatewayInterface
     /**
      * Create a new gateway instance
      *
-     * @param ClientInterface          $httpClient  A HTTP client to make API calls with
-     * @param HttpRequest     $httpRequest A Symfony HTTP request object
+     * @param ClientInterface $httpClient A HTTP client to make API calls with
+     * @param HttpRequest $httpRequest A Symfony HTTP request object
      */
     public function __construct(ClientInterface $httpClient = null, HttpRequest $httpRequest = null)
     {
@@ -85,7 +85,7 @@ abstract class AbstractGateway implements GatewayInterface
     /**
      * Initialize this gateway with default parameters
      *
-     * @param  array $parameters
+     * @param array $parameters
      * @return $this
      */
     public function initialize(array $parameters = array())
@@ -123,7 +123,7 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * @param  string $key
+     * @param string $key
      * @return mixed
      */
     public function getParameter($key)
@@ -132,8 +132,8 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed $value
      * @return $this
      */
     public function setParameter($key, $value)
@@ -152,7 +152,7 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * @param  boolean $value
+     * @param boolean $value
      * @return $this
      */
     public function setTestMode($value)
@@ -169,7 +169,7 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * @param  string $value
+     * @param string $value
      * @return $this
      */
     public function setCurrency($value)
@@ -312,10 +312,10 @@ abstract class AbstractGateway implements GatewayInterface
      *   $myRequest = $gw->myRequest($someParameters);
      * </code>
      *
-     * @see \Omnipay\Common\Message\AbstractRequest
      * @param string $class The request class name
      * @param array $parameters
      * @return \Omnipay\Common\Message\AbstractRequest
+     * @see \Omnipay\Common\Message\AbstractRequest
      */
     protected function createRequest($class, array $parameters)
     {

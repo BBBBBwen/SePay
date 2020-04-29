@@ -3,6 +3,7 @@
 /**
  * Stripe List Invoices Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -22,7 +23,7 @@ class ListInvoicesRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        $endpoint = $this->endpoint.'/invoices';
+        $endpoint = $this->endpoint . '/invoices';
         if ($customerReference = $this->getCustomerReference()) {
             return $endpoint . '?customer=' . $customerReference;
         }

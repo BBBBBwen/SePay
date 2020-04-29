@@ -20,7 +20,7 @@ use Omnipay\Common\Exception\InvalidRequestException;
  * Test modes:
  *
  * Stripe accounts have test-mode API keys as well as live-mode
- * API keys. These keys can be active at the same time. Data
+ * API keys. These keys can be active at the same time. data
  * created with test-mode credentials will never hit the credit
  * card networks and will never cost anyone money.
  *
@@ -231,7 +231,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->response = new Response($this, $data, $headers);
     }
-    
+
     /**
      * @return mixed
      */
@@ -278,7 +278,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 throw new InvalidRequestException('Amount precision is too high for currency.');
             }
 
-            $money = $moneyParser->parse((string) $number, $currency->getCode());
+            $money = $moneyParser->parse((string)$number, $currency->getCode());
 
             // Check for a negative amount.
             if (!$this->negativeAmountAllowed && $money->isNegative()) {

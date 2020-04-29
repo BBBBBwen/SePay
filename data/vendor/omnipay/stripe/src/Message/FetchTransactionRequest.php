@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Transaction Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -38,7 +39,7 @@ class FetchTransactionRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getTransactionReference();
+        return $this->endpoint . '/charges/' . $this->getTransactionReference();
     }
 
     public function getHttpMethod()

@@ -52,7 +52,7 @@ final class DecimalMoneyParser implements MoneyParser
          */
         $currency = $forceCurrency;
         if (!$currency instanceof Currency) {
-            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a '.Currency::class.' instance instead.', E_USER_DEPRECATED);
+            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a ' . Currency::class . ' instance instead.', E_USER_DEPRECATED);
             $currency = new Currency($currency);
         }
 
@@ -76,7 +76,7 @@ final class DecimalMoneyParser implements MoneyParser
         $decimal = $matches['digits'];
 
         if ($negative) {
-            $decimal = '-'.$decimal;
+            $decimal = '-' . $decimal;
         }
 
         if (isset($matches['fraction'])) {
@@ -94,7 +94,7 @@ final class DecimalMoneyParser implements MoneyParser
         }
 
         if ($negative) {
-            $decimal = '-'.ltrim(substr($decimal, 1), '0');
+            $decimal = '-' . ltrim(substr($decimal, 1), '0');
         } else {
             $decimal = ltrim($decimal, '0');
         }

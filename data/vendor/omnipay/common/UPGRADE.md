@@ -36,7 +36,7 @@ Examples:
 
  $response = $this->httpClient->request('POST', $this->endpoint, [
      'Accept' => 'application/json',
-     'Content-Type' => 'application/json',
+     'content-Type' => 'application/json',
  ], json_encode($data));
  
  $result = json_decode($response->getBody()->getContents(), true);

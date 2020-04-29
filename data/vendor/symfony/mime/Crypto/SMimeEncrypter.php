@@ -24,7 +24,7 @@ final class SMimeEncrypter extends SMime
 
     /**
      * @param string|string[] $certificate The path (or array of paths) of the file(s) containing the X.509 certificate(s)
-     * @param int|null        $cipher      A set of algorithms used to encrypt the message. Must be one of these PHP constants: https://www.php.net/manual/en/openssl.ciphers.php
+     * @param int|null $cipher A set of algorithms used to encrypt the message. Must be one of these PHP constants: https://www.php.net/manual/en/openssl.ciphers.php
      */
     public function __construct($certificate, int $cipher = null)
     {
@@ -54,9 +54,8 @@ final class SMimeEncrypter extends SMime
 
         $mimePart = $this->convertMessageToSMimePart($outputFile, 'application', 'pkcs7-mime');
         $mimePart->getHeaders()
-            ->addTextHeader('Content-Transfer-Encoding', 'base64')
-            ->addParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'smime.p7m'])
-        ;
+            ->addTextHeader('content-Transfer-Encoding', 'base64')
+            ->addParameterizedHeader('content-Disposition', 'attachment', ['name' => 'smime.p7m']);
 
         return new Message($message->getHeaders(), $mimePart);
     }
