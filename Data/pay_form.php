@@ -33,10 +33,10 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $update = $db->query("UPDATE users SET balance=".$balance." WHERE id='".$userID."'");
                 $update = $db->query("UPDATE users SET balance=".$receiver_balance." WHERE id='".$receiver['id']."'");
 
-                echo "Payment is successful. Your payment id is: ". $payment_id;
-            } else {
-                echo 'there is no such user or no enough balance';
-            }}else{
+            echo "Payment is successful. Your payment id is: ". $payment_id;
+        } else {
+            echo 'there is no such user or no enough balance';
+        }}else{
             echo "Please enter correct payment password";
         }
     } catch(Exception $e) {
@@ -74,29 +74,29 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         </div>
     </form>
 </div>
-<script src="../assets/js/rsa.js"></script>
-<script src="../assets/js/des.js"></script>
-<script type="text/javascript">
+    <script src="../assets/js/rsa.js"></script>
+    <script src="../assets/js/des.js"></script>
+    <script type="text/javascript">
 
-    //Encrypt amount number by DES
-    function DES_encryption() {
-        var DES_key = document.getElementById("paymentpassword").value;
-        var encrypted_des_key = RSA_encryption(DES_key);
-        document.getElementById("paymentpassword").value = encrypted_des_key;
-        var amount = document.getElementById("amount").value;
-        var encrypted_amount = javascript_des_encryption(DES_key, amount);
-        document.getElementById("amount").value = encrypted_amount;
-    }
-    //Encrypt DES key by RSA public key
-    function RSA_encryption(deskey){
-        var pubilc_key = "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzdxaei6bt/xIAhYsdFdW62CGTpRX+GXoZkzqvbf5oOxw4wKENjFX7LsqZXxdFfoRxEwH90zZHLHgsNFzXe3JqiRabIDcNZmKS2F0A7+Mwrx6K2fZ5b7E2fSLFbC7FsvL22mN0KNAp35tdADpl4lKqNFuF7NT22ZBp/X3ncod8cDvMb9tl0hiQ1hJv0H8My/31w+F+Cdat/9Ja5d1ztOOYIx1mZ2FD2m2M33/BgGY/BusUKqSk9W91Eh99+tHS5oTvE8CI8g7pvhQteqmVgBbJOa73eQhZfOQJ0aWQ5m2i0NUPcmwvGDzURXTKW+72UKDz671bE7YAch2H+U7UQeawwIDAQAB-----END PUBLIC KEY-----";
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey(pubilc_key);
-        var encrypted = encrypt.encrypt(deskey);
-        return encrypted;
-    }
+        //Encrypt amount number by DES
+        function DES_encryption() {
+            var DES_key = document.getElementById("paymentpassword").value;
+            var encrypted_des_key = RSA_encryption(DES_key);
+            document.getElementById("paymentpassword").value = encrypted_des_key;
+            var amount = document.getElementById("amount").value;
+            var encrypted_amount = javascript_des_encryption(DES_key, amount);
+            document.getElementById("amount").value = encrypted_amount;
+        }
+        //Encrypt DES key by RSA public key
+        function RSA_encryption(deskey){
+            var pubilc_key = "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzdxaei6bt/xIAhYsdFdW62CGTpRX+GXoZkzqvbf5oOxw4wKENjFX7LsqZXxdFfoRxEwH90zZHLHgsNFzXe3JqiRabIDcNZmKS2F0A7+Mwrx6K2fZ5b7E2fSLFbC7FsvL22mN0KNAp35tdADpl4lKqNFuF7NT22ZBp/X3ncod8cDvMb9tl0hiQ1hJv0H8My/31w+F+Cdat/9Ja5d1ztOOYIx1mZ2FD2m2M33/BgGY/BusUKqSk9W91Eh99+tHS5oTvE8CI8g7pvhQteqmVgBbJOa73eQhZfOQJ0aWQ5m2i0NUPcmwvGDzURXTKW+72UKDz671bE7YAch2H+U7UQeawwIDAQAB-----END PUBLIC KEY-----";
+            var encrypt = new JSEncrypt();
+            encrypt.setPublicKey(pubilc_key);
+            var encrypted = encrypt.encrypt(deskey);
+            return encrypted;
+        }
 
-</script>
+    </script>
 <!-- Footer -->
 <?php include_once("../Content/foot.php"); ?>
 

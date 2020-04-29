@@ -1,5 +1,5 @@
 <?php
-require 'connect_database.php';
+require '../Data/connect_database.php';
 session_start();
 $_SESSION['message'] = '';
 if (!empty($_POST)) {
@@ -24,9 +24,10 @@ if (!empty($_POST)) {
         }
 
         $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: index.php");
+        header("Location: ../index.php");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }
@@ -35,7 +36,7 @@ if (!empty($_POST)) {
 ?>
 <link href="//db.onlinewebfonts.com/c/a4e256ed67403c6ad5d43937ed48a77b?family=Core+Sans+N+W01+35+Light" rel="stylesheet"
       type="text/css"/>
-<link rel="stylesheet" href="assets/css/form.css" type="text/css">
+<link rel="stylesheet" href="../assets/css/form.css" type="text/css">
 <div class="body-content">
     <div class="module">
         <h1>Log in</h1>
@@ -49,7 +50,7 @@ if (!empty($_POST)) {
         </form>
     </div>
 </div>
-<script src="sha256.js"></script>
+<script src="../assets/js/sha256.js"></script>
 <script type="text/javascript">
     function hash() {
         var password = document.getElementById('password').value;

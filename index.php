@@ -26,17 +26,17 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
                     <?php if (isset($_SESSION['id'])) {
-                        echo '<a class="btn btn-outline-info" href="data/Wallet.php">Wallet</a>';
+                        echo '<a class="btn btn-outline-info" href="data/Wallet.php"><img src="assets/images/wallet.png" style="height:23px;width:23px" alt="Wallet"></a>';
                     } else {
-                        echo '<a class="btn btn-outline-primary" href="register.php">Register</a>';
+                        echo '<a class="btn btn-outline-primary" href="Content/register.php">Register</a>';
                     } ?>
                 </li>
                 <li class="nav-item">
                     <?php if (isset($_SESSION['id'])) {
-                        echo '<a href="Wallet.php class="btn btn-outline-primary" title="My Account"><img src="assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
-                        echo '<a class="btn btn-outline-danger" href="data/logout.php">Logout</a>';
+                        echo '<a href="data/Wallet.php" class="btn btn-outline-primary" title="My Account"><img src="assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
+                        echo '<a class="btn btn-outline-danger" href="data/logout.php"><img src="assets/images/logout.png" style="height:23px;width:23px" alt="Logout"></a>';
                     } else {
-                        echo '<a class="btn btn-outline-primary" href="login.php">Login</a>';
+                        echo '<a class="btn btn-outline-primary" href="Content/login.php">Login</a>';
                     } ?>
                 </li>
             </ul>
@@ -46,11 +46,9 @@
 <link rel="stylesheet" href="assets/css/form.css">
 <?php
 if(isset($_SESSION['username'])) {
-    echo "welcome! ".$_SESSION['username'];
-    echo '<br>';
-    echo $_SESSION['avatar'];
-    echo '<br>';
+    echo "<div style='text-align:center'><h1>welcome! ".$_SESSION['username'];
+    echo '</h1><br>';
 ?>
-<span class="user"><img src='<?= $_SESSION['avatar'] ?>'/></span>
+<span class="user"><img src='Content/<?= $_SESSION['avatar'] ?>'/></span></div>
 <?php } ?>
 

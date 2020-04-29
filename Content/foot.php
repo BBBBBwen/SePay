@@ -5,6 +5,6 @@
         </span>
     </div>
     <div>
-        <span>Team Member: s3617571 Bowen Zhang s3728207 Chen Cheng</span>
+        <span>Team Member: s3617571 Bowen Zhang s3728207 Chen Cheng s3702629 Zhaoxu Nie</span>
     </div>
 </footer>

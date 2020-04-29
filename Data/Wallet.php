@@ -125,19 +125,19 @@ $transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION
             <div class="popup-body">
                 <form action="charge.php" method="post" id="payment-form">
 
-                    <div id="card-element">
-                        <!-- A Stripe Element will be inserted here. -->
-                    </div>
+                        <div id="card-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
 
-                    <!-- Used to display form errors. -->
-                    <div id="card-errors" role="alert"></div>
-                    <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
-                    <div>
-                        <button style="align-content: center"
-                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
-                            Submit Payment
-                        </button>
-                    </div>
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                        <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
+                        <div>
+                            <button style="align-content: center"
+                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
+                                Submit Payment
+                            </button>
+                        </div>
                 </form>
             </div>
 
