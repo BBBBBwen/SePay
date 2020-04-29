@@ -2,14 +2,20 @@
 <!DOCTYPE html>
 <html>
 <?php include_once("../Content/header.php");
+<<<<<<< Updated upstream
     $db = new mysqli('localhost', 'root', 'root', 'SePay');
     $user = $db->query("SELECT * FROM users WHERE id = '".$_SESSION['id']."'")->fetch_assoc();
     $transaction = $db->query("SELECT * FROM payments WHERE user_id = '".$_SESSION['id']."'");
+=======
+$db = new mysqli('localhost', 'root', 'root', 'SePay');
+$user = $db->query("SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'")->fetch_assoc();
+$transaction = $db->query("SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC");
+>>>>>>> Stashed changes
 ?>
-<body class="">
+<body>
 
 <!-- Page Container -->
-<div class="" style="whole">
+<div class="whole">
     <!-- The Grid -->
     <div class="container">
         <!-- Left Column -->
@@ -22,7 +28,11 @@
                             <h4 class="center">My Profile</h4>
                             <hr>
                             <span class="float:left; display:inline">
+<<<<<<< Updated upstream
                                 <p class="left"><img src="../assets/images/1.jpeg" class="circle"
+=======
+                                <p class="left"><img src="<?= $_SESSION['avatar'] ?>" class="circle"
+>>>>>>> Stashed changes
                                                      style="height:106px;width:106px"
                                                      alt="Avatar"></p>
                                 <div class="right">
@@ -50,11 +60,11 @@
                                 <h1>Balance</h1>
                             </div>
                             <div>
-                                <span><?php echo $user['balance']?></span>
+                                <span><?php echo $user['balance'] ?></span>
                             </div>
-                            <a role="button" href="card_form.html"
-                               class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Transfer
-                                Money</a>
+                            <button class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney"
+                                    id="transform" onclick="openwindow()">Transfer Money
+                            </button>
                         </div>
                     </div>
                 </th>
@@ -70,10 +80,11 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if($row = $transaction->fetch_assoc()) { ?>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
+                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
+                                            } ?></p>
                                     </span>
                         </div>
                     </a>
@@ -83,10 +94,11 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if($row = $transaction->fetch_assoc()) {?>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
+                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
+                                            } ?></p>
                                     </span>
                         </div>
                     </a>
@@ -96,17 +108,50 @@
                     <a class='cw_tile-itemListLink'>
                         <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                        <?php if($row = $transaction->fetch_assoc()) {?>
-                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at'];?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description'];?></p>
-                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$'.$row['amount'];}?></p>
+                                        <?php if ($row = $transaction->fetch_assoc()) { ?>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
+                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
+                                            } ?></p>
                                     </span>
                         </div>
                     </a>
                 </li>
             </ul>
-            <a role="button" class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">See
+            <a role="button" href="TransactionHistory.php"
+               class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">See
                 More History</a>
+        </div>
+    </div>
+
+    <!-- popup -->
+    <div id='myModal' class='popup'>
+        <div class="popup-content">
+            <div class="popup-header">
+                <span class="close">X</span>
+                <h2>Credit or debit card</h2>
+            </div>
+
+            <div class="popup-body">
+                <form action="charge.php" method="post" id="payment-form">
+
+                        <div id="card-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                        <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
+                        <div>
+                            <button style="align-content: center"
+                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
+                                Submit Payment
+                            </button>
+                        </div>
+                </form>
+            </div>
+
+            <script src="../assets/js/card.js"></script>
         </div>
     </div>
 
@@ -119,6 +164,5 @@
 
 <!-- Footer -->
 <?php include_once("../Content/foot.php"); ?>
-
 </body>
 </html>
