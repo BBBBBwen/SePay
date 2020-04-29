@@ -21,17 +21,16 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $sql = "SELECT * FROM users WHERE email = '" . $email . "'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $isEmailExist = $stmt->fetch(PDO::FETCH_ASSOC);
+        $receiver = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $privateKey = get_rsa_privatekey('../assets/private.key');
+        $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
         $recovered_des = rsa_decryption($user['paymentpassword'], $privateKey);
-        $privateKey_client = get_rsa_privatekey('../assets/private.key');
+        $privateKey_client = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
         $recovered_client = rsa_decryption($_POST['paymentpassword'], $privateKey_client);
-        $amount = php_des_decryption($recovered_des, $_POST['amount']);
+        $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {
-            if ($isEmailExist && $amount <= $user['balance'] && $amount > 0) {
-                $receiver = $isEmailExist;
+            if ($receiver && $amount <= $user['balance'] && $amount > 0) {
                 $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -39,18 +38,16 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $balance = $user['balance'] - $amount;
                 $receiver_balance = $receiver['balance'] + $amount;
                 $description = 'transfer money to ' . $receiver['username'];
+                $receiverID = $receiver['id'];
 
-                $sql = "INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', '$description', '$amount', 'AUD', 'Captured')";
-                $stmt = $db->prepare($sql);
-                $result = $stmt->execute();
+                $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$receiverID','$payment_id', '$description', '$amount', 'AUD', 'Captured')";
+                $stmt = $db->prepare($sql)->execute();
 
                 $sql = "UPDATE users SET balance=" . $balance . " WHERE id='" . $userID . "'";
-                $stmt = $db->prepare($sql);
-                $result = $stmt->execute();
+                $stmt = $db->prepare($sql)->execute();
 
                 $sql = "UPDATE users SET balance=" . $receiver_balance . " WHERE id='" . $receiver['id'] . "'";
-                $stmt = $db->prepare($sql);
-                $result = $stmt->execute();
+                $stmt = $db->prepare($sql)->execute();
 
                 echo "Payment is successful. Your payment id is: " . $payment_id;
             } else {

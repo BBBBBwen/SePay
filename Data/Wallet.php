@@ -1,14 +1,14 @@
-<?php include_once __DIR__."/../Content/head.php"; ?>
+<?php include_once __DIR__ . "/../Content/head.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php include_once __DIR__."/../Content/header.php";
-require_once __DIR__."/connect_database.php";
+<?php include_once __DIR__ . "/../Content/header.php";
+require_once __DIR__ . "/connect_database.php";
 $sql = "SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC";
+$sql = "SELECT * FROM payments WHERE user_id = '" . $_SESSION['id'] . "' OR transfer_id = '" . $_SESSION['id'] . "' ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 ?>
@@ -78,7 +78,16 @@ $stmt->execute();
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                         <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php if ($_SESSION['id'] == $row['user_id']) { ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php } else {
+                                            $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
+                                            $stmt = $db->prepare($sql);
+                                            $stmt->execute();
+                                            $transfer = $stmt->fetch(PDO::FETCH_ASSOC);
+                                            ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
+                                        <?php } ?>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
                                             } ?></p>
                                     </span>
@@ -92,7 +101,16 @@ $stmt->execute();
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                         <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php if ($_SESSION['id'] == $row['user_id']) { ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php } else {
+                                            $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
+                                            $stmt = $db->prepare($sql);
+                                            $stmt->execute();
+                                            $transfer = $stmt->fetch(PDO::FETCH_ASSOC);
+                                            ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
+                                        <?php } ?>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
                                             } ?></p>
                                     </span>
@@ -106,7 +124,16 @@ $stmt->execute();
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                         <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php if ($_SESSION['id'] == $row['user_id']) { ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                        <?php } else {
+                                            $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
+                                            $stmt = $db->prepare($sql);
+                                            $stmt->execute();
+                                            $transfer = $stmt->fetch(PDO::FETCH_ASSOC);
+                                            ?>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
+                                        <?php } ?>
                                         <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
                                             } ?></p>
                                     </span>
@@ -131,19 +158,19 @@ $stmt->execute();
             <div class="popup-body">
                 <form action="charge.php" method="post" id="payment-form">
 
-                        <div id="card-element">
-                            <!-- A Stripe Element will be inserted here. -->
-                        </div>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
 
-                        <!-- Used to display form errors. -->
-                        <div id="card-errors" role="alert"></div>
-                        <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
-                        <div>
-                            <button style="align-content: center"
-                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
-                                Submit Payment
-                            </button>
-                        </div>
+                    <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                    <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
+                    <div>
+                        <button style="align-content: center"
+                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
+                            Submit Payment
+                        </button>
+                    </div>
                 </form>
             </div>
 
@@ -159,6 +186,6 @@ $stmt->execute();
 <br>
 
 <!-- Footer -->
-<?php include_once __DIR__."/../Content/foot.php"; ?>
+<?php include_once __DIR__ . "/../Content/foot.php"; ?>
 </body>
 </html>

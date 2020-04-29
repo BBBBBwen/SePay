@@ -19,6 +19,7 @@ CREATE TABLE `payments`
 (
     `id`             int(11)       NOT NULL AUTO_INCREMENT,
     `user_id`        varchar(255)  NOT NULL,
+    `transfer_id`    varchar(255)  DEFAULT null,
     `payment_id`     varchar(255)  NOT NULL,
     `description`    varchar(255)  NOT NULL,
     `amount`         double(20, 2) NOT NULL,

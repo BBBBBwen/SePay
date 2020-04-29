@@ -8,6 +8,9 @@ handlers:
   - url: /assets/js
     static_dir: assets/js
 
+  - url: /assets
+    static_dir: assets
+
   # Serve images as static resources.
   - url: /assets/images
     static_dir: assets/images
