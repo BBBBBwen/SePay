@@ -119,7 +119,6 @@
 }
 
 .cw_tile-container {
-    height: 100%;
     position: relative;
     background: 0 0;
     -webkit-box-shadow: none;
@@ -174,8 +173,7 @@
 }
 
 .whole {
-    max-width: 1024px;
-    margin: 0 auto;
+    height: 100%;
     padding: 72px 0 9rem;
     position: relative;
 }

@@ -27,7 +27,7 @@ if (!empty($_POST)) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: ../index.php");
+        header("Location: ../Data/Wallet.php");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }

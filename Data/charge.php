@@ -20,25 +20,24 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
             $amount = $_POST['amount'];
 
             // Insert transaction data into the database
-            $isPaymentExist = $db->query("SELECT * FROM payments WHERE payment_id = '".$payment_id."'");
-            $user = $db->query("SELECT * FROM users WHERE id = '".$userID."'")->fetch_assoc();
+            $isPaymentExist = $db->query("SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'");
+            $user = $db->query("SELECT * FROM users WHERE id = '" . $userID . "'")->fetch_assoc();
             $balance = $user['balance'] + $amount;
 
-            if($isPaymentExist->num_rows == 0) {
+            if ($isPaymentExist->num_rows == 0) {
                 $insert = $db->query("INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', 'transaction from bank', '$amount', 'AUD', 'Captured')");
-                $update = $db->query("UPDATE users SET balance=".$balance." WHERE id='".$userID."'");
+                $update = $db->query("UPDATE users SET balance=" . $balance . " WHERE id='" . $userID . "'");
             }
-
-            echo "Payment is successful. Your payment id is: ". $payment_id;
+            echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='Wallet.php'; </script>";
         } else {
             // payment failed: display message to customer
             echo $response->getMessage();
             echo 'check';
         }
-    } catch(Exception $e) {
-        echo $e->getMessage();echo 'check';
+    } catch (Exception $e) {
+        echo $e->getMessage();
+        echo 'check';
     }
-    echo "<br/>The page will redirect to index page.";
-    header("refresh:3;url=../index.php");
+
 }
 ?>

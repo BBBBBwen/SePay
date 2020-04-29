@@ -19,7 +19,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $recovered_des = rsa_decryption($user['paymentpassword'], $privateKey);
         $privateKey_client = get_rsa_privatekey('../assets/private.key');
         $recovered_client = rsa_decryption($_POST['paymentpassword'], $privateKey_client);
-        $amount = php_des_decryption($recovered_des, $_POST['amount']);
+        $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des==$recovered_client){
             if ($isEmailExist->num_rows != 0 && $amount <= $user['balance'] && $amount>0 ) {
@@ -30,6 +30,11 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $description = 'transfer money to '.$receiver['username'];
 
                 $insert = $db->query("INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', '$description', '$amount', 'AUD', 'Captured')");
+                
+                $receiver_description = 'transfer money from '.$user['username'];
+                $receiver_id = $receiver['id'];
+                $insert = $db->query("INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$receiver_id','$payment_id', '$receiver_description', '$amount', 'AUD', 'Captured')");
+
                 $update = $db->query("UPDATE users SET balance=".$balance." WHERE id='".$userID."'");
                 $update = $db->query("UPDATE users SET balance=".$receiver_balance." WHERE id='".$receiver['id']."'");
 
@@ -45,9 +50,10 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 }
 ?>
 <body>
-    <form action="" method="post">
+<div class="whole">
+    <form action="" method="post" class="container">
         <div>
-            <div>
+            <div class = "card" style="margin: 10%">
                 <h2>Send money</h2>
                 <div>
                     <div>
@@ -68,11 +74,11 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><button type="submit" onclick="DES_encryption();">Confirm Payment</button>
             </div>
         </div>
-        <button type="submit" onclick="DES_encryption();">Confirm Payment</button>
     </form>
+</div>
     <script src="../assets/js/rsa.js"></script>
     <script src="../assets/js/des.js"></script>
     <script type="text/javascript">
