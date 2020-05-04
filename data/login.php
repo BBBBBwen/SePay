@@ -1,5 +1,7 @@
+<?php include_once "../content/head.php"; ?>
+<?php include_once "../content/header.php"; ?>
+<?php require '../content/connect_database.php'; ?>
 <?php
-require '../content/connect_database.php';
 $_SESSION['message'] = '';
 if (!empty($_POST)) {
     if (empty($_POST['email'])) {
@@ -25,7 +27,7 @@ if (!empty($_POST)) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: Wallet.php");
+        header("Location: wallet.php");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }
@@ -55,3 +57,4 @@ if (!empty($_POST)) {
         var hash = SHA256.hash(password);
         document.getElementById("password").value = hash;
     }</script>
+<?php include_once "../content/foot.php"; ?>

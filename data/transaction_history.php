@@ -1,9 +1,7 @@
 <?php include_once "../content/head.php"; ?>
-<!DOCTYPE html>
-<html>
-<?php include_once "../content/header.php";
-require_once "../content/connect_database.php";
-
+<?php include_once "../content/header.php"; ?>
+<?php require_once "../content/connect_database.php"; ?>
+<?php
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);

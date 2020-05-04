@@ -1,6 +1,8 @@
+<?php include_once "../content/head.php"; ?>
+<?php include_once "../content/header.php"; ?>
+<?php require '../content/connect_database.php'; ?>
+<?php include '../data/rsa.php'; ?>
 <?php
-require '../content/connect_database.php';
-include '../data/rsa.php';
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = false;
@@ -132,3 +134,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 </script>
+<?php include_once "../content/foot.php"; ?>

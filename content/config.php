@@ -1,6 +1,5 @@
 <?php
 require_once "vendor/autoload.php";
-require 'connect_database.php';
 
 use Omnipay\Omnipay;
 

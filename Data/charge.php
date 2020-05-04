@@ -1,6 +1,6 @@
+<?php require_once "../content/config.php"; ?>
+<?php require_once "../content/connect_database.php"; ?>
 <?php
-require_once "../content/config.php";
-require_once "../content/connect_database.php";
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
 
     try {

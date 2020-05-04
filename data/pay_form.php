@@ -1,13 +1,9 @@
+<?php include_once "../content/head.php"; ?>
+<?php include 'rsa.php'; ?>
+<?php include 'des.php'; ?>
+<?php include_once "../content/header.php"; ?>
+<?php require_once "connect_database.php"; ?>
 <?php
-include_once "../content/head.php";
-include 'rsa.php';
-include 'des.php';
-?>
-<!DOCTYPE html>
-<html>
-<?php include_once "../content/header.php";
-require_once "connect_database.php";
-
 if (isset($_SESSION['id']) && isset($_POST['email'])) {
     try {
         $email = $_POST['email'];

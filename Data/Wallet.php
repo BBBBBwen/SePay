@@ -1,8 +1,7 @@
 <?php include_once "../content/head.php"; ?>
-<!DOCTYPE html>
-<html>
-<?php include_once "../content/header.php";
-require_once "../content/connect_database.php";
+<?php include_once "../content/header.php"; ?>
+<?php require_once "../content/connect_database.php"; ?>
+<?php
 $sql = "SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'";
 $stmt = $db->prepare($sql);
 $stmt->execute();

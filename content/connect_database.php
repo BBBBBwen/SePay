@@ -1,5 +1,4 @@
 <?php
-session_start();
 $host = 'sepay.coqnkhi2ftwp.us-east-1.rds.amazonaws.com';
 $dbName = 'sepay';
 $db_user = 'root';
