@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../data/connect_database.php';
+require '../content/connect_database.php';
 $_SESSION['message'] = '';
 if (!empty($_POST)) {
     if (empty($_POST['email'])) {

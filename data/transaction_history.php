@@ -1,8 +1,8 @@
-<?php include_once __DIR__ . "/../content/head.php"; ?>
+<?php include_once "../content/head.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php include_once __DIR__ . "/../content/header.php";
-require_once __DIR__ . "/connect_database.php";
+<?php include_once "../content/header.php";
+require_once "../content/connect_database.php";
 
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
@@ -15,7 +15,7 @@ $stmt->execute();
     <div class="container">
         <div class="card cw_tile-container">
             <div style="border: 1px solid #9da3a6">
-                <a role="button" href="Wallet.php"
+                <a role="button" href="wallet.php"
                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton"
                    style="width: 15%">Go Back</a>
             </div>
@@ -58,7 +58,7 @@ $stmt->execute();
 <br>
 
 <!-- Footer -->
-<?php include_once __DIR__ . "/../content/foot.php"; ?>
+<?php include_once "../content/foot.php"; ?>
 
 </body>
 </html>

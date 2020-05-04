@@ -1,8 +1,8 @@
-<?php include_once __DIR__ . "/../content/head.php"; ?>
+<?php include_once "../content/head.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php include_once __DIR__ . "/../content/header.php";
-require_once __DIR__ . "/connect_database.php";
+<?php include_once "../content/header.php";
+require_once "../content/connect_database.php";
 $sql = "SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'";
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -98,7 +98,7 @@ $stmt->execute();
                     </li>
                 <?php } ?>
             </ul>
-            <a role="button" href="TransactionHistory.php"
+            <a role="button" href="transaction_history.php"
                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">See
                 More History</a>
         </div>
@@ -143,6 +143,6 @@ $stmt->execute();
 <br>
 
 <!-- Footer -->
-<?php include_once __DIR__ . "/../content/foot.php"; ?>
+<?php include_once "../content/foot.php"; ?>
 </body>
 </html>

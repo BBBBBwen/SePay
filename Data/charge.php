@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . "/config.php";
+require_once "../content/config.php";
+require_once "../content/connect_database.php";
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
 
     try {
@@ -38,9 +39,9 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
                 $sql = "UPDATE users SET balance=" . $balance . " WHERE id='" . $userID . "'";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
-                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='Wallet.php'; </script>";
+                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
-            echo "<script> alert('Payment is failed. you can try it again later');parent.location.href='Wallet.php'; </script>";
+            echo "<script> alert('Payment is failed. you can try it again later');parent.location.href='wallet.php'; </script>";
         } else {
             // payment failed: display message to customer
             echo $response->getMessage();
