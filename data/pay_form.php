@@ -48,8 +48,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
                 $sql = "UPDATE users SET balance=" . $receiver_balance . " WHERE id='" . $receiver['id'] . "'";
                 $stmt = $db->prepare($sql)->execute();
-
-                echo "Payment is successful. Your payment id is: " . $payment_id;
+                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             } else {
                 echo 'there is no such user or no enough balance';
             }
