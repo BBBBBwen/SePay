@@ -69,21 +69,26 @@ function stripeTokenHandler(token) {
     form.submit();
 }
 
-function openwindow() {
-    //获取弹窗得div
+function open_transfer_window() {
     var modal = document.getElementById('myModal');
-    // 获取 <span> 元素，用于关闭弹窗 （X）
     var span = document.getElementsByClassName("close")[0];
-    //窗体弹出
     modal.style.display = "block";
-    // 点击 <span> (x), 关闭弹窗
     span.onclick = function () {
-        //直接关闭窗口
         modal.style.display = "none";
     }
-    // 在用户点击其他地方时，关闭弹窗
     window.onclick = function (event) {
-        //点击窗口外内容，关闭窗口
+        if (event.target == modal) modal.style.display = "none";
+    }
+}
+
+function open_exchange_window() {
+    var modal = document.getElementById('myModal1');
+    var span = document.getElementsByClassName("close")[1];
+    modal.style.display = "block";
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
         if (event.target == modal) modal.style.display = "none";
     }
 }

@@ -1,14 +1,15 @@
 <?php require_once "../content/config.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
-<?php
+<?php session_start();
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
 
     try {
         $token = $_POST['stripeToken'];
+        $currency = $_POST['currency'];
 
         $response = $gateway->purchase([
             'amount' => $_POST['amount'],
-            'currency' => 'AUD',
+            'currency' => $currency,
             'token' => $token,
         ])->send();
 
@@ -25,18 +26,19 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
             $stmt->execute();
             $isPaymentExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT * FROM users WHERE id = '" . $userID . "'";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            $balance = $user['balance'] + $amount;
+            if (!$isPaymentExist) {
+                $sql = "SELECT * FROM currency WHERE user_id = '" . $userID . "'";
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $balance = $user[$currency] + $amount;
 
-            if ($isPaymentExist['num'] == 0) {
-                $sql = "INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$payment_id', 'transaction from bank', '$amount', 'AUD', 'Captured')";
+
+                $sql = "INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES('".$userID."','".$payment_id."', 'transaction from bank', '".$amount."', '".$currency."', 'Captured')";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
 
-                $sql = "UPDATE users SET balance=" . $balance . " WHERE id='" . $userID . "'";
+                $sql = "UPDATE currency SET ".$currency."=" . $balance . " WHERE user_id='" . $userID . "'";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
                 echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
@@ -45,11 +47,9 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
         } else {
             // payment failed: display message to customer
             echo $response->getMessage();
-            echo 'check';
         }
     } catch (Exception $e) {
         echo $e->getMessage();
-        echo 'check';
     }
 
 }

@@ -198,7 +198,7 @@ li {
     margin-left: 20%;
 }
 
-.popup {
+.popup, .popup1 {
     display: none; /* 默认隐藏 */
     /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
     position: fixed;
@@ -219,7 +219,7 @@ li {
 }
 
 /* 弹窗内容 */
-.popup-content {
+.popup-content, .popup-content1 {
     /*position: relative;*/
     /*弹窗背景色设置*/
     background-color: #fefefe;
@@ -256,20 +256,20 @@ li {
     }
 }
 
-.close {
+.close, .close1{
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.close:hover, .close:focus, .close1:hover, .close1:focus{
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.popup-header {
+.popup-header, .popup-header1 {
     display: block;
     line-height: 30px;
     padding: 2px 10px;
@@ -278,12 +278,12 @@ li {
     text-align: left;
 }
 
-.popup-body {
+.popup-body, .popup-body1 {
     padding: 2px 16px;
     font-size: 18px;
 }
 
-.popup-footer {
+.popup-footer, .popup-footer1 {
     display: block;
     line-height: 30px;
     padding: 2px 10px;
@@ -291,7 +291,7 @@ li {
     color: grey;
 }
 
-.amount-enter {
+.amount-enter, .amount-enter1 {
     margin-top: 20px;
     box-sizing: border-box;
     height: 40px;

@@ -7,6 +7,11 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$sql = "SELECT * FROM currency WHERE user_id = '" . $_SESSION['id'] . "'";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$balance = $stmt->fetch(PDO::FETCH_ASSOC);
+
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
@@ -56,10 +61,15 @@ $stmt->execute();
                                 <h1>Balance</h1>
                             </div>
                             <div>
-                                <span><?php echo $user['balance'] ?></span>
+                                <span>EUR: <?php echo $balance['EUR'] ?></span>
+                                <span>AUD: <?php echo $balance['AUD'] ?></span>
+                                <span>USD: <?php echo $balance['USD'] ?></span>
                             </div>
                             <button class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney"
-                                    id="transform" onclick="openwindow()">Transfer Money
+                                    id="transform" onclick="open_transfer_window()">Transfer Money
+                            </button>
+                            <button class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney"
+                                    id="transform" onclick="open_exchange_window()">Exchange Currencies
                             </button>
                         </div>
                     </div>
@@ -107,7 +117,7 @@ $stmt->execute();
     <div id='myModal' class='popup'>
         <div class="popup-content">
             <div class="popup-header">
-                <span class="close">X</span>
+                <span id="close1" class="close">X</span>
                 <h2>Credit or debit card</h2>
             </div>
 
@@ -122,6 +132,15 @@ $stmt->execute();
                     <div id="card-errors" role="alert"></div>
                     <input class="amount-enter" type="text" name="amount" placeholder="Enter Amount"/>
                     <div>
+                        <label>currency</label>
+
+                        <select name="currency">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="AUD">AUD</option>
+                        </select>
+                    </div>
+                    <div>
                         <button style="align-content: center"
                                 class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
                             Submit Payment
@@ -134,11 +153,62 @@ $stmt->execute();
         </div>
     </div>
 
-    <!-- End Grid -->
+    <!-- popup 2-->
+    <div id='myModal1' class='popup1'>
+        <div class="popup-content1">
+            <div class="popup-header1">
+                <span id="close1" class="close">X</span>
+                <h2>Currencies exchange</h2>
+            </div>
+
+            <div class="popup-body1">
+                <div>
+                    <span>EUR: <?php echo $balance['EUR'] ?></span>
+                    <span>AUD: <?php echo $balance['AUD'] ?></span>
+                    <span>USD: <?php echo $balance['USD'] ?></span>
+                </div>
+                <form action="currencies_converter.php" method="post" id="payment-form">
+                    <input class="amount-enter1" type="text" name="amount" placeholder="Enter Amount"/>
+                    <div>
+                        <label>from:</label>
+
+                        <select name="from">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="AUD">AUD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>to:</label>
+
+                        <select name="to">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="AUD">AUD</option>
+                        </select>
+                    </div>
+
+                    <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                    <div>
+                        <button style="align-content: center"
+                                class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile__activity-moreButton">
+                            Confirm
+                        </button>
+                    </div>
+                    <script src="../assets/js/card.js"></script>
+
+                </form>
+            </div>
+            <!-- End Grid -->
+        </div>
+    </div>
+
+    <script src="../assets/js/card.js"></script>
 </div>
 
-<!-- End Page Container -->
-</div>
+
+    <!-- End Page Container -->
 <br>
 
 <!-- Footer -->

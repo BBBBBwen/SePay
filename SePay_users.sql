@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `payments`;
+DROP TABLE IF EXISTS `currency`;
 
 CREATE TABLE `users`
 (
@@ -7,7 +8,6 @@ CREATE TABLE `users`
     `username` varchar(512)  NOT NULL,
     `password` varchar(512)  NOT NULL,
     `email`    varchar(512)  NOT NULL,
-    `balance`  double(20, 2) NOT NULL,
     `avatar`   varchar(512)  NOT NULL,
     `paymentpassword` varchar(512) NOT NULL,
     `reg_date` datetime      NOT NULL DEFAULT current_timestamp(),
@@ -28,4 +28,14 @@ CREATE TABLE `payments`
     `captured_at`    datetime      NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = latin1
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `currency`
+(
+    `user_id`        varchar(255)  NOT NULL,
+    `AUD`         double(20, 2) DEFAULT 0.0,
+    `EUR`         double(20, 2) DEFAULT 0.0,
+    `USD`         double(20, 2) DEFAULT 0.0,
+    PRIMARY KEY (`user_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

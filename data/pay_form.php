@@ -9,7 +9,8 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $email = $_POST['email'];
         $payment_id = 0;
         $userID = $_SESSION['id'];
-        $sql = "SELECT * FROM users WHERE id = '" . $userID . "'";
+        $currency = $_POST['$currency'];
+        $sql = "SELECT * FROM currency WHERE user_id = '" . $userID . "'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,23 +27,23 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {
-            if ($receiver && $amount <= $user['balance'] && $amount > 0) {
+            if ($receiver && $amount <= $user[$currency] && $amount > 0) {
                 $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
                 $isPaymentExist = $stmt->fetch(PDO::FETCH_ASSOC);
-                $balance = $user['balance'] - $amount;
+                $balance = $user[$currency] - $amount;
                 $receiver_balance = $receiver['balance'] + $amount;
                 $description = 'transfer money to ' . $receiver['username'];
                 $receiverID = $receiver['id'];
 
-                $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('$userID','$receiverID','$payment_id', '$description', '$amount', 'AUD', 'Captured')";
+                $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('".$userID."','".$receiverID."','".$payment_id."', '".$description."', '".$amount."', '".$currency."', 'Captured')";
                 $stmt = $db->prepare($sql)->execute();
 
-                $sql = "UPDATE users SET balance=" . $balance . " WHERE id='" . $userID . "'";
+                $sql = "UPDATE currency SET AUD = " . $balance . " WHERE id='" . $userID . "'";
                 $stmt = $db->prepare($sql)->execute();
 
-                $sql = "UPDATE users SET balance=" . $receiver_balance . " WHERE id='" . $receiver['id'] . "'";
+                $sql = "UPDATE currency SET AUD = " . $receiver_balance . " WHERE id='" . $receiver['id'] . "'";
                 $stmt = $db->prepare($sql)->execute();
                 echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             } else {
@@ -73,6 +74,15 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                 <div>
                                     <label>Amount:</label>
                                     <input type="text" placeholder="amount" id="amount" name="amount" required/>
+                                    <div>
+                                        <label for="currency">to:</label>
+
+                                        <select id="currency">
+                                            <option value="eur">EUR</option>
+                                            <option value="usd">USD</option>
+                                            <option value="aud">AUD</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Payment Password:</label>

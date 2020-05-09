@@ -48,17 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($haveError == false) {
 
-        $sql = "INSERT INTO users (username, password,email,balance,paymentpassword,avatar)
-  			      VALUES(:username, :password,:email,:balance,:paymentpassword,:avatar)";
+        $sql = "INSERT INTO users (username, password,email,paymentpassword,avatar)
+  			      VALUES(:username, :password,:email,:paymentpassword,:avatar)";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':username', $_POST['username']);
         $stmt->bindValue(':password', $_POST['password']);
         $stmt->bindValue(':email', $_POST['email']);
-        $stmt->bindValue(':balance', 0);
         $stmt->bindValue(':paymentpassword', $_POST['paymentpassword']);
         $stmt->bindValue(':avatar', $avatar_path);
         $result = $stmt->execute();
         $lastId = $db->lastInsertId();
+
+        $sql = "INSERT INTO currency (user_id) VALUES(:user_id)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $lastId);
+        $result = $stmt->execute();
 
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
