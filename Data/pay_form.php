@@ -2,18 +2,23 @@
 <?php include 'rsa.php'; ?>
 <?php include 'des.php'; ?>
 <?php include_once "../content/header.php"; ?>
-<?php require_once "connect_database.php"; ?>
+<?php require_once "../content/connect_database.php"; ?>
 <?php
 if (isset($_SESSION['id']) && isset($_POST['email'])) {
     try {
         $email = $_POST['email'];
         $payment_id = 0;
         $userID = $_SESSION['id'];
-        $currency = $_POST['$currency'];
+        $currency = $_POST['to'];
         $sql = "SELECT * FROM currency WHERE user_id = '" . $userID . "'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "SELECT * FROM users WHERE id = '" . $userID . "'";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $sender = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $sql = "SELECT * FROM users WHERE email = '" . $email . "'";
         $stmt = $db->prepare($sql);
@@ -21,13 +26,17 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $receiver = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
-        $recovered_des = rsa_decryption($user['paymentpassword'], $privateKey);
+        $recovered_des = rsa_decryption($sender['paymentpassword'], $privateKey);
         $privateKey_client = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
         $recovered_client = rsa_decryption($_POST['paymentpassword'], $privateKey_client);
         $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {
-            if ($receiver && $amount <= $user[$currency] && $amount > 0) {
+            if(!$receiver) {
+                echo 'there is no such user';
+            } else if($amount > $user[$currency] || $amount < 0) {
+                echo 'there is no enough balance';
+            } else {
                 $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -40,14 +49,12 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('".$userID."','".$receiverID."','".$payment_id."', '".$description."', '".$amount."', '".$currency."', 'Captured')";
                 $stmt = $db->prepare($sql)->execute();
 
-                $sql = "UPDATE currency SET AUD = " . $balance . " WHERE id='" . $userID . "'";
+                $sql = "UPDATE currency SET ".$currency." = " . $balance . " WHERE user_id='" . $userID . "'";
                 $stmt = $db->prepare($sql)->execute();
 
-                $sql = "UPDATE currency SET AUD = " . $receiver_balance . " WHERE id='" . $receiver['id'] . "'";
+                $sql = "UPDATE currency SET ".$currency." = " . $receiver_balance . " WHERE user_id='" . $receiver['id'] . "'";
                 $stmt = $db->prepare($sql)->execute();
-                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
-            } else {
-                echo 'there is no such user or no enough balance';
+                echo "<script> alert('Currency: ".$currency."Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
             echo "Please enter correct payment password";
@@ -75,12 +82,12 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                     <label>Amount:</label>
                                     <input type="text" placeholder="amount" id="amount" name="amount" required/>
                                     <div>
-                                        <label for="currency">to:</label>
+                                        <label>to:</label>
 
-                                        <select id="currency">
-                                            <option value="eur">EUR</option>
-                                            <option value="usd">USD</option>
-                                            <option value="aud">AUD</option>
+                                        <select name="to">
+                                            <option value="EUR">EUR</option>
+                                            <option value="USD">USD</option>
+                                            <option value="AUD">AUD</option>
                                         </select>
                                     </div>
                                 </div>
