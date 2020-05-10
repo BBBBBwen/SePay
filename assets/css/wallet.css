@@ -1,0 +1,207 @@
+.ppvx_btn {
+    border-radius: 1.5rem;
+    border: .0625rem solid #0070ba;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+
+    margin: 10;
+}
+
+.ppvx_btn--secondary:visited {
+    color: #ff0000;
+}
+
+.ppvx_btn:active, .ppvx_btn:focus, .ppvx_btn:hover, .ppvx_btn:visited {
+    color: #9da3a6;
+}
+
+.ppvx_btn--size_sm {
+    font-size: .8125rem;
+    line-height: 1.125rem;
+    font-family: PayPalSansSmall-Regular, Helvetica Neue, Arial, sans-serif;
+    font-weight: 700;
+    min-width: 3.75rem;
+    padding: .3125rem .875rem;
+}
+
+.ppvx_btn--secondary {
+    background: rgba(0, 0, 0, 0);
+    border-color: #0070ba;
+}
+
+.cw_tile-activityListRow {
+    padding: 0;
+    height: 100%;
+}
+
+.cw_tile-itemListRow {
+    min-height: 4.3125rem;
+    padding: .5rem 0;
+}
+
+.ppvx_row {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -.75rem;
+    margin-left: -.75rem;
+}
+
+.ppvx_container-fluid {
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cw_tile-itemListLink.cw_tile-itemListLink {
+    text-decoration: none;
+    color: #2c2e2f;
+    font-weight: 400;
+}
+
+.cw_tile-itemListContainer {
+    position: relative;
+    min-height: 4.125rem;
+    border-bottom: 1px dotted #9da3a6;
+    z-index: 1;
+    width: 100%;
+}
+
+.cw_tile-itemListContainer_hover:after {
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 112, 186, .1);
+    left: -.75rem;
+    top: 0;
+    height: 100%;
+    width: calc(100% + 1.5rem);
+    z-index: -1;
+    border-left: 3px solid #0070ba;
+    opacity: 0;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+}
+
+.cw_tile-itemList {
+    width: 100%;
+    list-style: none;
+}
+
+.ppvx_col-1 {
+    -ms-flex: 0 0 8.333333%;
+    -webkit-box-flex: 0;
+    width: 20%;
+}
+
+.ppvx_col-2 {
+    -ms-flex: 0 0 8.333333%;
+    -webkit-box-flex: 0;
+    width: 60%;
+}
+
+.ppvx_col-3 {
+    -ms-flex: 0 0 8.333333%;
+    -webkit-box-flex: 0;
+    width: 20%;
+}
+
+.cw_tile-itemListCol {
+    padding: 0 .3125rem 0 .75rem;
+    vertical-align: middle;
+}
+
+.cw_tile__activity-txnDateContainer {
+    padding-left: .625rem;
+    text-align: center;
+    color: #2c2e2f;
+}
+
+.cw_tile-container {
+    position: relative;
+    background: 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.cw_tile-header {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    margin: 0;
+    font-weight: 200;
+    color: #0070ba;
+    width: calc(100% - 2.25rem);
+    display: inline-block;
+}
+
+.container {
+    clear: both;
+}
+
+.top_col {
+    position: relative;
+    width: 100%;
+    float: left;
+    vertical-align: top;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.card_left {
+    margin-left: 10px;
+}
+
+.upper_cards {
+    width: 49.5%;
+    height: 300px;
+    float: left;
+}
+
+.whole {
+    height: 100%;
+    padding: 72px 0 9rem;
+    position: relative;
+}
+
+.left {
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 20%;
+    display: inline;
+}
+
+.right {
+    float: left;
+    padding-right: 10px;
+    padding-left: 20px;
+    width: 80%;
+    display: inline;
+}
+
+.full {
+    width: 100%;
+}
+
+ul {
+    padding-inline-start: 0;
+}
