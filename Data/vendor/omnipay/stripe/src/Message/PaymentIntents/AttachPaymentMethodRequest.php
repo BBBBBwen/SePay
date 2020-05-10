@@ -3,6 +3,7 @@
 /**
  * Stripe Attach Payment Method Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**
@@ -55,7 +56,7 @@ class AttachPaymentMethodRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/payment_methods/' . $this->getPaymentMethod() . '/attach';
+        return $this->endpoint . '/payment_methods/' . $this->getPaymentMethod() . '/attach';
     }
 
     /**

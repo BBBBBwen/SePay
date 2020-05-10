@@ -128,6 +128,6 @@ class RefundRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getTransactionReference().'/refund';
+        return $this->endpoint . '/charges/' . $this->getTransactionReference() . '/refund';
     }
 }

@@ -3,6 +3,7 @@
 /**
  * Stripe List Plans Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 // use Omnipay\Common\Message\AbstractRequest;
@@ -24,7 +25,7 @@ class ListPlansRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/plans';
+        return $this->endpoint . '/plans';
     }
 
     public function getHttpMethod()

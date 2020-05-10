@@ -29,7 +29,7 @@ final class AggregateMoneyParser implements MoneyParser
 
         foreach ($parsers as $parser) {
             if (false === $parser instanceof MoneyParser) {
-                throw new \InvalidArgumentException('All parsers must implement '.MoneyParser::class);
+                throw new \InvalidArgumentException('All parsers must implement ' . MoneyParser::class);
             }
 
             $this->parsers[] = $parser;
@@ -42,7 +42,7 @@ final class AggregateMoneyParser implements MoneyParser
     public function parse($money, $forceCurrency = null)
     {
         if ($forceCurrency !== null && !$forceCurrency instanceof Currency) {
-            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a '.Currency::class.' instance instead.', E_USER_DEPRECATED);
+            @trigger_error('Passing a currency as string is deprecated since 3.1 and will be removed in 4.0. Please pass a ' . Currency::class . ' instance instead.', E_USER_DEPRECATED);
             $forceCurrency = new Currency($forceCurrency);
         }
 

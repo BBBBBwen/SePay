@@ -13,16 +13,16 @@ interface ClientInterface
     /**
      * Creates a new PSR-7 request.
      *
-     * @param string                               $method
-     * @param string|UriInterface                  $uri
-     * @param array                                $headers
+     * @param string $method
+     * @param string|UriInterface $uri
+     * @param array $headers
      * @param resource|string|StreamInterface|null $body
-     * @param string                               $protocolVersion
-     *
-     * @throws RequestException when the HTTP client is passed a request that is invalid and cannot be sent.
-     * @throws NetworkException if there is an error with the network or the remote server cannot be reached.
+     * @param string $protocolVersion
      *
      * @return ResponseInterface
+     * @throws NetworkException if there is an error with the network or the remote server cannot be reached.
+     *
+     * @throws RequestException when the HTTP client is passed a request that is invalid and cannot be sent.
      */
     public function request(
         $method,

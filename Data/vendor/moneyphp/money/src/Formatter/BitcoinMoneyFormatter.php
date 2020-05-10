@@ -27,7 +27,7 @@ final class BitcoinMoneyFormatter implements MoneyFormatter
     private $currencies;
 
     /**
-     * @param int        $fractionDigits
+     * @param int $fractionDigits
      * @param Currencies $currencies
      */
     public function __construct($fractionDigits, Currencies $currencies)
@@ -65,7 +65,7 @@ final class BitcoinMoneyFormatter implements MoneyFormatter
                 $formatted .= substr($valueBase, $valueLength - $subunit);
             }
         } else {
-            $formatted = '0.'.str_pad('', $subunit - $valueLength, '0').$valueBase;
+            $formatted = '0.' . str_pad('', $subunit - $valueLength, '0') . $valueBase;
         }
 
         if ($this->fractionDigits === 0) {
@@ -77,10 +77,10 @@ final class BitcoinMoneyFormatter implements MoneyFormatter
             $formatted = substr($formatted, 0, $lastDigit);
         }
 
-        $formatted = BitcoinCurrencies::SYMBOL.$formatted;
+        $formatted = BitcoinCurrencies::SYMBOL . $formatted;
 
         if (true === $negative) {
-            $formatted = '-'.$formatted;
+            $formatted = '-' . $formatted;
         }
 
         return $formatted;

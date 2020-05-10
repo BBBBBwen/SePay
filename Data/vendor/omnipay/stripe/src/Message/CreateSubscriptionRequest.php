@@ -77,6 +77,6 @@ class CreateSubscriptionRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/customers/'.$this->getCustomerReference().'/subscriptions';
+        return $this->endpoint . '/customers/' . $this->getCustomerReference() . '/subscriptions';
     }
 }

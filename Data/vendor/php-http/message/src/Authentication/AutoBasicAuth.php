@@ -24,7 +24,7 @@ final class AutoBasicAuth implements Authentication
      */
     public function __construct($shouldRremoveUserInfo = true)
     {
-        $this->shouldRemoveUserInfo = (bool) $shouldRremoveUserInfo;
+        $this->shouldRemoveUserInfo = (bool)$shouldRremoveUserInfo;
     }
 
     /**

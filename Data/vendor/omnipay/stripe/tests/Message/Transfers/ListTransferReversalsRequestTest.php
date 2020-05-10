@@ -19,7 +19,7 @@ class ListTransferReversalsRequestTest extends TestCase
 
     public function setUp()
     {
-        $this->mockDir = __DIR__.'/../../Mock/Transfers';
+        $this->mockDir = __DIR__ . '/../../Mock/Transfers';
         $this->request = new ListTransferReversalsRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->setTransferReference('tr_164xRv2eZvKYlo2CZxJZWm1E');
     }
@@ -35,7 +35,7 @@ class ListTransferReversalsRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/ListTransferReversalsSuccess.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/ListTransferReversalsSuccess.txt')))
         );
 
         /** @var \Omnipay\Stripe\Message\Response $response */
@@ -55,7 +55,7 @@ class ListTransferReversalsRequestTest extends TestCase
         $this->request->setTransferReference('NOTFOUND');
 
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/ListTransferReversalsFailure.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/ListTransferReversalsFailure.txt')))
         );
         $response = $this->request->send();
 

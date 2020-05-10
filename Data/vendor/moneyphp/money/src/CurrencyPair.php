@@ -33,7 +33,7 @@ final class CurrencyPair implements \JsonSerializable
     /**
      * @param Currency $baseCurrency
      * @param Currency $counterCurrency
-     * @param float    $conversionRatio
+     * @param float $conversionRatio
      *
      * @throws \InvalidArgumentException If conversion ratio is not numeric
      */
@@ -45,7 +45,7 @@ final class CurrencyPair implements \JsonSerializable
 
         $this->counterCurrency = $counterCurrency;
         $this->baseCurrency = $baseCurrency;
-        $this->conversionRatio = (float) $conversionRatio;
+        $this->conversionRatio = (float)$conversionRatio;
     }
 
     /**
@@ -61,7 +61,7 @@ final class CurrencyPair implements \JsonSerializable
     {
         $currency = '([A-Z]{2,3})';
         $ratio = "([0-9]*\.?[0-9]+)"; // @see http://www.regular-expressions.info/floatingpoint.html
-        $pattern = '#'.$currency.'/'.$currency.' '.$ratio.'#';
+        $pattern = '#' . $currency . '/' . $currency . ' ' . $ratio . '#';
 
         $matches = [];
 
@@ -119,8 +119,7 @@ final class CurrencyPair implements \JsonSerializable
         return
             $this->baseCurrency->equals($other->baseCurrency)
             && $this->counterCurrency->equals($other->counterCurrency)
-            && $this->conversionRatio === $other->conversionRatio
-        ;
+            && $this->conversionRatio === $other->conversionRatio;
     }
 
     /**

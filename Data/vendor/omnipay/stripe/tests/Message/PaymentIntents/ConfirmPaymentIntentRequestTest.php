@@ -47,7 +47,7 @@ class ConfirmPaymentIntentRequestTest extends TestCase
         $this->assertNull($response->getMessage());
     }
 
-  public function testConfirmMissingRedirect()
+    public function testConfirmMissingRedirect()
     {
         $this->setMockHttpResponse('ConfirmIntentMissingRedirect.txt');
         $response = $this->request->send();
@@ -57,7 +57,7 @@ class ConfirmPaymentIntentRequestTest extends TestCase
         $this->assertSame('pm_1Ev1CcFSbr6xR4YAuKuJgwEs', $response->getCardReference());
     }
 
-  public function testConfirm3dsRedirect()
+    public function testConfirm3dsRedirect()
     {
         $this->setMockHttpResponse('ConfirmIntent3dsRedirect.txt');
         $response = $this->request->send();

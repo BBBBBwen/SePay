@@ -125,19 +125,19 @@ class TextPart extends AbstractPart
     {
         $headers = parent::getPreparedHeaders();
 
-        $headers->setHeaderBody('Parameterized', 'Content-Type', $this->getMediaType().'/'.$this->getMediaSubtype());
+        $headers->setHeaderBody('Parameterized', 'content-Type', $this->getMediaType() . '/' . $this->getMediaSubtype());
         if ($this->charset) {
-            $headers->setHeaderParameter('Content-Type', 'charset', $this->charset);
+            $headers->setHeaderParameter('content-Type', 'charset', $this->charset);
         }
         if ($this->name) {
-            $headers->setHeaderParameter('Content-Type', 'name', $this->name);
+            $headers->setHeaderParameter('content-Type', 'name', $this->name);
         }
-        $headers->setHeaderBody('Text', 'Content-Transfer-Encoding', $this->encoding);
+        $headers->setHeaderBody('Text', 'content-Transfer-Encoding', $this->encoding);
 
-        if (!$headers->has('Content-Disposition') && null !== $this->disposition) {
-            $headers->setHeaderBody('Parameterized', 'Content-Disposition', $this->disposition);
+        if (!$headers->has('content-Disposition') && null !== $this->disposition) {
+            $headers->setHeaderBody('Parameterized', 'content-Disposition', $this->disposition);
             if ($this->name) {
-                $headers->setHeaderParameter('Content-Disposition', 'name', $this->name);
+                $headers->setHeaderParameter('content-Disposition', 'name', $this->name);
             }
         }
 
@@ -148,10 +148,10 @@ class TextPart extends AbstractPart
     {
         $str = parent::asDebugString();
         if (null !== $this->charset) {
-            $str .= ' charset: '.$this->charset;
+            $str .= ' charset: ' . $this->charset;
         }
         if (null !== $this->disposition) {
-            $str .= ' disposition: '.$this->disposition;
+            $str .= ' disposition: ' . $this->disposition;
         }
 
         return $str;

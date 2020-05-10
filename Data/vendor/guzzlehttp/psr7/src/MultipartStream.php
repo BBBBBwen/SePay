@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp\Psr7;
 
 use Psr\Http\Message\StreamInterface;
@@ -14,7 +15,7 @@ class MultipartStream implements StreamInterface
     private $boundary;
 
     /**
-     * @param array  $elements Array of associative arrays, each containing a
+     * @param array $elements Array of associative arrays, each containing a
      *                         required "name" key mapping to the form field,
      *                         name, a required "contents" key mapping to a
      *                         StreamInterface/resource/string, an optional
@@ -113,7 +114,7 @@ class MultipartStream implements StreamInterface
         // Set a default content-disposition header if one was no provided
         $disposition = $this->getHeader($headers, 'content-disposition');
         if (!$disposition) {
-            $headers['Content-Disposition'] = ($filename === '0' || $filename)
+            $headers['content-Disposition'] = ($filename === '0' || $filename)
                 ? sprintf('form-data; name="%s"; filename="%s"',
                     $name,
                     basename($filename))
@@ -124,15 +125,15 @@ class MultipartStream implements StreamInterface
         $length = $this->getHeader($headers, 'content-length');
         if (!$length) {
             if ($length = $stream->getSize()) {
-                $headers['Content-Length'] = (string) $length;
+                $headers['content-Length'] = (string)$length;
             }
         }
 
-        // Set a default Content-Type if one was not supplied
+        // Set a default content-Type if one was not supplied
         $type = $this->getHeader($headers, 'content-type');
         if (!$type && ($filename === '0' || $filename)) {
             if ($type = mimetype_from_filename($filename)) {
-                $headers['Content-Type'] = $type;
+                $headers['content-Type'] = $type;
             }
         }
 

@@ -1,7 +1,7 @@
 .div1 {
-    float:left;
+    float: left;
     width: 30%;
-    height:200px;
+    height: 200px;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -9,9 +9,9 @@
 }
 
 .div2 {
-    float:left;
+    float: left;
     width: 30%;
-    height:200px;
+    height: 200px;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -19,9 +19,9 @@
 }
 
 .div3 {
-    float:left;
+    float: left;
     width: 30%;
-    height:200px;
+    height: 200px;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -52,7 +52,7 @@ html, body {
 }
 
 main {
-    flex:auto;
+    flex: auto;
 }
 
 body {

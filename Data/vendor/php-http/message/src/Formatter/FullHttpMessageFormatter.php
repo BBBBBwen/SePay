@@ -42,7 +42,7 @@ class FullHttpMessageFormatter implements Formatter
         );
 
         foreach ($request->getHeaders() as $name => $values) {
-            $message .= $name.': '.implode(', ', $values)."\n";
+            $message .= $name . ': ' . implode(', ', $values) . "\n";
         }
 
         return $this->addBody($request, $message);
@@ -61,7 +61,7 @@ class FullHttpMessageFormatter implements Formatter
         );
 
         foreach ($response->getHeaders() as $name => $values) {
-            $message .= $name.': '.implode(', ', $values)."\n";
+            $message .= $name . ': ' . implode(', ', $values) . "\n";
         }
 
         return $this->addBody($response, $message);
@@ -71,7 +71,7 @@ class FullHttpMessageFormatter implements Formatter
      * Add the message body if the stream is seekable.
      *
      * @param MessageInterface $request
-     * @param string           $message
+     * @param string $message
      *
      * @return string
      */
@@ -80,13 +80,13 @@ class FullHttpMessageFormatter implements Formatter
         $stream = $request->getBody();
         if (!$stream->isSeekable() || 0 === $this->maxBodyLength) {
             // Do not read the stream
-            return $message."\n";
+            return $message . "\n";
         }
 
         if (null === $this->maxBodyLength) {
-            $message .= "\n".$stream->__toString();
+            $message .= "\n" . $stream->__toString();
         } else {
-            $message .= "\n".mb_substr($stream->__toString(), 0, $this->maxBodyLength);
+            $message .= "\n" . mb_substr($stream->__toString(), 0, $this->maxBodyLength);
         }
 
         $stream->rewind();

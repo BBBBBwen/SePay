@@ -54,8 +54,8 @@ class MetadataBag implements SessionBagInterface
     private $updateThreshold;
 
     /**
-     * @param string $storageKey      The key used to store bag in the session
-     * @param int    $updateThreshold The time to wait between two UPDATED updates
+     * @param string $storageKey The key used to store bag in the session
+     * @param int $updateThreshold The time to wait between two UPDATED updates
      */
     public function __construct(string $storageKey = '_sf2_meta', int $updateThreshold = 0)
     {

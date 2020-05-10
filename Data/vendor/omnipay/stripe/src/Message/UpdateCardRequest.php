@@ -3,6 +3,7 @@
 /**
  * Stripe Update Credit Card Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -36,8 +37,8 @@ class UpdateCardRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/customers/'.$this->getCustomerReference().
-            '/cards/'.$this->getCardReference();
+        return $this->endpoint . '/customers/' . $this->getCustomerReference() .
+            '/cards/' . $this->getCardReference();
     }
 
     /**

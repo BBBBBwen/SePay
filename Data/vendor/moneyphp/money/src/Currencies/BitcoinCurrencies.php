@@ -30,7 +30,7 @@ final class BitcoinCurrencies implements Currencies
     {
         if ($currency->getCode() !== self::CODE) {
             throw new UnknownCurrencyException(
-                $currency->getCode().' is not bitcoin and is not supported by this currency repository'
+                $currency->getCode() . ' is not bitcoin and is not supported by this currency repository'
             );
         }
 

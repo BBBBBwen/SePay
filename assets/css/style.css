@@ -154,13 +154,14 @@ li {
     opacity: 0.2;
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
     .creditCardForm .owner,
     .creditCardForm .CVV,
     .creditCardForm #expiration-date,
     .creditCardForm #credit_cards {
         width: 100%;
     }
+
     .creditCardForm #credit_cards {
         text-align: left;
     }
@@ -177,7 +178,7 @@ li {
     color: #4c4e56;
 }
 
-.examples-note{
+.examples-note {
     text-align: center;
     font-size: 14px;
     max-width: 370px;
@@ -197,7 +198,7 @@ li {
     margin-left: 20%;
 }
 
-.popup {
+.popup, .popup1 {
     display: none; /* 默认隐藏 */
     /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
     position: fixed;
@@ -209,23 +210,23 @@ li {
     padding-bottom: 300px;
     /*浮在全屏上*/
     width: 100%;
-    height:  100%;
+    height: 100%;
     /*overflow：auto；如果内容被修剪，则浏览器会显示滚动条，以便查看其余内容。*/
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
 }
 
 /* 弹窗内容 */
-.popup-content {
+.popup-content, .popup-content1 {
     /*position: relative;*/
     /*弹窗背景色设置*/
     background-color: #fefefe;
     margin: auto;
     padding: 200px auto;
     width: 60%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
@@ -234,29 +235,41 @@ li {
 
 /* 添加动画 */
 @-webkit-keyframes animatetop {
-    from {top:-200px; opacity:0}
-    to {top:0; opacity:1}
+    from {
+        top: -200px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
 
 @keyframes animatetop {
-    from {top:-200px; opacity:0}
-    to {top:0; opacity:1}
+    from {
+        top: -200px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
 
-.close {
+.close, .close1{
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.close:hover, .close:focus, .close1:hover, .close1:focus{
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.popup-header {
+.popup-header, .popup-header1 {
     display: block;
     line-height: 30px;
     padding: 2px 10px;
@@ -265,12 +278,12 @@ li {
     text-align: left;
 }
 
-.popup-body {
+.popup-body, .popup-body1 {
     padding: 2px 16px;
     font-size: 18px;
 }
 
-.popup-footer {
+.popup-footer, .popup-footer1 {
     display: block;
     line-height: 30px;
     padding: 2px 10px;
@@ -278,7 +291,7 @@ li {
     color: grey;
 }
 
-.amount-enter {
+.amount-enter, .amount-enter1 {
     margin-top: 20px;
     box-sizing: border-box;
     height: 40px;

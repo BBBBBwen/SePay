@@ -12,20 +12,22 @@
 .ppvx_btn--secondary:visited {
     color: #ff0000;
 }
+
 .ppvx_btn:active, .ppvx_btn:focus, .ppvx_btn:hover, .ppvx_btn:visited {
     color: #9da3a6;
 }
+
 .ppvx_btn--size_sm {
     font-size: .8125rem;
     line-height: 1.125rem;
-    font-family: PayPalSansSmall-Regular,Helvetica Neue,Arial,sans-serif;
+    font-family: PayPalSansSmall-Regular, Helvetica Neue, Arial, sans-serif;
     font-weight: 700;
     min-width: 3.75rem;
     padding: .3125rem .875rem;
 }
 
 .ppvx_btn--secondary {
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
     border-color: #0070ba;
 }
 
@@ -33,6 +35,7 @@
     padding: 0;
     height: 100%;
 }
+
 .cw_tile-itemListRow {
     min-height: 4.3125rem;
     padding: .5rem 0;
@@ -69,10 +72,11 @@
     z-index: 1;
     width: 100%;
 }
+
 .cw_tile-itemListContainer_hover:after {
     content: '';
     position: absolute;
-    background-color: rgba(0,112,186,.1);
+    background-color: rgba(0, 112, 186, .1);
     left: -.75rem;
     top: 0;
     height: 100%;
@@ -151,7 +155,7 @@
 }
 
 .card {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     color: #000;
     background-color: #fff;
@@ -179,7 +183,7 @@
 }
 
 .left {
-    float:left;
+    float: left;
     padding-right: 10px;
     padding-left: 10px;
     width: 20%;
@@ -187,7 +191,7 @@
 }
 
 .right {
-    float:left;
+    float: left;
     padding-right: 10px;
     padding-left: 20px;
     width: 80%;

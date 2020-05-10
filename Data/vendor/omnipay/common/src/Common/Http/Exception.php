@@ -7,7 +7,7 @@ use Throwable;
 
 abstract class Exception extends \RuntimeException
 {
-    /** @var RequestInterface  */
+    /** @var RequestInterface */
     protected $request;
 
     public function __construct($message, RequestInterface $request, $previous = null)

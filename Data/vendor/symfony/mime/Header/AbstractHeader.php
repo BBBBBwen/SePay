@@ -82,8 +82,8 @@ abstract class AbstractHeader implements HeaderInterface
     /**
      * Produces a compliant, formatted RFC 2822 'phrase' based on the string given.
      *
-     * @param string $string  as displayed
-     * @param bool   $shorten the first line to make remove for header name
+     * @param string $string as displayed
+     * @param bool $shorten the first line to make remove for header name
      */
     protected function createPhrase(HeaderInterface $header, string $string, string $charset, bool $shorten = false): string
     {
@@ -91,19 +91,19 @@ abstract class AbstractHeader implements HeaderInterface
         $phraseStr = $string;
 
         // If it's not valid
-        if (!preg_match('/^'.self::PHRASE_PATTERN.'$/D', $phraseStr)) {
+        if (!preg_match('/^' . self::PHRASE_PATTERN . '$/D', $phraseStr)) {
             // .. but it is just ascii text, try escaping some characters
             // and make it a quoted-string
             if (preg_match('/^[\x00-\x08\x0B\x0C\x0E-\x7F]*$/D', $phraseStr)) {
                 foreach (['\\', '"'] as $char) {
-                    $phraseStr = str_replace($char, '\\'.$char, $phraseStr);
+                    $phraseStr = str_replace($char, '\\' . $char, $phraseStr);
                 }
-                $phraseStr = '"'.$phraseStr.'"';
+                $phraseStr = '"' . $phraseStr . '"';
             } else {
                 // ... otherwise it needs encoding
                 // Determine space remaining on line if first line
                 if ($shorten) {
-                    $usedLength = \strlen($header->getName().': ');
+                    $usedLength = \strlen($header->getName() . ': ');
                 } else {
                     $usedLength = 0;
                 }
@@ -134,7 +134,7 @@ abstract class AbstractHeader implements HeaderInterface
                 }
 
                 if (-1 == $usedLength) {
-                    $usedLength = \strlen($header->getName().': ') + \strlen($value);
+                    $usedLength = \strlen($header->getName() . ': ') + \strlen($value);
                 }
                 $value .= $this->getTokenAsEncodedWord($token, $usedLength);
             } else {
@@ -147,7 +147,7 @@ abstract class AbstractHeader implements HeaderInterface
 
     protected function tokenNeedsEncoding(string $token): bool
     {
-        return (bool) preg_match('~[\x00-\x08\x10-\x19\x7F-\xFF\r\n]~', $token);
+        return (bool)preg_match('~[\x00-\x08\x10-\x19\x7F-\xFF\r\n]~', $token);
     }
 
     /**
@@ -190,9 +190,9 @@ abstract class AbstractHeader implements HeaderInterface
         // Adjust $firstLineOffset to account for space needed for syntax
         $charsetDecl = $this->charset;
         if (null !== $this->lang) {
-            $charsetDecl .= '*'.$this->lang;
+            $charsetDecl .= '*' . $this->lang;
         }
-        $encodingWrapperLength = \strlen('=?'.$charsetDecl.'?'.self::$encoder->getName().'??=');
+        $encodingWrapperLength = \strlen('=?' . $charsetDecl . '?' . self::$encoder->getName() . '??=');
 
         if ($firstLineOffset >= 75) {
             //Does this logic need to be here?
@@ -206,7 +206,7 @@ abstract class AbstractHeader implements HeaderInterface
         if ('iso-2022-jp' !== strtolower($this->charset)) {
             // special encoding for iso-2022-jp using mb_encode_mimeheader
             foreach ($encodedTextLines as $lineNum => $line) {
-                $encodedTextLines[$lineNum] = '=?'.$charsetDecl.'?'.self::$encoder->getName().'?'.$line.'?=';
+                $encodedTextLines[$lineNum] = '=?' . $charsetDecl . '?' . self::$encoder->getName() . '?' . $line . '?=';
             }
         }
 
@@ -254,14 +254,14 @@ abstract class AbstractHeader implements HeaderInterface
     {
         $lineCount = 0;
         $headerLines = [];
-        $headerLines[] = $this->name.': ';
+        $headerLines[] = $this->name . ': ';
         $currentLine = &$headerLines[$lineCount++];
 
         // Build all tokens back into compliant header
         foreach ($tokens as $i => $token) {
             // Line longer than specified maximum or token was just a new line
             if (("\r\n" === $token) ||
-                ($i > 0 && \strlen($currentLine.$token) > $this->lineLength)
+                ($i > 0 && \strlen($currentLine . $token) > $this->lineLength)
                 && 0 < \strlen($currentLine)) {
                 $headerLines[] = '';
                 $currentLine = &$headerLines[$lineCount++];

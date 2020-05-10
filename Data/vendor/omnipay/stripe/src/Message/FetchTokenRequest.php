@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Token Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -35,7 +36,7 @@ class FetchTokenRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/tokens/'.$this->getToken();
+        return $this->endpoint . '/tokens/' . $this->getToken();
     }
 
     public function getHttpMethod()

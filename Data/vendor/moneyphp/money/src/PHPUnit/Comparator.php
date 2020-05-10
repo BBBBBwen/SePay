@@ -45,8 +45,8 @@ final class Comparator extends \SebastianBergmann\Comparator\Comparator
      * @param Money $expected
      * @param Money $actual
      * @param float $delta
-     * @param bool  $canonicalize
-     * @param bool  $ignoreCase
+     * @param bool $canonicalize
+     * @param bool $ignoreCase
      * @param array $processed
      */
     public function assertEquals(
@@ -56,7 +56,8 @@ final class Comparator extends \SebastianBergmann\Comparator\Comparator
         $canonicalize = false,
         $ignoreCase = false,
         array &$processed = []
-    ) {
+    )
+    {
         if (!$expected->equals($actual)) {
             throw new ComparisonFailure(
                 $expected,

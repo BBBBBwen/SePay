@@ -72,11 +72,11 @@ class GatewayFactory
     /**
      * Create a new gateway instance
      *
-     * @param string               $class       Gateway name
-     * @param ClientInterface|null $httpClient  A HTTP Client implementation
-     * @param HttpRequest|null     $httpRequest A Symfony HTTP Request implementation
-     * @throws RuntimeException                 If no such gateway is found
+     * @param string $class Gateway name
+     * @param ClientInterface|null $httpClient A HTTP Client implementation
+     * @param HttpRequest|null $httpRequest A Symfony HTTP Request implementation
      * @return GatewayInterface                 An object of class $class is created and returned
+     * @throws RuntimeException                 If no such gateway is found
      */
     public function create($class, ClientInterface $httpClient = null, HttpRequest $httpRequest = null)
     {

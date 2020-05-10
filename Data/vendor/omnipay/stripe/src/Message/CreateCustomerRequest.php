@@ -3,6 +3,7 @@
 /**
  * Stripe Create Customer Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -169,6 +170,6 @@ class CreateCustomerRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/customers';
+        return $this->endpoint . '/customers';
     }
 }

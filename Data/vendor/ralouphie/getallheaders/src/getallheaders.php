@@ -12,9 +12,9 @@ if (!function_exists('getallheaders')) {
         $headers = array();
 
         $copy_server = array(
-            'CONTENT_TYPE'   => 'Content-Type',
-            'CONTENT_LENGTH' => 'Content-Length',
-            'CONTENT_MD5'    => 'Content-Md5',
+            'CONTENT_TYPE' => 'content-Type',
+            'CONTENT_LENGTH' => 'content-Length',
+            'CONTENT_MD5' => 'content-Md5',
         );
 
         foreach ($_SERVER as $key => $value) {

@@ -19,7 +19,7 @@ class ListTransfersRequestTest extends TestCase
 
     public function setUp()
     {
-        $this->mockDir = __DIR__.'/../../Mock/Transfers';
+        $this->mockDir = __DIR__ . '/../../Mock/Transfers';
         $this->request = new ListTransfersRequest($this->getHttpClient(), $this->getHttpRequest());
     }
 
@@ -31,7 +31,7 @@ class ListTransfersRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/ListTransfersSuccess.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/ListTransfersSuccess.txt')))
         );
 
         /** @var \Omnipay\Stripe\Message\Response $response */
@@ -51,7 +51,7 @@ class ListTransfersRequestTest extends TestCase
         $this->request->setTransferGroup('NOTFOUND');
 
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/ListTransfersFailure.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/ListTransfersFailure.txt')))
         );
         $response = $this->request->send();
 

@@ -61,7 +61,7 @@ final class ResponseHasCookie extends Constraint
      */
     protected function failureDescription($response): string
     {
-        return 'the Response '.$this->toString();
+        return 'the Response ' . $this->toString();
     }
 
     private function getCookie(Response $response): ?Cookie

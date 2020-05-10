@@ -2,6 +2,7 @@
 /**
  * CreateSourceRequest
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**

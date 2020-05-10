@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp;
 
 use GuzzleHttp\Promise\PromiseInterface;
@@ -6,12 +7,12 @@ use GuzzleHttp\Psr7;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Prepares requests that contain a body, adding the Content-Length,
- * Content-Type, and Expect headers.
+ * Prepares requests that contain a body, adding the content-Length,
+ * content-Type, and Expect headers.
  */
 class PrepareBodyMiddleware
 {
-    /** @var callable  */
+    /** @var callable */
     private $nextHandler;
 
     /**
@@ -24,7 +25,7 @@ class PrepareBodyMiddleware
 
     /**
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return PromiseInterface
      */
@@ -40,21 +41,21 @@ class PrepareBodyMiddleware
         $modify = [];
 
         // Add a default content-type if possible.
-        if (!$request->hasHeader('Content-Type')) {
+        if (!$request->hasHeader('content-Type')) {
             if ($uri = $request->getBody()->getMetadata('uri')) {
                 if ($type = Psr7\mimetype_from_filename($uri)) {
-                    $modify['set_headers']['Content-Type'] = $type;
+                    $modify['set_headers']['content-Type'] = $type;
                 }
             }
         }
 
         // Add a default content-length or transfer-encoding header.
-        if (!$request->hasHeader('Content-Length')
+        if (!$request->hasHeader('content-Length')
             && !$request->hasHeader('Transfer-Encoding')
         ) {
             $size = $request->getBody()->getSize();
             if ($size !== null) {
-                $modify['set_headers']['Content-Length'] = $size;
+                $modify['set_headers']['content-Length'] = $size;
             } else {
                 $modify['set_headers']['Transfer-Encoding'] = 'chunked';
             }
@@ -75,7 +76,8 @@ class PrepareBodyMiddleware
         RequestInterface $request,
         array $options,
         array &$modify
-    ) {
+    )
+    {
         // Determine if the Expect header should be used
         if ($request->hasHeader('Expect')) {
             return;
@@ -104,7 +106,7 @@ class PrepareBodyMiddleware
         $body = $request->getBody();
         $size = $body->getSize();
 
-        if ($size === null || $size >= (int) $expect || !$body->isSeekable()) {
+        if ($size === null || $size >= (int)$expect || !$body->isSeekable()) {
             $modify['set_headers']['Expect'] = '100-Continue';
         }
     }

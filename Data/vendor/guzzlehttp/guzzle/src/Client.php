@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp;
 
 use GuzzleHttp\Cookie\CookieJar;
@@ -78,7 +79,7 @@ class Client implements ClientInterface
 
     /**
      * @param string $method
-     * @param array  $args
+     * @param array $args
      *
      * @return Promise\PromiseInterface
      */
@@ -138,9 +139,9 @@ class Client implements ClientInterface
      * contain the query string as well. Use an array to provide a URL
      * template and additional variables to use in the URL template expansion.
      *
-     * @param string              $method  HTTP method
-     * @param string|UriInterface $uri     URI object or string.
-     * @param array               $options Request options to apply. See \GuzzleHttp\RequestOptions.
+     * @param string $method HTTP method
+     * @param string|UriInterface $uri URI object or string.
+     * @param array $options Request options to apply. See \GuzzleHttp\RequestOptions.
      *
      * @return Promise\PromiseInterface
      */
@@ -170,9 +171,9 @@ class Client implements ClientInterface
      * relative path to append to the base path of the client. The URL can
      * contain the query string as well.
      *
-     * @param string              $method  HTTP method.
-     * @param string|UriInterface $uri     URI object or string.
-     * @param array               $options Request options to apply. See \GuzzleHttp\RequestOptions.
+     * @param string $method HTTP method.
+     * @param string|UriInterface $uri URI object or string.
+     * @param array $options Request options to apply. See \GuzzleHttp\RequestOptions.
      *
      * @return ResponseInterface
      * @throws GuzzleException
@@ -202,7 +203,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param  string|null $uri
+     * @param string|null $uri
      *
      * @return UriInterface
      */
@@ -233,10 +234,10 @@ class Client implements ClientInterface
     {
         $defaults = [
             'allow_redirects' => RedirectMiddleware::$defaultSettings,
-            'http_errors'     => true,
-            'decode_content'  => true,
-            'verify'          => true,
-            'cookies'         => false
+            'http_errors' => true,
+            'decode_content' => true,
+            'verify' => true,
+            'cookies' => false
         ];
 
         // idn_to_ascii() is a part of ext-intl and might be not available
@@ -368,7 +369,7 @@ class Client implements ClientInterface
      * Applies the array of request options to a request.
      *
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return RequestInterface
      */
@@ -394,8 +395,8 @@ class Client implements ClientInterface
             $options['body'] = http_build_query($options['form_params'], '', '&');
             unset($options['form_params']);
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = Psr7\_caseless_remove(['Content-Type'], $options['_conditional']);
-            $options['_conditional']['Content-Type'] = 'application/x-www-form-urlencoded';
+            $options['_conditional'] = Psr7\_caseless_remove(['content-Type'], $options['_conditional']);
+            $options['_conditional']['content-Type'] = 'application/x-www-form-urlencoded';
         }
 
         if (isset($options['multipart'])) {
@@ -407,8 +408,8 @@ class Client implements ClientInterface
             $options['body'] = \GuzzleHttp\json_encode($options['json']);
             unset($options['json']);
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = Psr7\_caseless_remove(['Content-Type'], $options['_conditional']);
-            $options['_conditional']['Content-Type'] = 'application/json';
+            $options['_conditional'] = Psr7\_caseless_remove(['content-Type'], $options['_conditional']);
+            $options['_conditional']['content-Type'] = 'application/json';
         }
 
         if (!empty($options['decode_content'])
@@ -471,10 +472,10 @@ class Client implements ClientInterface
 
         $request = Psr7\modify_request($request, $modify);
         if ($request->getBody() instanceof Psr7\MultipartStream) {
-            // Use a multipart/form-data POST if a Content-Type is not set.
+            // Use a multipart/form-data POST if a content-Type is not set.
             // Ensure that we don't have the header in different case and set the new value.
-            $options['_conditional'] = Psr7\_caseless_remove(['Content-Type'], $options['_conditional']);
-            $options['_conditional']['Content-Type'] = 'multipart/form-data; boundary='
+            $options['_conditional'] = Psr7\_caseless_remove(['content-Type'], $options['_conditional']);
+            $options['_conditional']['content-Type'] = 'multipart/form-data; boundary='
                 . $request->getBody()->getBoundary();
         }
 

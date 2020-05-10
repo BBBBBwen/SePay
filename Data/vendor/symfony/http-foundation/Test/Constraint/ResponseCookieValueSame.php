@@ -69,7 +69,7 @@ final class ResponseCookieValueSame extends Constraint
      */
     protected function failureDescription($response): string
     {
-        return 'the Response '.$this->toString();
+        return 'the Response ' . $this->toString();
     }
 
     protected function getCookie(Response $response): ?Cookie

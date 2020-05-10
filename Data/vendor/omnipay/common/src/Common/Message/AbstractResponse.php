@@ -214,16 +214,16 @@ abstract class AbstractResponse implements ResponseInterface
         $hiddenFields = '';
         foreach ($this->getRedirectData() as $key => $value) {
             $hiddenFields .= sprintf(
-                '<input type="hidden" name="%1$s" value="%2$s" />',
-                htmlentities($key, ENT_QUOTES, 'UTF-8', false),
-                htmlentities($value, ENT_QUOTES, 'UTF-8', false)
-            )."\n";
+                    '<input type="hidden" name="%1$s" value="%2$s" />',
+                    htmlentities($key, ENT_QUOTES, 'UTF-8', false),
+                    htmlentities($value, ENT_QUOTES, 'UTF-8', false)
+                ) . "\n";
         }
 
         $output = '<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
     <title>Redirecting...</title>
 </head>
 <body onload="document.forms[0].submit();">
@@ -261,7 +261,7 @@ abstract class AbstractResponse implements ResponseInterface
         }
 
         if (!in_array($this->getRedirectMethod(), ['GET', 'POST'])) {
-            throw new RuntimeException('Invalid redirect method "'.$this->getRedirectMethod().'".');
+            throw new RuntimeException('Invalid redirect method "' . $this->getRedirectMethod() . '".');
         }
     }
 }

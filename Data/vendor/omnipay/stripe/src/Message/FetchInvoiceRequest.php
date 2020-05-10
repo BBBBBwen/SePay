@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Invoice Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -42,7 +43,7 @@ class FetchInvoiceRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/invoices/'.$this->getInvoiceReference();
+        return $this->endpoint . '/invoices/' . $this->getInvoiceReference();
     }
 
     public function getHttpMethod()

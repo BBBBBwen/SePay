@@ -48,7 +48,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
         foreach ($headers as $name => $values) {
             $name = ucwords($name, '-');
             foreach ($values as $value) {
-                $content .= sprintf("%-{$max}s %s\r\n", $name.':', $value);
+                $content .= sprintf("%-{$max}s %s\r\n", $name . ':', $value);
             }
         }
 
@@ -103,14 +103,14 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns a header value by name.
      *
-     * @param string      $key     The header name
+     * @param string $key The header name
      * @param string|null $default The default value
      *
      * @return string|null The first header value or default value
      */
     public function get($key, $default = null)
     {
-        $headers = $this->all((string) $key);
+        $headers = $this->all((string)$key);
         if (2 < \func_num_args()) {
             @trigger_error(sprintf('Passing a third argument to "%s()" is deprecated since Symfony 4.4, use method "all()" instead', __METHOD__), E_USER_DEPRECATED);
 
@@ -127,15 +127,15 @@ class HeaderBag implements \IteratorAggregate, \Countable
             return null;
         }
 
-        return (string) $headers[0];
+        return (string)$headers[0];
     }
 
     /**
      * Sets a header by name.
      *
-     * @param string          $key     The key
-     * @param string|string[] $values  The value or an array of values
-     * @param bool            $replace Whether to replace the actual value or not (true by default)
+     * @param string $key The key
+     * @param string|string[] $values The value or an array of values
+     * @param bool $replace Whether to replace the actual value or not (true by default)
      */
     public function set($key, $values, $replace = true)
     {
@@ -177,14 +177,14 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns true if the given HTTP header contains the given value.
      *
-     * @param string $key   The HTTP header name
+     * @param string $key The HTTP header name
      * @param string $value The HTTP value
      *
      * @return bool true if the value is contained in the header, false otherwise
      */
     public function contains($key, $value)
     {
-        return \in_array($value, $this->all((string) $key));
+        return \in_array($value, $this->all((string)$key));
     }
 
     /**
@@ -228,8 +228,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Adds a custom Cache-Control directive.
      *
-     * @param string $key   The Cache-Control directive name
-     * @param mixed  $value The Cache-Control directive value
+     * @param string $key The Cache-Control directive name
+     * @param mixed $value The Cache-Control directive value
      */
     public function addCacheControlDirective($key, $value = true)
     {

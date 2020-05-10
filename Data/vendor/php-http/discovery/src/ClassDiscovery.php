@@ -53,7 +53,7 @@ abstract class ClassDiscovery
         $exceptions = [];
         foreach (self::$strategies as $strategy) {
             try {
-                $candidates = call_user_func($strategy.'::getCandidates', $type);
+                $candidates = call_user_func($strategy . '::getCandidates', $type);
             } catch (StrategyUnavailableException $e) {
                 $exceptions[] = $e;
 
@@ -168,7 +168,7 @@ abstract class ClassDiscovery
             return self::safeClassExists($condition);
         }
         if (is_callable($condition)) {
-            return (bool) $condition();
+            return (bool)$condition();
         }
         if (is_bool($condition)) {
             return $condition;
@@ -221,7 +221,7 @@ abstract class ClassDiscovery
      * This function will catch all potential exceptions and make sure it returns a boolean.
      *
      * @param string $class
-     * @param bool   $autoload
+     * @param bool $autoload
      *
      * @return bool
      */

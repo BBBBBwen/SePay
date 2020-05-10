@@ -3,6 +3,7 @@
 /**
  * Stripe Update Payment Method Request.
  */
+
 namespace Omnipay\Stripe\Message\PaymentIntents;
 
 /**
@@ -49,7 +50,7 @@ class UpdatePaymentMethodRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/payment_methods/'.$this->getPaymentMethod();
+        return $this->endpoint . '/payment_methods/' . $this->getPaymentMethod();
     }
 
     /**
@@ -88,8 +89,8 @@ class UpdatePaymentMethodRequest extends AbstractRequest
         // Take care of optional data by filtering it out.
         return array_filter([
             'email' => $data['email'],
-            'name' =>  $data['name'],
-            'address' =>  array_filter([
+            'name' => $data['name'],
+            'address' => array_filter([
                 'city' => $data['address_city'],
                 'country' => $data['address_country'],
                 'line1' => $data['address_line1'],

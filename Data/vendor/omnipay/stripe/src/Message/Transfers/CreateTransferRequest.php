@@ -88,6 +88,6 @@ class CreateTransferRequest extends AuthorizeRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/transfers';
+        return $this->endpoint . '/transfers';
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp;
 
 /**
@@ -82,7 +83,7 @@ final class RequestOptions
 
     /**
      * decode_content: (bool, default=true) Specify whether or not
-     * Content-Encoding responses (gzip, deflate, etc.) are automatically
+     * content-Encoding responses (gzip, deflate, etc.) are automatically
      * decoded.
      */
     const DECODE_CONTENT = 'decode_content';
@@ -112,8 +113,8 @@ final class RequestOptions
 
     /**
      * form_params: (array) Associative array of form field names to values
-     * where each value is a string or array of strings. Sets the Content-Type
-     * header to application/x-www-form-urlencoded when no Content-Type header
+     * where each value is a string or array of strings. Sets the content-Type
+     * header to application/x-www-form-urlencoded when no content-Type header
      * is already present.
      */
     const FORM_PARAMS = 'form_params';
@@ -142,8 +143,8 @@ final class RequestOptions
 
     /**
      * json: (mixed) Adds JSON data to a request. The provided value is JSON
-     * encoded and a Content-Type header of application/json will be added to
-     * the request if no Content-Type header is already present.
+     * encoded and a content-Type header of application/json will be added to
+     * the request if no content-Type header is already present.
      */
     const JSON = 'json';
 

@@ -3,6 +3,7 @@
 /**
  * Stripe Capture Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -43,6 +44,6 @@ class CaptureRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getTransactionReference().'/capture';
+        return $this->endpoint . '/charges/' . $this->getTransactionReference() . '/capture';
     }
 }

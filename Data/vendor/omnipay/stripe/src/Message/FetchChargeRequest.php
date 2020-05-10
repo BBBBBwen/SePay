@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Charge Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -42,7 +43,7 @@ class FetchChargeRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getChargeReference();
+        return $this->endpoint . '/charges/' . $this->getChargeReference();
     }
 
     public function getHttpMethod()

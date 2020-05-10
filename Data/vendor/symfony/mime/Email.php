@@ -490,7 +490,7 @@ class Email extends Message
                 }
                 $attachment['inline'] = true;
                 $inlineParts[$name] = $part = $this->createDataPart($attachment);
-                $html = str_replace('cid:'.$name, 'cid:'.$part->getContentId(), $html);
+                $html = str_replace('cid:' . $name, 'cid:' . $part->getContentId(), $html);
                 continue 2;
             }
             $attachmentParts[] = $this->createDataPart($attachment);

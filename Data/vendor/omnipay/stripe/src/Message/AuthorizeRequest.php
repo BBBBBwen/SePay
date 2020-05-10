@@ -3,6 +3,7 @@
 /**
  * Stripe Authorize Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 use Omnipay\Stripe\StripeItemBag;
@@ -180,7 +181,7 @@ class AuthorizeRequest extends AbstractRequest
         $money = $this->getMoney('applicationFee');
 
         if ($money !== null) {
-            return (integer) $money->getAmount();
+            return (integer)$money->getAmount();
         }
 
         return 0;
@@ -320,6 +321,6 @@ class AuthorizeRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges';
+        return $this->endpoint . '/charges';
     }
 }

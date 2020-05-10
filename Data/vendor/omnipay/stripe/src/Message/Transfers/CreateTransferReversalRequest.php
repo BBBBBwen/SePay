@@ -86,6 +86,6 @@ class CreateTransferReversalRequest extends RefundRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint.'/transfers/'.$this->getTransferReference().'/reversals';
+        return $this->endpoint . '/transfers/' . $this->getTransferReference() . '/reversals';
     }
 }

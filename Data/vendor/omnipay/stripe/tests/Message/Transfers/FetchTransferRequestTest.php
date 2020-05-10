@@ -19,7 +19,7 @@ class FetchTransferRequestTest extends TestCase
 
     public function setUp()
     {
-        $this->mockDir = __DIR__.'/../../Mock/Transfers';
+        $this->mockDir = __DIR__ . '/../../Mock/Transfers';
         $this->request = new FetchTransferRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->setTransferReference('tr_164xRv2eZvKYlo2CZxJZWm1E');
     }
@@ -35,7 +35,7 @@ class FetchTransferRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/FetchTransferSuccess.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/FetchTransferSuccess.txt')))
         );
 
         /** @var \Omnipay\Stripe\Message\Response $response */
@@ -50,7 +50,7 @@ class FetchTransferRequestTest extends TestCase
     public function testSendFailure()
     {
         $this->setMockHttpResponse(
-            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir.'/FetchTransferFailure.txt')))
+            array(\GuzzleHttp\Psr7\parse_response(file_get_contents($this->mockDir . '/FetchTransferFailure.txt')))
         );
         $response = $this->request->send();
 

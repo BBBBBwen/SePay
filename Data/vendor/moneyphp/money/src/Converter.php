@@ -21,7 +21,7 @@ final class Converter
 
     /**
      * @param Currencies $currencies
-     * @param Exchange   $exchange
+     * @param Exchange $exchange
      */
     public function __construct(Currencies $currencies, Exchange $exchange)
     {
@@ -30,9 +30,9 @@ final class Converter
     }
 
     /**
-     * @param Money    $money
+     * @param Money $money
      * @param Currency $counterCurrency
-     * @param int      $roundingMode
+     * @param int $roundingMode
      *
      * @return Money
      */
@@ -45,7 +45,7 @@ final class Converter
         $counterCurrencySubunit = $this->currencies->subunitFor($counterCurrency);
         $subunitDifference = $baseCurrencySubunit - $counterCurrencySubunit;
 
-        $ratio = (string) Number::fromFloat($ratio)->base10($subunitDifference);
+        $ratio = (string)Number::fromFloat($ratio)->base10($subunitDifference);
 
         $counterValue = $money->multiply($ratio, $roundingMode);
 

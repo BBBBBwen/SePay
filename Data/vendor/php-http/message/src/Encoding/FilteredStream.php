@@ -55,8 +55,8 @@ abstract class FilteredStream implements StreamInterface
 
     /**
      * @param StreamInterface $stream
-     * @param mixed|null      $readFilterOptions
-     * @param mixed|null      $writeFilterOptions deprecated since 1.5, will be removed in 2.0
+     * @param mixed|null $readFilterOptions
+     * @param mixed|null $writeFilterOptions deprecated since 1.5, will be removed in 2.0
      */
     public function __construct(StreamInterface $stream, $readFilterOptions = null, $writeFilterOptions = null)
     {
@@ -100,7 +100,7 @@ abstract class FilteredStream implements StreamInterface
         $this->buffer = '';
         $this->fill();
 
-        return $read.$this->read($length - strlen($read));
+        return $read . $this->read($length - strlen($read));
     }
 
     /**
@@ -201,7 +201,7 @@ abstract class FilteredStream implements StreamInterface
      */
     public function getReadFilter()
     {
-        @trigger_error('The '.__CLASS__.'::'.__METHOD__.' method is deprecated since version 1.5 and will be removed in 2.0.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __CLASS__ . '::' . __METHOD__ . ' method is deprecated since version 1.5 and will be removed in 2.0.', E_USER_DEPRECATED);
 
         return $this->readFilter();
     }
@@ -222,7 +222,7 @@ abstract class FilteredStream implements StreamInterface
      */
     public function getWriteFilter()
     {
-        @trigger_error('The '.__CLASS__.'::'.__METHOD__.' method is deprecated since version 1.5 and will be removed in 2.0.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __CLASS__ . '::' . __METHOD__ . ' method is deprecated since version 1.5 and will be removed in 2.0.', E_USER_DEPRECATED);
 
         return $this->writeFilter();
     }

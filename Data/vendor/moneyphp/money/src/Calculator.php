@@ -50,7 +50,7 @@ interface Calculator
     /**
      * Multiply amount with multiplier.
      *
-     * @param string           $amount
+     * @param string $amount
      * @param int|float|string $multiplier
      *
      * @return string
@@ -60,7 +60,7 @@ interface Calculator
     /**
      * Divide amount with divisor.
      *
-     * @param string           $amount
+     * @param string $amount
      * @param int|float|string $divisor
      *
      * @return string
@@ -98,7 +98,7 @@ interface Calculator
      * Round number, use rounding mode for tie-breaker.
      *
      * @param int|float|string $number
-     * @param int              $roundingMode
+     * @param int $roundingMode
      *
      * @return string
      */
@@ -107,7 +107,7 @@ interface Calculator
     /**
      * Share amount among ratio / total portions.
      *
-     * @param string           $amount
+     * @param string $amount
      * @param int|float|string $ratio
      * @param int|float|string $total
      *
@@ -118,7 +118,7 @@ interface Calculator
     /**
      * Get the modulus of an amount.
      *
-     * @param string           $amount
+     * @param string $amount
      * @param int|float|string $divisor
      *
      * @return string

@@ -58,7 +58,7 @@ class FetchBalanceTransactionRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/balance/history/'.$this->getBalanceTransactionReference();
+        return $this->endpoint . '/balance/history/' . $this->getBalanceTransactionReference();
     }
 
     public function getHttpMethod()

@@ -3,6 +3,7 @@
 /**
  * Stripe Fetch Event Request.
  */
+
 namespace Omnipay\Stripe\Message;
 
 /**
@@ -42,7 +43,7 @@ class FetchEventRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/events/'.$this->getEventReference();
+        return $this->endpoint . '/events/' . $this->getEventReference();
     }
 
     public function getHttpMethod()
