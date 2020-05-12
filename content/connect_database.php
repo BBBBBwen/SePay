@@ -87,4 +87,14 @@ function updateBalance($user_id, $currency, $balance) {
     $stmt->bindValue(':user_id', $user_id);
     return $stmt->execute();
 }
+
+function updateCurrency($user_id, $currency_from, $currency_to, $balance_from, $balance_to) {
+    global $db;
+    $sql = "UPDATE currency SET ".$currency_from."= :balance_from , ".$currency_to."= :balance_to WHERE user_id= :user_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':balance_from', $balance_from);
+    $stmt->bindValue(':balance_to', $balance_to);
+    $stmt->bindValue(':user_id', $user_id);
+    return $stmt->execute();
+}
 ?>
