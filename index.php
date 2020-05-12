@@ -49,6 +49,6 @@ if(isset($_SESSION['username'])) {
     echo "<div style='text-align:center'><h1>welcome! ".$_SESSION['username'];
     echo '</h1><br>';
     ?>
-    <span class="user"><img src='Content/<?= $_SESSION['avatar'] ?>'/></span></div>
+    <span class="user"><img src='assets/images/<?= $_SESSION['avatar'] ?>'></span></div>
 <?php } ?>
 

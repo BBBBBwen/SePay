@@ -2,15 +2,8 @@
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
 <?php
-$sql = "SELECT * FROM users WHERE id = '" . $_SESSION['id'] . "'";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$sql = "SELECT * FROM currency WHERE user_id = '" . $_SESSION['id'] . "'";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-$balance = $stmt->fetch(PDO::FETCH_ASSOC);
+$user = getUserInfoById($_SESSION['id']);
+$balance = getUserBalance($_SESSION['id']);
 
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
 $stmt = $db->prepare($sql);
@@ -34,7 +27,7 @@ $stmt->execute();
                                 <h4 class="center">My Profile</h4>
                                 <hr>
                                 <span class="float:left; display:inline">
-                                    <p class="left"><img src="<?= $_SESSION['avatar'] ?>" class="circle" style="height:106px;width:106px" alt="Avatar"></p>
+                                    <p class="left"><img src="../assets/images/<?= $_SESSION['avatar'] ?>" class="circle" style="height:106px;width:106px" alt="Avatar"></p>
                                     <div class="right">
                                         <p><i class=""></i> Name <?php echo $user['username'] ?></p>
                                         <p><i class=""></i> Email <?php echo $user['email'] ?></p>
@@ -111,7 +104,7 @@ $stmt->execute();
         <div id='myModal' class='popup'>
             <div class="popup-content">
                 <div class="popup-header">
-                    <span id="close1" class="close">X</span>
+                    <span class="close">X</span>
                     <h2>Credit or debit card</h2>
                 </div>
 
@@ -141,8 +134,6 @@ $stmt->execute();
                         </div>
                     </form>
                 </div>
-
-                <script src="../assets/js/card.js"></script>
             </div>
         </div>
 
@@ -150,7 +141,7 @@ $stmt->execute();
         <div id='myModal1' class='popup1'>
             <div class="popup-content1">
                 <div class="popup-header1">
-                    <span id="close1" class="close">X</span>
+                    <span class="close">X</span>
                     <h2>Currencies exchange</h2>
                 </div>
 
@@ -188,8 +179,6 @@ $stmt->execute();
                                 Confirm
                             </button>
                         </div>
-                        <script src="../assets/js/card.js"></script>
-
                     </form>
                 </div>
                 <!-- End Grid -->

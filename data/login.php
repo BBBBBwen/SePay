@@ -9,15 +9,11 @@ if (!empty($_POST)) {
     if (empty($_POST['password'])) {
         $_SESSION['message'] = "Password can not be empty";
     }
-    $query = "SELECT * FROM users WHERE email=:email";
-    $stmt = $db->prepare($query);
-    $stmt->bindValue(':email', $_POST['email']);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = getUserInfoByEmail($_POST['email']);
 
-    if (empty($user)) {
+    if (!$user) {
         $_SESSION['message'] = "Your username is not exist! Please <a href=register.php>Register</a> first!";
-    } else if ($user && ($_POST['password'] == $user['password'])) {
+    } else if ($_POST['password'] == $user['password']) {
         if (isset($_SESSION['id'])) {
             unset($_SESSION['id']);
         }

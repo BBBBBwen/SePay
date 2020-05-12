@@ -1,4 +1,54 @@
-<?php
+<style>
+    body {
+        font-family: Arial;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    div.container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    #alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        text-align: center;
+        font-size: 130%;
+    }
+
+    #success {}
+
+</style>
+
+<body>
+    <?php
 include_once "../content/head.php";
 include_once "../content/header.php";
 require_once "../content/connect_database.php";
@@ -45,7 +95,7 @@ if (isset($_SESSION['id'])){
         
     if($biller_array[9] == "longName"){
         if($amount > $user[$currency] || $amount < 0) {
-                echo 'there is no enough balance to ';}
+                echo '<div id="alert"><strong>Payment Failed<br/> There is no enough balance to </strong>';}
         else{   
                 
                 $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
@@ -69,22 +119,27 @@ if (isset($_SESSION['id'])){
 //        echo $_POST['bill_amount'];
 //        echo "')</script>";
         
-        echo "Pay ".$_POST['bill_amount']." AUD to ".$biller_array[11];
+        echo "<div id='alert'>Pay ".$_POST['bill_amount']." AUD to ".$biller_array[11]."<br/>Back To <a href='wallet.php'>My Wallet</a></div></div>";
         
     }else{
-        echo "biller not found";
+        echo "<div id='alert'> Biller Not Found<br/>Back To <a href='wallet.php'>My Wallet</a></div>";
     }
 }else{
         ?>
-<form action="" method="post">
-    <h5>Available Biller IDs:<br /></h5>
-    <h5>565572, 1313, 100008<br /></h5>
-    <h5>Notice: Bpay could only use AUD</h5>
-    <label for="bill_reference">Reference number</label><input type="number" name="bill_reference" />
-    <label for="biller_id">Biller ID</label><input type="text" name="biller_id" />
-    <label for="bill_amount">Amount</label><input type="number" name="bill_amount" />
-    <input type="submit" />
-</form>
+    <div class="container">
+        <form action="" method="post">
+            <div id="notice" style="text-align:center;">
+                <img src="../assets/images/bpay.png" />
+                <h5>Notice: Bpay could only use AUD</h5>
+            </div>
+            <label for="bill_reference">Reference number</label><input type="text" placeholder="Reference Number" name="bill_reference" /><br />
+            <label for="biller_id">Biller ID</label><input type="text" placeholder="Available Biller IDs: 
+565572, 1313, 100008" name="biller_id" /><br />
+            <label for="bill_amount">Amount</label><input type="text" placeholder="Amount" name="bill_amount" /><br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
 <?php
     }
 }
