@@ -10,11 +10,15 @@ if (isset($_SESSION['id'])) {
         $converted = convertCurrency($amount, $from, $to);
         $fee = $converted * 0.01;
 
-        $result = $converted - $fee + $user[$to];
-        $sql = "UPDATE currency SET ".$from."=" . ($user[$from] - $amount) . " , ".$to."=" . $result . "WHERE user_id='" . $_SESSION['id'] . "'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
+        $balance_from = $user[$from] - $amount;
+        $balance_to = $converted - $fee + $user[$to];
+        $result = updateCurrency($_SESSION['id'], $from, $to, $balance_from, $balance_to);
+
+        insertPayment($_SESSION['id'], time(), "currency exchange from", $balance_from, $from, 'Captured');
+        insertPayment($_SESSION['id'], time(), "currency exchange to", $balance_to, $to, 'Captured');
         header("Location: wallet.php");
+    } else {
+        echo "<script> alert('no such user or not enough balance');parent.location.href='wallet.php'; </script>";
     }
 }
 

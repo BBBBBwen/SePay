@@ -87,7 +87,7 @@ $stmt->execute();
                                             ?>
                                     <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
                                     <?php } ?>
-                                    <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo '$' . $row['amount'];
+                                    <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['currency'].' ' . $row['amount'];
                                             } ?></p>
                                 </span>
                             </div>
