@@ -6,7 +6,7 @@
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = true;
-    $avatar_path = ('../assets/images/' . $_FILES['avatar']['name']);
+    $avatar_path = ('../assets/images/' . time() . $_FILES['avatar']['name']);
     if ($_POST['password'] != $_POST['confirmed_password']) {
         $_SESSION['message'] = "Two Password Do Not Match";
     } else if (empty($_POST['username'])) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($haveError == false) {
-        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $avatar_path);
+        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], time() . $_FILES['avatar']['name']);
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
     }
@@ -88,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 submit.value = 'Register';
             }
         }
-
 
         //Encrypt payment password(DES) by RSA
         function encryption() {
