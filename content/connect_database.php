@@ -1,8 +1,8 @@
 <?php
-$host = 'sepay.coqnkhi2ftwp.us-east-1.rds.amazonaws.com';
-$dbName = 'sepay';
+$host = 'localhost';
+$dbName = 'SePay';
 $db_user = 'root';
-$db_pass = 'rootroot';
+$db_pass = 'root';
 $dsn = "mysql:host=$host;port=3306;dbname=$dbName";
 $db = new PDO($dsn, $db_user, $db_pass);
 
@@ -89,7 +89,8 @@ function updateBalance($user_id, $currency, $balance) {
 }
 
 function updateCurrency($user_id, $currency_from, $currency_to, $balance_from, $balance_to) {
-    $sql = "UPDATE currency SET ".$from."= :balance_from , ".$to."= balance_to WHERE user_id= :user_id";
+    global $db;
+    $sql = "UPDATE currency SET ".$currency_from."= :balance_from , ".$currency_to."= :balance_to WHERE user_id= :user_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':balance_from', $balance_from);
     $stmt->bindValue(':balance_to', $balance_to);
