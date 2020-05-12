@@ -1,3 +1,4 @@
+use sepay;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `payments`;
 DROP TABLE IF EXISTS `currency`;
@@ -9,7 +10,7 @@ CREATE TABLE `users`
     `password` varchar(512)  NOT NULL,
     `email`    varchar(512)  NOT NULL,
     `avatar`   varchar(512)  NOT NULL,
-    `paymentpassword` varchar(512) NOT NULL,
+    `payment_password` varchar(512) NOT NULL,
     `reg_date` datetime      NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

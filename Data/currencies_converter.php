@@ -4,11 +4,8 @@ if (isset($_SESSION['id'])) {
     $from = $_POST['from'];
     $to = $_POST['to'];
     $amount = $_POST['amount'];
+    $user = getUserBalance($_SESSION['id']);
 
-    $sql = "SELECT * FROM currency WHERE user_id = '" . $_SESSION['id'] . "'";
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user && $user[$from] >= $amount) {
         $converted = convertCurrency($amount, $from, $to);
         $fee = $converted * 0.01;

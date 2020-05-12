@@ -10,20 +10,10 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $payment_id = 0;
         $userID = $_SESSION['id'];
         $currency = $_POST['to'];
-        $sql = "SELECT * FROM currency WHERE user_id = '" . $userID . "'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = getUserBalance($userID);
 
-        $sql = "SELECT * FROM users WHERE id = '" . $userID . "'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $sender = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $sql = "SELECT * FROM users WHERE email = '" . $email . "'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $receiver = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sender = getUserInfoById($userID);
+        $receiver = getUserInfoByEmail($email);
 
         $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
         $recovered_des = rsa_decryption($sender['paymentpassword'], $privateKey);
@@ -32,29 +22,21 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {
-            if(!$receiver) {
+            if (!$receiver) {
                 echo 'there is no such user';
-            } else if($amount > $user[$currency] || $amount < 0) {
+            } else if ($amount > $user[$currency] || $amount < 0) {
                 echo 'there is no enough balance';
             } else {
-                $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
-                $isPaymentExist = $stmt->fetch(PDO::FETCH_ASSOC);
+                $isPaymentExist = getPayment($payment_id);
                 $balance = $user[$currency] - $amount;
                 $receiver_balance = $receiver['balance'] + $amount;
                 $description = 'transfer money to ' . $receiver['username'];
                 $receiverID = $receiver['id'];
 
-                $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('".$userID."','".$receiverID."','".$payment_id."', '".$description."', '".$amount."', '".$currency."', 'Captured')";
-                $stmt = $db->prepare($sql)->execute();
-
-                $sql = "UPDATE currency SET ".$currency." = " . $balance . " WHERE user_id='" . $userID . "'";
-                $stmt = $db->prepare($sql)->execute();
-
-                $sql = "UPDATE currency SET ".$currency." = " . $receiver_balance . " WHERE user_id='" . $receiver['id'] . "'";
-                $stmt = $db->prepare($sql)->execute();
-                echo "<script> alert('Currency: ".$currency."Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
+                $result = insertPayment($userID, $receiverID, $payment_id, $description, $amount, $currency, 'Captured');
+                $result = updateBalance($userID, $currency, $balance);
+                $result = updateBalance($receiver['id'], $currency, $receiver_balance);
+                echo "<script> alert('Currency: " . $currency . "Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
             echo "Please enter correct payment password";
