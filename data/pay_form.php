@@ -1,3 +1,4 @@
+<?php require_once "page_not_found.php"; ?>
 <?php include_once "../content/head.php"; ?>
 <?php include 'rsa.php'; ?>
 <?php include 'des.php'; ?>
@@ -7,7 +8,7 @@
 if (isset($_SESSION['id']) && isset($_POST['email'])) {
     try {
         $email = $_POST['email'];
-        $payment_id = 0;
+        $payment_id = time();
         $userID = $_SESSION['id'];
         $currency = $_POST['to'];
         $user = getUserBalance($userID);
@@ -16,9 +17,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $receiver = getUserInfoByEmail($email);
 
         $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
-        $recovered_des = rsa_decryption($sender['paymentpassword'], $privateKey);
+        $recovered_des = rsa_decryption($sender['payment_password'], $privateKey);
         $privateKey_client = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
-        $recovered_client = rsa_decryption($_POST['paymentpassword'], $privateKey_client);
+        $recovered_client = rsa_decryption($_POST['payment_password'], $privateKey_client);
         $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {
@@ -36,7 +37,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $result = insertPayment($userID, $receiverID, $payment_id, $description, $amount, $currency, 'Captured');
                 $result = updateBalance($userID, $currency, $balance);
                 $result = updateBalance($receiver['id'], $currency, $receiver_balance);
-                echo "<script> alert('Currency: " . $currency . "Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
+                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
             echo "Please enter correct payment password";
@@ -75,8 +76,8 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                 </div>
                                 <div>
                                     <label>Payment Password:</label>
-                                    <input type="text" placeholder="Payment Password" id="paymentpassword"
-                                           name="paymentpassword" required/>
+                                    <input type="text" placeholder="Payment Password" id="payment_password"
+                                           name="payment_password" required/>
                                 </div>
                             </div>
                         </div>
@@ -93,9 +94,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
     //Encrypt amount number by DES
     function DES_encryption() {
-        var DES_key = document.getElementById("paymentpassword").value;
+        var DES_key = document.getElementById("payment_password").value;
         var encrypted_des_key = RSA_encryption(DES_key);
-        document.getElementById("paymentpassword").value = encrypted_des_key;
+        document.getElementById("payment_password").value = encrypted_des_key;
         var amount = document.getElementById("amount").value;
         var encrypted_amount = javascript_des_encryption(DES_key, amount);
         document.getElementById("amount").value = encrypted_amount;

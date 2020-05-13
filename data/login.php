@@ -1,7 +1,9 @@
 <?php include_once "../content/head.php"; ?>
 <?php include_once "../content/header.php"; ?>
 <?php require '../content/connect_database.php'; ?>
-<?php $_SESSION['message'] = '';
+<?php
+session_start();
+$_SESSION['message'] = '';
 if (!empty($_POST)) {
     if (empty($_POST['email'])) {
         $_SESSION['message'] = "Email can not be empty";
@@ -21,8 +23,12 @@ if (!empty($_POST)) {
         $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
+        $_SESSION['level'] = $user['user_level'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: wallet.php");
+        if($user['user_level'] == 0)
+            header("Location: administration/administration.php");
+        else
+            header("Location: wallet.php");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }
