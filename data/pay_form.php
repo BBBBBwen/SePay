@@ -76,8 +76,8 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                 </div>
                                 <div>
                                     <label>Payment Password:</label>
-                                    <input type="text" placeholder="Payment Password" id="paymentpassword"
-                                           name="paymentpassword" required/>
+                                    <input type="text" placeholder="Payment Password" id="payment_password"
+                                           name="payment_password" required/>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +94,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
     //Encrypt amount number by DES
     function DES_encryption() {
-        var DES_key = document.getElementById("paymentpassword").value;
+        var DES_key = document.getElementById("payment_password").value;
         var encrypted_des_key = RSA_encryption(DES_key);
-        document.getElementById("paymentpassword").value = encrypted_des_key;
+        document.getElementById("payment_password").value = encrypted_des_key;
         var amount = document.getElementById("amount").value;
         var encrypted_amount = javascript_des_encryption(DES_key, amount);
         document.getElementById("amount").value = encrypted_amount;
