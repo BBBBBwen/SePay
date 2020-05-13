@@ -10,6 +10,7 @@ CREATE TABLE `users`
     `password` varchar(512)  NOT NULL,
     `email`    varchar(512)  NOT NULL,
     `avatar`   varchar(512)  NOT NULL,
+    `user_level`    int(3)   NOT NULL,
     `payment_password` varchar(512) NOT NULL,
     `reg_date` datetime      NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (`id`)
@@ -40,3 +41,5 @@ CREATE TABLE `currency`
     PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+INSERT INTO users (username, password,email,payment_password,avatar,user_level) VALUES('Administration', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@admin.com','123456','user.png',0);

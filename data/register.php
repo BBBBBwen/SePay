@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['message'] = "Avatar must be png/jpg";
     } else if (empty($_POST['payment_password']) || strlen($_POST['payment_password']) < 6) {
         $_SESSION['message'] = "Please enter an at least 6 characters payment password";
+    } else if (empty($_POST['level'])) {
+        $_SESSION['message'] = "please select customer or merchant";
     } else if (copy($_FILES['avatar']['tmp_name'], $avatar_path) == false) {
         $_SESSION['message'] = "Avatar upload fail";
     } else {
@@ -31,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($haveError == false) {
-        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], time() . $_FILES['avatar']['name']);
+        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], time() . $_FILES['avatar']['name'], $_POST['level']);
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
     }
@@ -55,6 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        autocomplete="new-password" required/>
                 <input type="password" id="payment_password" placeholder="Payment Password (at least 6 characters)"
                        name="payment_password" required/>
+                <span id="level">
+                    <input type="radio" name="level" value="1">
+                    <label for="female">Merchant</label><br>
+                    <input type="radio" name="level" value="2">
+                    <label for="male">Customer</label><br>
+                </span>
                 <div class="avatar"><label>Select your avatar: </label><input type="file" name="avatar" accept="image/*"
                                                                               required/></div>
                 <input type="submit" value="Register" id="submit" name="register" class="btn btn-block btn-primary"

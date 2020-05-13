@@ -21,8 +21,12 @@ if (!empty($_POST)) {
         $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar'];
+        $_SESSION['level'] = $user['user_level'];
         $_SESSION['message'] = "Login Success!";
-        header("Location: wallet.php");
+        if($user['user_level'] == 0)
+            header("Location: administration/administration.php");
+        else
+            header("Location: wallet.php");
     } else {
         $_SESSION['message'] = "Your password is incorrect!";
     }
