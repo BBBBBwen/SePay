@@ -2,7 +2,7 @@
 include_once "../content/head.php";
 include_once "../content/header.php";
 require_once "../content/connect_database.php";
-error_reporting(0);
+session_start();
 if (isset($_SESSION['id'])){
     if(!empty($_POST['biller_id'])){
         //request access_token from BPay
