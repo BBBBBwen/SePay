@@ -25,12 +25,12 @@
 
 <title>User List</title>
 <?php
-$pageSize = 1;
+$page_limit = 20;
 $rowCount = 0;
 $curr_page = 1;
 
-if (!empty($_GET['pageNow'])) {
-    $pageNow = $_GET['pageNow'];
+if (!empty($_GET['curr_page'])) {
+    $curr_page = $_GET['curr_page'];
 }
 
 $pageCount = 0;
@@ -41,7 +41,7 @@ $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
 $row = $stmt->fetchColumn();
 if ($row > 0) $rowCount = $row;
-$pageCount = ceil($rowCount / $pageSize);
+$pageCount = ceil($rowCount / $page_limit);
 
 $sql = "select * from currency limit 1";
 $stmt = $db->prepare($sql);
@@ -49,7 +49,7 @@ $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
 $balance = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = "select * from users where user_level = :user_level limit " . ($curr_page - 1) * $pageSize . "," . $pageSize;
+$sql = "select * from users where user_level = :user_level ORDER BY id LIMIT " . ($curr_page - 1) * $page_limit . ", " . $page_limit;
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
@@ -76,9 +76,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<td><a href='edit_user.php?id={$row['id']}'>edit</a></td><td><a href='javascript:doDel({$row['id']},{$row['user_level']})'>delete</a></td></tr>";
 }
 echo "</table>";
-
+echo "page: ";
 for ($i = 1; $i <= $pageCount; $i++) {
-    echo "<a href='user_management.php?level=" . $_GET['level'] . "&curr_page=" . $i . "'>" . $i . "</a>";
+    echo "<a href='user_management.php?level=" . $_GET['level'] . "&curr_page=" . $i . "'>" . $i . "</a> ";
 }
 
 echo "<br><a href='administration.php'>back</a>";
