@@ -8,7 +8,7 @@
 if (isset($_SESSION['id']) && isset($_POST['email'])) {
     try {
         $email = $_POST['email'];
-        $payment_id = 0;
+        $payment_id = time();
         $userID = $_SESSION['id'];
         $currency = $_POST['to'];
         $user = getUserBalance($userID);
@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 $result = insertPayment($userID, $receiverID, $payment_id, $description, $amount, $currency, 'Captured');
                 $result = updateBalance($userID, $currency, $balance);
                 $result = updateBalance($receiver['id'], $currency, $receiver_balance);
-                echo "<script> alert('Currency: " . $currency . "Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
+                echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
             echo "Please enter correct payment password";

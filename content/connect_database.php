@@ -72,12 +72,17 @@ function insertUser($username, $password, $email, $payment_password, $avatar, $l
     return $stmt->execute();
 }
 
-function insertPayment($user_id, $payment_id, $description, $amount, $currency, $payment_status)
+function insertPayment($user_id, $receiver_id, $payment_id, $description, $amount, $currency, $payment_status)
 {
     global $db;
-    $sql = "INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES(:user_id, :payment_id, :description, :amount, :currency, :payment_status)";
+    if ($receiver_id)
+        $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES(:user_id, :transfer_id, :payment_id, :description, :amount, :currency, :payment_status)";
+    else
+        $sql = "INSERT INTO payments(user_id, payment_id, description, amount, currency, payment_status) VALUES(:user_id, :payment_id, :description, :amount, :currency, :payment_status)";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id);
+    if ($receiver_id)
+        $stmt->bindValue(':transfer_id', $receiver_id);
     $stmt->bindValue(':payment_id', $payment_id);
     $stmt->bindValue(':description', $description);
     $stmt->bindValue(':amount', $amount);
@@ -86,14 +91,15 @@ function insertPayment($user_id, $payment_id, $description, $amount, $currency, 
     return $stmt->execute();
 }
 
+
 function updateUser($id, $username, $password, $email, $payment_password, $avatar, $level)
 {
     global $db;
     $user = getUserInfoById($id);
-    if(empty($password)) {
+    if (empty($password)) {
         $password = $user['password'];
     }
-    if(empty($$payment_password)) {
+    if (empty($$payment_password)) {
         $payment_password = $user['payment_password'];
     }
     $sql = "UPDATE users SET username = :username, password = :password, email = :email, payment_password = :payment_password, avatar = :avatar, user_level = :user_level WHERE id = :user_id";
@@ -128,4 +134,5 @@ function updateCurrency($user_id, $currency_from, $currency_to, $balance_from, $
     $stmt->bindValue(':user_id', $user_id);
     return $stmt->execute();
 }
+
 ?>
