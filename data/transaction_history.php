@@ -1,3 +1,4 @@
+<?php require_once "page_not_found.php"; ?>
 <?php include_once "../content/head.php"; ?>
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
@@ -37,7 +38,7 @@ $stmt->execute();
                                             <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
                                         <?php } ?>
                                         <div class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>
-                                            <p><?php echo '$' . $row['amount'].$row['currency']; ?></p>
+                                            <p><?php echo $row['currency'].' ' . $row['amount']; ?></p>
                                             <p><?php echo $row['payment_status']; ?></p>
                                         </div>
                                     </span>

@@ -1,6 +1,7 @@
+<?php require_once "page_not_found.php"; ?>
 <?php require_once "../content/config.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
-<?php session_start();
+<?php
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
     try {
         $response = $gateway->purchase([
@@ -20,8 +21,8 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
                 $user = getUserBalance($_SESSION['id']);
                 $balance = $user[$_POST['currency']] + $_POST['amount']; //calculate new balance based on selected balance
 
-                $result = insertPayment($_SESSION['id'], $arr_payment_data['id'], 'transaction from bank', $_POST['amount'], $_POST['currency'], 'Captured');
-                $result = updateBalance($_SESSION['id'],$_POST['currency'],$balance);
+                $result = insertPayment($_SESSION['id'], null, $arr_payment_data['id'], 'transaction from bank', $_POST['amount'], $_POST['currency'], 'Captured');
+                $result = updateBalance($_SESSION['id'], $_POST['currency'], $balance);
 
                 echo "<script> alert('Payment is successful. Your payment id is: " . $arr_payment_data['id'] . "');parent.location.href='wallet.php'; </script>";
             }
