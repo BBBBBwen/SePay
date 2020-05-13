@@ -1,5 +1,4 @@
 <?php require_once "page_not_found.php"; ?>
-?>
 <?php include_once "../content/head.php"; ?>
 <?php include 'rsa.php'; ?>
 <?php include 'des.php'; ?>
@@ -18,9 +17,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $receiver = getUserInfoByEmail($email);
 
         $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
-        $recovered_des = rsa_decryption($sender['paymentpassword'], $privateKey);
+        $recovered_des = rsa_decryption($sender['payment_password'], $privateKey);
         $privateKey_client = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
-        $recovered_client = rsa_decryption($_POST['paymentpassword'], $privateKey_client);
+        $recovered_client = rsa_decryption($_POST['payment_password'], $privateKey_client);
         $amount = doubleval(php_des_decryption($recovered_des, $_POST['amount']));
 
         if ($recovered_des == $recovered_client) {

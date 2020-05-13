@@ -1,7 +1,9 @@
 <?php include_once "../content/head.php"; ?>
 <?php include_once "../content/header.php"; ?>
 <?php require '../content/connect_database.php'; ?>
-<?php $_SESSION['message'] = '';
+<?php
+session_start();
+$_SESSION['message'] = '';
 if (!empty($_POST)) {
     if (empty($_POST['email'])) {
         $_SESSION['message'] = "Email can not be empty";

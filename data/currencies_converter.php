@@ -1,5 +1,4 @@
 <?php require_once "page_not_found.php"; ?>
-?>
 <?php require_once "../content/connect_database.php"; ?>
 <?php session_start();
 if (isset($_SESSION['id'])) {

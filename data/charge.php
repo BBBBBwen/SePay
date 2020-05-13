@@ -1,8 +1,7 @@
 <?php require_once "page_not_found.php"; ?>
-?>
 <?php require_once "../content/config.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
-<?php session_start();
+<?php
 if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SESSION['id'])) {
     try {
         $response = $gateway->purchase([

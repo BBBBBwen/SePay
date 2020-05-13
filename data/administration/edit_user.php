@@ -18,9 +18,11 @@
 <?php
 $sql = "SELECT * FROM users WHERE id =" . $_GET['id'];
 $user = getUserInfoById($_GET['id']);
+$balance = getUserBalance($_GET['id']);
 ?>
-<form id="add_user" name="add_user" method="post" action="action.php?action=add">
+<form id="add_user" name="add_user" method="post" action="action.php?action=edit">
     <table>
+        <input type="hidden" name="user_id" value="<?php echo $user['id']?>">
         <tr>
             <td>user name</td>
             <td><input name="username" type="text" value="<?php echo $user['username'] ?>"/></td>
@@ -45,6 +47,15 @@ $user = getUserInfoById($_GET['id']);
             <td>user_level (0 for admin, 1 for user, 2 for merchant)</td>
             <td><input name="user_level" type="text" value="<?php echo $user['user_level'] ?>"/></td>
         </tr>
+        <?php
+        foreach ($balance as $key => $value) {
+            if ($key != 'user_id')
+                echo "<tr>" .
+                    "<td>".$key."</td>" .
+                    "<td><input name=".$key." type='text' value=".$value."></td>" .
+                    "</tr>";
+        }
+        ?>
         <tr>
             <td>&nbsp;</td>
             <td><input type="submit" value="edit" id="submit" onclick="encryption();hash();"/>

@@ -3,6 +3,7 @@
 <?php require '../content/connect_database.php'; ?>
 <?php include '../data/rsa.php'; ?>
 <?php
+session_start();
 require 'vendor/autoload.php';
 define('AWS_KEY', 'AKIAJW4PWBT7J6EX2RXQ');
 define('AWS_SECRET_KEY', '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');
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['message'] = "Avatar must be png/jpg";
     } else if (empty($_POST['payment_password']) || strlen($_POST['payment_password']) < 6) {
         $_SESSION['message'] = "Please enter an at least 6 characters payment password";
-    } else if (empty($_POST['level'])) {
+    } else if (empty($_POST['user_level'])) {
         $_SESSION['message'] = "please select customer or merchant";
     } else if (!$awsresult) {
         $_SESSION['message'] = "Avatar upload fail";
@@ -82,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="password" id="payment_password" placeholder="Payment Password (at least 6 characters)"
                    name="payment_password" required/>
             <span id="level">
-                <input type="radio" name="level" value="1">
+                <input type="radio" name="user_level" value="1">
                 <label for="female">Merchant</label>
-                <input type="radio" name="level" value="2">
+                <input type="radio" name="user_level" value="2">
                 <label for="male">Customer</label><br>
             </span>
             <div class="avatar"><label>Select your avatar: </label><input type="file" name="avatar" accept="image/*"

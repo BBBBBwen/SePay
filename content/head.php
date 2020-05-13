@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <head>
     <meta charset="UTF8">
     <title>SePay</title>
