@@ -42,5 +42,5 @@ CREATE TABLE `currency`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO users (username, password,email,payment_password,avatar,user_level) VALUES('Administration', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@admin.com','123456','user.png',0);
+INSERT INTO users (username, password,email,payment_password,avatar,user_level) VALUES('Administration', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@admin.com','F8bcSEQEP3JTmethDATDs0WtTAeVNT+1xEAbKrdsNFnyaIGAyOcOI8XyedQ+HREWf9gTBatuaiWszONbHawdSaiZkrA6FWKPbRgo4UciH1ncLeQ2AoKmOGne6mUqyjQWAQxbT7fJn2mWihxquYN7t39QM5uloI0pP6Aj0J1T0dbw/HWUiX9fm3i9E0Q6IGAMDSvF/PNuJbZbYFUwdPvqhdUrU6aFUYlLmOTYP26RRl4abzEzTPlzaTYPbW/p67R3ol7zqkd2qgpJCrzk1zckVNotjzmbf2UKDuQZiBxHJqlOG8BJ29SaIX/dfhq2JFSU/0CHY1vw88CZe0Q9e3v+tQ==','user.png',0);
 INSERT INTO currency (user_id) VALUES(1);
