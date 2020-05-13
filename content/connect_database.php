@@ -4,7 +4,6 @@ $dbName = 'sepay';
 $db_user = 'root';
 $db_pass = 'rootroot';
 $dsn = "mysql:host=$host;port=3306;dbname=$dbName";
-$db = new PDO($dsn, $db_user, $db_pass);
 try {
     $db = new PDO($dsn, $db_user, $db_pass);
 } catch (PDOException $e) {
