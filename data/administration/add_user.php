@@ -9,7 +9,6 @@
             <tr>
                 <td>user name</td>
                 <td><input name="name" type="text"/></td>
-
             </tr>
             <tr>
                 <td>password</td>
@@ -33,8 +32,8 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td><input type="submit" value="add"/>submit
-                    <input type="reset" value="reset"/>reset
+                <td><input type="submit" value="add"/>
+                    <input type="reset" value="reset"/>
                 </td>
             </tr>
         </table>

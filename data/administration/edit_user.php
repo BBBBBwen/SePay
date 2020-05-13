@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Administration</title>
-
 </head>
 <body>
 <?php
@@ -44,7 +43,6 @@ $user = getUserInfoById($_GET['id']);
             </td>
         </tr>
     </table>
-
 </form>
 </body>
 </html>

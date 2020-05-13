@@ -14,19 +14,16 @@
 </head>
 
 <title>User List</title>
-
 <?php
 $pageSize = 10;
 $rowCount = 0;
 $curr_page = 1;
-
 
 if (!empty($_GET['pageNow'])) {
     $pageNow = $_GET['pageNow'];
 }
 
 $pageCount = 0;
-
 
 $sql = "select count(*) from users where user_level = :user_level";
 $stmt = $db->prepare($sql);
@@ -55,14 +52,12 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         "<td><a href='edit_user.php?id={$row['id']}'>edit</a></td><td><a href='javascript:doDel({$row['id']},{$row['user_level']})'>delete</a></td></tr>";
 }
 
-
 echo "<h1>user list</h1>";
 echo "</table>";
 
 for ($i = 1; $i <= $pageCount; $i++) {
     echo "<a href='user_management.php?level=".$_GET['level']."&curr_page=".$i."'>".$i."</a>";
 }
-
 ?>
 
 </html>
