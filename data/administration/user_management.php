@@ -25,7 +25,7 @@
 
 <title>User List</title>
 <?php
-$pageSize = 20;
+$pageSize = 1;
 $rowCount = 0;
 $curr_page = 1;
 

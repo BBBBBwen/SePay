@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($haveError == false) {
-        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['level']);
+        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['user_level']);
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
     }
