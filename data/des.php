@@ -1,3 +1,5 @@
+<?php require_once "page_not_found.php"; ?>
+?>
 <?php
 
 

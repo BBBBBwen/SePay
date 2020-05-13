@@ -1,3 +1,4 @@
+<?php require_once "page_not_found.php"; ?>
 <?php include_once "../content/head.php"; ?>
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
@@ -27,7 +28,7 @@ $stmt->execute();
                                 <h4 class="center">My Profile</h4>
                                 <hr>
                                 <span class="float:left; display:inline">
-                                    <p class="left"><img src="../assets/images/<?= $_SESSION['avatar'] ?>" class="circle" style="height:106px;width:106px" alt="Avatar"></p>
+                                    <p class="left"><img src="<?= $_SESSION['avatar'] ?>" class="circle" style="height:106px;width:106px" alt="Avatar"></p>
                                     <div class="right">
                                         <p><i class=""></i> Name <?php echo $user['username'] ?></p>
                                         <p><i class=""></i> Email <?php echo $user['email'] ?></p>

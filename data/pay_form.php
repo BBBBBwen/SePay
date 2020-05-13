@@ -1,3 +1,5 @@
+<?php require_once "page_not_found.php"; ?>
+?>
 <?php include_once "../content/head.php"; ?>
 <?php include 'rsa.php'; ?>
 <?php include 'des.php'; ?>

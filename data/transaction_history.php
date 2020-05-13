@@ -1,3 +1,4 @@
+<?php require_once "page_not_found.php"; ?>
 <?php include_once "../content/head.php"; ?>
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>

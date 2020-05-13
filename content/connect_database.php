@@ -1,8 +1,8 @@
 <?php
-$host = 'sepay.coqnkhi2ftwp.us-east-1.rds.amazonaws.com';
-$dbName = 'sepay';
+$host = 'localhost';
+$dbName = 'SePay';
 $db_user = 'root';
-$db_pass = 'rootroot';
+$db_pass = 'root';
 $dsn = "mysql:host=$host;port=3306;dbname=$dbName";
 $db = new PDO($dsn, $db_user, $db_pass);
 try {
@@ -90,6 +90,13 @@ function insertPayment($user_id, $payment_id, $description, $amount, $currency, 
 function updateUser($id, $username, $password, $email, $payment_password, $avatar, $level)
 {
     global $db;
+    $user = getUserInfoById($id);
+    if(empty($password)) {
+        $password = $user['password'];
+    }
+    if(empty($$payment_password)) {
+        $payment_password = $user['payment_password'];
+    }
     $sql = "UPDATE users SET username = :username, password = :password, email = :email, payment_password = :payment_password, avatar = :avatar, user_level = :user_level WHERE id = :user_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $id);
@@ -122,5 +129,4 @@ function updateCurrency($user_id, $currency_from, $currency_to, $balance_from, $
     $stmt->bindValue(':user_id', $user_id);
     return $stmt->execute();
 }
-
 ?>
