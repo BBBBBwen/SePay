@@ -1,4 +1,3 @@
-<?php require_once "page_not_found.php"; ?>
 <?php
 
 function get_rsa_publickey($filename)
