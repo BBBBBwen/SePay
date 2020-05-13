@@ -147,7 +147,9 @@ $stmt->execute();
                 </div>
 
                 <div class="popup-body1">
+                    <h3 style="color: red">exchange currency require 1% surcharge</h3>
                     <div>
+                        <span>Current balance: </span>
                         <span>EUR: <?php echo $balance['EUR'] ?></span>
                         <span>AUD: <?php echo $balance['AUD'] ?></span>
                         <span>USD: <?php echo $balance['USD'] ?></span>
@@ -156,16 +158,13 @@ $stmt->execute();
                         <input class="amount-enter1" type="text" name="amount" placeholder="Enter Amount" />
                         <div>
                             <label>from:</label>
-
                             <select name="from">
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>
                                 <option value="AUD">AUD</option>
                             </select>
-                        </div>
-                        <div>
-                            <label>to:</label>
 
+                            <label>to:</label>
                             <select name="to">
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>
