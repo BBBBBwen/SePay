@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <style>
     body {
         font-family: Arial;
