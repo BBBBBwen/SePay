@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                    name="payment_password" required/>
             <span id="level">
                 <input type="radio" name="level" value="1">
-                <label for="female">Merchant</label><br>
+                <label for="female">Merchant</label>
                 <input type="radio" name="level" value="2">
                 <label for="male">Customer</label><br>
             </span>
