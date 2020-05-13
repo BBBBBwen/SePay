@@ -28,7 +28,6 @@
 $page_limit = 20;
 $rowCount = 0;
 $curr_page = 1;
-
 if (!empty($_GET['curr_page'])) {
     $curr_page = $_GET['curr_page'];
 }

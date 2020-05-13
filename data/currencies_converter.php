@@ -12,9 +12,10 @@ if (isset($_SESSION['id'])) {
         $fee = $converted * 0.01;
 
         $result = updateCurrency($_SESSION['id'], $from, $to, $user[$from] - $amount, $converted - $fee + $user[$to]);
-
-        insertPayment($_SESSION['id'], null, time(), "currency exchange from", $amount, $from, 'Captured');
-        insertPayment($_SESSION['id'], null, time(), "currency exchange to", $converted - $fee, $to, 'Captured');
+        $result = updateBalance(1, $to, $fee);//transfer surcharge into admin account
+        
+        insertPayment($_SESSION['id'], null, time(), "currency exchange from ".$from." with ".$fee." surcharge.", $amount, $from, 'Captured');
+        insertPayment($_SESSION['id'], null, time(), "currency exchange to ".$to, $converted - $fee, $to, 'Captured');
         header("Location: wallet.php");
     } else {
         echo "<script> alert('no such user or not enough balance');parent.location.href='wallet.php'; </script>";
