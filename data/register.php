@@ -7,7 +7,6 @@ session_start();
 require 'vendor/autoload.php';
 define('AWS_KEY', 'AKIAJW4PWBT7J6EX2RXQ');
 define('AWS_SECRET_KEY', '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');
-
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = true;
@@ -88,6 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="radio" name="user_level" value="2">
                 <label for="male">Customer</label><br>
             </span>
+            <input type="checkbox" id="age" name="Age" value="age" required>
+            <label>confirm you are over 18 years old</label><br>
             <div class="avatar"><label>Select your avatar: </label><input type="file" name="avatar" accept="image/*"
                                                                           required/></div>
             <input type="submit" value="Register" id="submit" name="register" class="btn btn-block btn-primary"

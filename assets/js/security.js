@@ -4,6 +4,7 @@
 
     function hash() {
         password = document.getElementById('password').value;
+
         if (password.length != 0) {
             var hash = SHA256.hash(password);
             document.getElementById("password").value = hash;

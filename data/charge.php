@@ -16,7 +16,6 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
 
             // Insert transaction data into the database
             $isPaymentExist = getPayment($arr_payment_data['id']);
-
             if (!$isPaymentExist) {
                 $user = getUserBalance($_SESSION['id']);
                 $balance = $user[$_POST['currency']] + $_POST['amount']; //calculate new balance based on selected balance
@@ -34,6 +33,5 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-
 }
 ?>
