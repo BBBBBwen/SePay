@@ -76,7 +76,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                 </div>
                                 <div>
                                     <label>Payment Password:</label>
-                                    <input type="text" placeholder="Payment Password" id="payment_password"
+                                    <input type="password" placeholder="Payment Password" id="payment_password"
                                            name="payment_password" required/>
                                 </div>
                             </div>

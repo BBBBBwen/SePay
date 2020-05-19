@@ -68,7 +68,7 @@ $stmt->execute();
 
             <!-- Accordion -->
             <div class="card cw_tile-container">
-                <h3 class='cw_tile-header'>Trasaction History</h3>
+                <h3 class='cw_tile-header'>Transaction History</h3>
                 <br>
                 <ul class='cw_tile-itemList'>
                     <?php for ($i = 0; $i < 3; $i++) { ?>
