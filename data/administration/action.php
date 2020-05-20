@@ -1,22 +1,23 @@
 <?php require_once "page_not_found.php"; ?>
 <?php require_once "../../content/connect_database.php"; ?>
 <?php
-if (empty($_POST['username'])) {
-    echo "<script> alert('Username can not be empty');
+
+switch ($_GET['action']) {
+    case 'add':
+    {
+        if (empty($_POST['username'])) {
+            echo "<script> alert('Username can not be empty');
                             window.history.back(); 
                  </script>";
-} else if (!empty($_POST['payment_password']) && strlen($_POST['payment_password']) < 6) {
-    echo "<script> alert('Please enter an at least 6 characters payment password');
+        } else if (!empty($_POST['payment_password']) && strlen($_POST['payment_password']) < 6) {
+            echo "<script> alert('Please enter an at least 6 characters payment password');
                             window.history.back(); 
                  </script>";
-} else if (empty($_POST['user_level'])) {
-    echo "<script> alert('please select customer or merchant');
+        } else if (empty($_POST['user_level'])) {
+            echo "<script> alert('please select customer or merchant');
                             window.history.back(); 
                  </script>";
-} else {
-    switch ($_GET['action']) {
-        case 'add':
-        {
+        } else {
             $user = getUserInfoByEmail($_POST['email']);
             if (!$user) {
                 $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
@@ -34,19 +35,33 @@ if (empty($_POST['username'])) {
                             window.history.back(); 
                  </script>";
             }
-            break;
         }
-        case "del":
-        {
-            $sql = "DELETE FROM users WHERE id = :user_id";
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':user_id', $_GET['id']);
-            $stmt->execute();
-            header("Location: user_management.php");
-            break;
-        }
-        case "edit" :
-        {
+        break;
+    }
+    case "del":
+    {
+        $sql = "DELETE FROM users WHERE id = :user_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $_GET['id']);
+        $stmt->execute();
+        header("Location: user_management.php?level=".$_GET['level']);
+        break;
+    }
+    case "edit" :
+    {
+        if (empty($_POST['username'])) {
+            echo "<script> alert('Username can not be empty');
+                            window.history.back(); 
+                 </script>";
+        } else if (!empty($_POST['payment_password']) && strlen($_POST['payment_password']) < 6) {
+            echo "<script> alert('Please enter an at least 6 characters payment password');
+                            window.history.back(); 
+                 </script>";
+        } else if (empty($_POST['user_level'])) {
+            echo "<script> alert('please select customer or merchant');
+                            window.history.back(); 
+                 </script>";
+        } else {
             $result = updateUser($_POST['user_id'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
             $result = updateBalance($_POST['user_id'], 'AUD', $_POST['AUD']);
             $result = updateBalance($_POST['user_id'], 'USD', $_POST['USD']);
@@ -56,7 +71,7 @@ if (empty($_POST['username'])) {
             } else {
                 echo "<script>alert('fail');window.history.back()</script>";
             }
-            break;
         }
+        break;
     }
 }
