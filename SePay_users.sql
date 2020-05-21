@@ -2,6 +2,9 @@ use sepay;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `payments`;
 DROP TABLE IF EXISTS `currency`;
+DROP TABLE IF EXISTS `friends`;
+DROP TABLE IF EXISTS `friend_request`;
+DROP TABLE IF EXISTS `chat`;
 
 CREATE TABLE `users`
 (
@@ -39,6 +42,30 @@ CREATE TABLE `currency`
     `EUR`         double(20, 2) DEFAULT 0.0,
     `USD`         double(20, 2) DEFAULT 0.0,
     PRIMARY KEY (`user_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `friends`
+(
+    `user_id`        varchar(255)  NOT NULL,
+    `friend_id`        varchar(255)  NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `friend_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `chat`
+(
+    `send_id`        varchar(255)  NOT NULL,
+    `receive_id`       varchar(255)  NOT NULL,
+    `content`        varchar(255)  NOT NULL,
+    `time`        datetime      NOT NULL DEFAULT current_timestamp(),
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

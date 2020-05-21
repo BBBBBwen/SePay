@@ -31,9 +31,13 @@
                         echo '<a class="btn btn-outline-primary" href="data/register.php">Register</a>';
                     } ?>
                 </li>
+                <?php if (isset($_SESSION['id'])) {
+                    echo '<li class="nav-item">';
+                    echo '<a href="data/social_network/profile.php" class="btn btn-outline-primary" title="My Profile"><img src="assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
+                    echo '</li>';
+                }?>
                 <li class="nav-item">
                     <?php if (isset($_SESSION['id'])) {
-                        echo '<a href="data/wallet.php" class="btn btn-outline-primary" title="My Account"><img src="assets/images/account.png" style="height:23px;width:23px" alt="Avatar"></a>';
                         echo '<a class="btn btn-outline-danger" href="data/logout.php"><img src="assets/images/logout.png" style="height:23px;width:23px" alt="Logout"></a>';
                     } else {
                         echo '<a class="btn btn-outline-primary" href="data/login.php">Login</a>';
@@ -51,4 +55,3 @@ if(isset($_SESSION['username'])) {
     ?>
     <span class="user"><img src='<?= $_SESSION['avatar'] ?>'></span></div>
 <?php } ?>
-
