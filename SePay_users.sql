@@ -65,7 +65,7 @@ CREATE TABLE `chat`
     `send_id`        varchar(255)  NOT NULL,
     `receive_id`       varchar(255)  NOT NULL,
     `content`        varchar(255)  NOT NULL,
-    `time`        datetime      NOT NULL DEFAULT current_timestamp(),
+    `time`        datetime      NOT NULL DEFAULT current_timestamp()
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

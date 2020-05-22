@@ -143,7 +143,7 @@ $chtName = getUserInfoById($_GET['id'])['username'];
                 document.getElementById("chat_content").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET", "http://localhost/SePay/data/social_network/get_chat.php?send=" + send + "&receive=" + receive, true);
+        xmlhttp.open("GET", "https://sesamepay.herokuapp.com/data/social_network/get_chat.php?send=" + send + "&receive=" + receive, true);
         xmlhttp.send();
     }
 
@@ -156,7 +156,7 @@ $chtName = getUserInfoById($_GET['id'])['username'];
         xmlhttp.onreadystatechange = function () {
                 document.getElementById("input").value = "";
         }
-        xmlhttp.open("POST", "http://localhost/SePay/data/social_network/send_chat.php", true);
+        xmlhttp.open("POST", "https://sesamepay.herokuapp.com/data/social_network/send_chat.php", true);
         var post_str = "content=" + content + "&receive=" + receive + "&send=" + send;
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(post_str);
