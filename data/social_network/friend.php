@@ -142,6 +142,10 @@ class Friend
                 $sql = "INSERT INTO friends(user_id, friend_id) VALUES(?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([$user_id, $friend_id]);
+
+                $sql = "INSERT INTO friends(user_id, friend_id) VALUES(?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([$friend_id, $user_id]);
                 header('Location: user_profile.php?id=' . $friend_id);
                 exit;
 
