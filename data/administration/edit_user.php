@@ -17,8 +17,8 @@
 <body>
 <?php
 $sql = "SELECT * FROM users WHERE id =" . $_GET['id'];
-$user = getUserInfoById($_GET['id']);
-$balance = getUserBalance($_GET['id']);
+$user = $db->getUserInfoById($_GET['id']);
+$balance = $db->getUserBalance($_GET['id']);
 ?>
 <form id="add_user" name="add_user" method="post" action="action.php?action=edit">
     <table>

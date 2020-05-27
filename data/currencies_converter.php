@@ -5,17 +5,17 @@ if (isset($_SESSION['id'])) {
     $from = $_POST['from'];
     $to = $_POST['to'];
     $amount = $_POST['amount'];
-    $user = getUserBalance($_SESSION['id']);
+    $user = $db->getUserBalance($_SESSION['id']);
 
     if ($user && $user[$from] >= $amount && $from != $to) {
         $fee = round($amount * 0.01, 2);
         $converted = convertCurrency($amount - $fee, $from, $to);
 
-        $result = updateCurrency($_SESSION['id'], $from, $to, $user[$from] - $amount, $converted - $fee + $user[$to]);
-        $result = updateBalance(1, $from, $fee);//transfer surcharge into admin account
-        
-        insertPayment($_SESSION['id'], null, time(), "currency exchange from ".$from.", with ".$fee." ".$from." surcharge.", $amount, $from, 'Captured');
-        insertPayment($_SESSION['id'], null, time(), "currency exchange to ".$to, $converted - $fee, $to, 'Captured');
+        $result = $db->updateCurrency($_SESSION['id'], $from, $to, $user[$from] - $amount, $converted - $fee + $user[$to]);
+        $result = $db->updateBalance(1, $from, $fee);//transfer surcharge into admin account
+
+        $db->insertPayment($_SESSION['id'], null, time(), "currency exchange from ".$from.", with ".$fee." ".$from." surcharge.", $amount, $from, 'Captured');
+        $db->insertPayment($_SESSION['id'], null, time(), "currency exchange to ".$to, $converted - $fee, $to, 'Captured');
         header("Location: wallet.php");
     } else if(!$user){
         echo "<script> alert('no such user');parent.location.href='wallet.php'; </script>";

@@ -2,7 +2,7 @@
 require 'friend.php';
 
 if(isset($_SESSION['id'])){
-    $user_data = getUserInfoById($_SESSION['id']);
+    $user_data = $db->getUserInfoById($_SESSION['id']);
     if($user_data ===  false){
         header('Location: ../logout.php');
         exit;

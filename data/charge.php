@@ -15,13 +15,13 @@ if (isset($_POST['stripeToken']) && !empty($_POST['stripeToken']) && isset($_SES
             $arr_payment_data = $response->getData();
 
             // Insert transaction data into the database
-            $isPaymentExist = getPayment($arr_payment_data['id']);
+            $isPaymentExist = $db->getPayment($arr_payment_data['id']);
             if (!$isPaymentExist) {
-                $user = getUserBalance($_SESSION['id']);
+                $user = $db->getUserBalance($_SESSION['id']);
                 $balance = $user[$_POST['currency']] + $_POST['amount']; //calculate new balance based on selected balance
 
-                $result = insertPayment($_SESSION['id'], null, $arr_payment_data['id'], 'transaction from bank', $_POST['amount'], $_POST['currency'], 'Captured');
-                $result = updateBalance($_SESSION['id'], $_POST['currency'], $balance);
+                $result = $db->insertPayment($_SESSION['id'], null, $arr_payment_data['id'], 'transaction from bank', $_POST['amount'], $_POST['currency'], 'Captured');
+                $result = $db->updateBalance($_SESSION['id'], $_POST['currency'], $balance);
 
                 echo "<script> alert('Payment is successful. Your payment id is: " . $arr_payment_data['id'] . "');parent.location.href='wallet.php'; </script>";
             }
