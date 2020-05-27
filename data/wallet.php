@@ -46,7 +46,7 @@ $stmt->execute();
 
                     <!-- Balance -->
                     <th>
-                        <div class="card_left upper_cards card center">
+                        <div class="upper_cards card center">
                             <div class=""><br>
                                 <div>
                                     <h1>Balance</h1>
