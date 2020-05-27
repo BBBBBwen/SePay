@@ -225,5 +225,5 @@ class Friend
 }
 
 session_start();
-$friend = new Friend($db);
+$friend = new Friend($db->getDB());
 ?>
