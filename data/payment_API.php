@@ -62,4 +62,5 @@ if($_GET['token'] && $_GET['email'] && $_GET['item_name'] && $_GET['currency'] &
     $pay = new PaymentAPI($db, $data);
     echo $pay->pay();
 }
-#http://localhost/SePay/data/payment_API.php?token=1&email=test@test.com&item_name=testItem&currency=AUD&amount=10
+
+# https://sesamepay.herokuapp.com//data/payment_API.php?token=6&email=test@test.com&item_name=testItem&currency=AUD&amount=10

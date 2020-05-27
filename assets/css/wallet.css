@@ -166,12 +166,8 @@
     text-align: center;
 }
 
-.card_left {
-    margin-left: 10px;
-}
-
 .upper_cards {
-    width: 49.5%;
+    width: 50%;
     height: 300px;
     float: left;
 }
