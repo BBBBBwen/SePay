@@ -38,6 +38,7 @@ class PaymentAPI
             $merchantBalance = $this->db->getUserBalance($token['id']);
             $isPaymentExist = $this->db->getPayment($payment_id);
             $balance = $userBalance[$currency] - $amount;
+            if($balance < 0) return "insufficient fund";
             $receiver_balance = $merchantBalance[$currency] + $amount;
             $description = 'pay money to ' . $token['username'] . ' for '. $this->data['item_name'];
             $receiverID = $token['id'];
