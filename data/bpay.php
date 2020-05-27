@@ -85,12 +85,12 @@ if(!empty($_POST['biller_id'])){
     $currency = 'AUD';
 
     $sql = "SELECT * FROM currency WHERE user_id = '" . $userID . "'";
-    $stmt = $db->prepare($sql);
+    $stmt = $db->getDB()->prepare($sql);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $sql = "SELECT * FROM users WHERE id = '" . $userID . "'";
-    $stmt = $db->prepare($sql);
+    $stmt = $db->getDB()->prepare($sql);
     $stmt->execute();
     $sender = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -100,7 +100,7 @@ if(!empty($_POST['biller_id'])){
         else{
 
             $sql = "SELECT * FROM payments WHERE payment_id = '" . $payment_id . "'";
-            $stmt = $db->prepare($sql);
+            $stmt = $db->getDB()->prepare($sql);
             $stmt->execute();
             $isPaymentExist = $stmt->fetch(PDO::FETCH_ASSOC);
             $balance = $user[$currency] - $amount;
@@ -109,9 +109,9 @@ if(!empty($_POST['biller_id'])){
             $payment_id = 0;
 
             $sql = "INSERT INTO payments(user_id, transfer_id, payment_id, description, amount, currency, payment_status) VALUES('".$userID."','".$receiverID."','".$payment_id."', '".$description."', '".$amount."', '".$currency."', 'Captured')";
-            $stmt = $db->prepare($sql)->execute();
+            $stmt = $db->getDB()->prepare($sql)->execute();
             $sql = "UPDATE currency SET ".$currency." = " . $balance . " WHERE user_id='" . $userID . "'";
-            $stmt = $db->prepare($sql)->execute();
+            $stmt = $db->getDB()->prepare($sql)->execute();
         }
 
 //        echo "<script> confirm('Please confirm your payment: Company Name:";

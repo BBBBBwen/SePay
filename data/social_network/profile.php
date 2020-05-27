@@ -2,13 +2,13 @@
 require 'friend.php';
 
 if(isset($_SESSION['id'])){
-    $user_data = getUserInfoById($_SESSION['id']);
+    $user_data = $db->getUserInfoById($_SESSION['id']);
     if($user_data ===  false){
         header('Location: ../logout.php');
         exit;
     }
     // FETCH ALL USERS WHERE ID IS NOT EQUAL TO MY ID
-    $all_users = getAllUsers($_SESSION['id']);
+    $all_users = $db->getAllUsers($_SESSION['id']);
 }
 else{
     header('Location: ../logout.php');

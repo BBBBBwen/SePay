@@ -2,7 +2,7 @@
 require 'friend.php';
 if(isset($_SESSION['id'])){
     if(isset($_GET['id'])){
-        $user_data = getUserInfoById($_GET['id']);
+        $user_data = $db->getUserInfoById($_GET['id']);
         if($user_data ===  false){
             header('Location: profile.php');
             exit;

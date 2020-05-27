@@ -11,7 +11,7 @@ if (!empty($_POST)) {
     if (empty($_POST['password'])) {
         $_SESSION['message'] = "Password can not be empty";
     }
-    $user = getUserInfoByEmail($_POST['email']);
+    $user = $db->getUserInfoByEmail($_POST['email']);
 
     if (!$user) {
         $_SESSION['message'] = "Your username is not exist! Please <a href=register.php>Register</a> first!";
@@ -52,8 +52,7 @@ if (!empty($_POST)) {
 <script type="text/javascript">
     function hash() {
         var password = document.getElementById('password').value;
-        var hash = SHA256.hash(password);
-        document.getElementById("password").value = hash;
+        document.getElementById("password").value = SHA256.hash(password);
     }
 
 </script>

@@ -18,9 +18,9 @@ switch ($_GET['action']) {
                             window.history.back(); 
                  </script>";
         } else {
-            $user = getUserInfoByEmail($_POST['email']);
+            $user = $db->getUserInfoByEmail($_POST['email']);
             if (!$user) {
-                $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
+                $result = $db->insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
                 if ($result) {
                     echo "<script> alert('success');
                             window.location='administration.php'; 
@@ -41,7 +41,7 @@ switch ($_GET['action']) {
     case "del":
     {
         $sql = "DELETE FROM users WHERE id = :user_id";
-        $stmt = $db->prepare($sql);
+        $stmt = $db->getDB()->prepare($sql);
         $stmt->bindValue(':user_id', $_GET['id']);
         $stmt->execute();
         header("Location: user_management.php?level=".$_GET['level']);
@@ -62,10 +62,10 @@ switch ($_GET['action']) {
                             window.history.back(); 
                  </script>";
         } else {
-            $result = updateUser($_POST['user_id'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
-            $result = updateBalance($_POST['user_id'], 'AUD', $_POST['AUD']);
-            $result = updateBalance($_POST['user_id'], 'USD', $_POST['USD']);
-            $result = updateBalance($_POST['user_id'], 'EUR', $_POST['EUR']);
+            $result = $db->updateUser($_POST['user_id'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
+            $result = $db->updateBalance($_POST['user_id'], 'AUD', $_POST['AUD']);
+            $result = $db->updateBalance($_POST['user_id'], 'USD', $_POST['USD']);
+            $result = $db->updateBalance($_POST['user_id'], 'EUR', $_POST['EUR']);
             if ($result) {
                 echo "<script>alert('success');window.location='administration.php'</script>";
             } else {

@@ -3,11 +3,11 @@
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
 <?php
-$user = getUserInfoById($_SESSION['id']);
-$balance = getUserBalance($_SESSION['id']);
+$user = $db->getUserInfoById($_SESSION['id']);
+$balance = $db->getUserBalance($_SESSION['id']);
 
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
 $stmt->execute();
 ?>

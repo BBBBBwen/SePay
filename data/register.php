@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if (!$awsresult) {
         $_SESSION['message'] = "Avatar upload fail";
     } else {
-        $user = getUserInfoByEmail($_POST['email']);
+        $user = $db->getUserInfoByEmail($_POST['email']);
         if ($user) {
             $_SESSION['message'] = "Your email have already been registered";
         } else {
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($haveError == false) {
-        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['user_level']);
+        $result = $db->insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['user_level']);
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
     }
