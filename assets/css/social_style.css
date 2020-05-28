@@ -270,6 +270,10 @@ h1{
 
 }
 
+li {
+    margin-right: 10px;
+}
+
 /* RESPONSIVE */
 @media only screen and (max-width: 560px) {
     .all_users .user_box{
