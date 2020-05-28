@@ -7,7 +7,6 @@ session_start();
 require 'vendor/autoload.php';
 define('AWS_KEY', 'AKIAJW4PWBT7J6EX2RXQ');
 define('AWS_SECRET_KEY', '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');
-
 $_SESSION['message'] = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = true;
@@ -50,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if (!$awsresult) {
         $_SESSION['message'] = "Avatar upload fail";
     } else {
-        $user = getUserInfoByEmail($_POST['email']);
+        $user = $db->getUserInfoByEmail($_POST['email']);
         if ($user) {
             $_SESSION['message'] = "Your email have already been registered";
         } else {
@@ -59,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($haveError == false) {
-        $result = insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['user_level']);
+        $result = $db->insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $awsresult['ObjectURL'], $_POST['user_level']);
         $_SESSION['message'] = 'Register Success!';
         header("Location: login.php");
     }
@@ -88,6 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="radio" name="user_level" value="2">
                 <label for="male">Customer</label><br>
             </span>
+            <input type="checkbox" id="age" name="Age" value="age" required>
+            <label>confirm you are over 18 years old</label><br>
             <div class="avatar"><label>Select your avatar: </label><input type="file" name="avatar" accept="image/*"
                                                                           required/></div>
             <input type="submit" value="Register" id="submit" name="register" class="btn btn-block btn-primary"

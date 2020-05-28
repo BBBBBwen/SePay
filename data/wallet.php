@@ -3,11 +3,11 @@
 <?php include_once "../content/header.php"; ?>
 <?php require_once "../content/connect_database.php"; ?>
 <?php
-$user = getUserInfoById($_SESSION['id']);
-$balance = getUserBalance($_SESSION['id']);
+$user = $db->getUserInfoById($_SESSION['id']);
+$balance = $db->getUserBalance($_SESSION['id']);
 
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
 $stmt->execute();
 ?>
@@ -46,7 +46,7 @@ $stmt->execute();
 
                     <!-- Balance -->
                     <th>
-                        <div class="card_left upper_cards card center">
+                        <div class="upper_cards card center">
                             <div class=""><br>
                                 <div>
                                     <h1>Balance</h1>
@@ -68,7 +68,7 @@ $stmt->execute();
 
             <!-- Accordion -->
             <div class="card cw_tile-container">
-                <h3 class='cw_tile-header'>Trasaction History</h3>
+                <h3 class='cw_tile-header'>Transaction History</h3>
                 <br>
                 <ul class='cw_tile-itemList'>
                     <?php for ($i = 0; $i < 3; $i++) { ?>
@@ -147,7 +147,9 @@ $stmt->execute();
                 </div>
 
                 <div class="popup-body1">
+                    <h3 style="color: red">exchange currency require 1% surcharge</h3>
                     <div>
+                        <span>Current balance: </span>
                         <span>EUR: <?php echo $balance['EUR'] ?></span>
                         <span>AUD: <?php echo $balance['AUD'] ?></span>
                         <span>USD: <?php echo $balance['USD'] ?></span>
@@ -156,16 +158,13 @@ $stmt->execute();
                         <input class="amount-enter1" type="text" name="amount" placeholder="Enter Amount" />
                         <div>
                             <label>from:</label>
-
                             <select name="from">
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>
                                 <option value="AUD">AUD</option>
                             </select>
-                        </div>
-                        <div>
-                            <label>to:</label>
 
+                            <label>to:</label>
                             <select name="to">
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>

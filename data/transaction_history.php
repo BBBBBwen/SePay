@@ -4,7 +4,7 @@
 <?php require_once "../content/connect_database.php"; ?>
 <?php
 $sql = "SELECT * FROM payments WHERE user_id = :user_id OR transfer_id = :user_id ORDER BY captured_at DESC";
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_id', $_SESSION['id']);
 $stmt->execute();
 ?>
@@ -31,7 +31,7 @@ $stmt->execute();
                                             <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
                                         <?php } else {
                                             $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
-                                            $stmt1 = $db->prepare($sql);
+                                            $stmt1 = $db->getDB()->prepare($sql);
                                             $stmt1->execute();
                                             $transfer = $stmt1->fetch(PDO::FETCH_ASSOC);
                                             ?>

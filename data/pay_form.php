@@ -11,10 +11,10 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         $payment_id = time();
         $userID = $_SESSION['id'];
         $currency = $_POST['to'];
-        $user = getUserBalance($userID);
+        $userBalance = $db->getUserBalance($userID);
 
-        $sender = getUserInfoById($userID);
-        $receiver = getUserInfoByEmail($email);
+        $sender = $db->getUserInfoById($userID);
+        $receiver = $db->getUserInfoByEmail($email);
 
         $privateKey = get_rsa_privatekey(__DIR__ . '/../assets/private.key');
         $recovered_des = rsa_decryption($sender['payment_password'], $privateKey);
@@ -25,18 +25,19 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         if ($recovered_des == $recovered_client) {
             if (!$receiver) {
                 echo 'there is no such user';
-            } else if ($amount > $user[$currency] || $amount < 0) {
+            } else if ($amount > $userBalance[$currency] || $amount < 0) {
                 echo 'there is no enough balance';
             } else {
-                $isPaymentExist = getPayment($payment_id);
-                $balance = $user[$currency] - $amount;
-                $receiver_balance = $receiver['balance'] + $amount;
+                $receiverBalance = $db->getUserBalance($receiver['id']);
+                $isPaymentExist = $db->getPayment($payment_id);
+                $balance = $userBalance[$currency] - $amount;
+                $receiver_balance = $receiverBalance[$currency] + $amount;
                 $description = 'transfer money to ' . $receiver['username'];
                 $receiverID = $receiver['id'];
 
-                $result = insertPayment($userID, $receiverID, $payment_id, $description, $amount, $currency, 'Captured');
-                $result = updateBalance($userID, $currency, $balance);
-                $result = updateBalance($receiver['id'], $currency, $receiver_balance);
+                $result = $db->insertPayment($userID, $receiverID, $payment_id, $description, $amount, $currency, 'Captured');
+                $result = $db->updateBalance($userID, $currency, $balance);
+                $result = $db->updateBalance($receiver['id'], $currency, $receiver_balance);
                 echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
@@ -76,7 +77,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                 </div>
                                 <div>
                                     <label>Payment Password:</label>
-                                    <input type="text" placeholder="Payment Password" id="payment_password"
+                                    <input type="password" placeholder="Payment Password" id="payment_password"
                                            name="payment_password" required/>
                                 </div>
                             </div>

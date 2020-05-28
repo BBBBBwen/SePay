@@ -28,7 +28,6 @@
 $page_limit = 20;
 $rowCount = 0;
 $curr_page = 1;
-
 if (!empty($_GET['curr_page'])) {
     $curr_page = $_GET['curr_page'];
 }
@@ -36,7 +35,7 @@ if (!empty($_GET['curr_page'])) {
 $pageCount = 0;
 
 $sql = "select count(*) from users where user_level = :user_level";
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
 $row = $stmt->fetchColumn();
@@ -44,13 +43,13 @@ if ($row > 0) $rowCount = $row;
 $pageCount = ceil($rowCount / $page_limit);
 
 $sql = "select * from currency limit 1";
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
 $balance = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $sql = "select * from users where user_level = :user_level ORDER BY id LIMIT " . ($curr_page - 1) * $page_limit . ", " . $page_limit;
-$stmt = $db->prepare($sql);
+$stmt = $db->getDB()->prepare($sql);
 $stmt->bindValue(':user_level', $_GET['level']);
 $stmt->execute();
 echo "<table>";
@@ -68,7 +67,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     else
         $level = 'User';
     echo "<tr><td>{$row['id']}</td><td>{$row['username']}</td><td>{$row['email']}</td><td>{$level}</td><td>{$row['reg_date']}</td>";
-    $balance = getUserBalance($row['id']);
+    $balance = $db->getUserBalance($row['id']);
     foreach ($balance as $key => $value) {
         if ($key != 'user_id')
             echo "<td>{$value}</td>";
