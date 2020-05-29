@@ -16,6 +16,12 @@ GitHub Repo
 https://github.com/BBBBBwen/SePay
 
 
+API address:
+https://sesamepay.herokuapp.com//data/payment_API.php
+POST data format example:
+token=6&email=test@test.com&item_name=testItem&currency=AUD&amount=10
+
+
 Admin account
 Email: admin@admin.com
 password: 123456
