@@ -21,6 +21,10 @@ https://sesamepay.herokuapp.com//data/payment_API.php
 POST data format example:
 token=6&email=test@test.com&item_name=testItem&currency=AUD&amount=10
 
+Database:
+Database structure could refer to sepay.sql
+Database connection code in content/connect_database.php from line 146, could be changed if needed
+
 
 Admin account
 Email: admin@admin.com
