@@ -20,6 +20,7 @@ switch ($_GET['action']) {
         } else {
             $user = $db->getUserInfoByEmail($_POST['email']);
             if (!$user) {
+                if($_POST['user_level'] == 3) $_POST['user_level'] = 0;
                 $result = $db->insertUser($_POST['username'], $_POST['password'], $_POST['email'], $_POST['payment_password'], $_POST['avatar'], $_POST['user_level']);
                 if ($result) {
                     echo "<script> alert('success');
