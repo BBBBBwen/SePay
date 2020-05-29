@@ -28,7 +28,7 @@
             <td><input name="avatar" type="text" /></td>
         </tr>
         <tr>
-            <td>user_level (0 for admin, 1 for merchant, 2 for user)</td>
+            <td>user_level (1 for merchant, 2 for user, 3 for admin)</td>
             <td><input name="user_level" type="text" /></td>
         </tr>
         <tr>
