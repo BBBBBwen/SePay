@@ -40,26 +40,32 @@ $get_frnd_num = $friend->getAllFriends($_SESSION['id'], false);
                     }
                     ?>"><?php echo $get_req_num; ?></span></a></li>
             <li><a href="friends.php" rel="noopener noreferrer">Friends<span
-                        class="badge"><?php echo $get_frnd_num; ?></span></a></li>
+                            class="badge"><?php echo $get_frnd_num; ?></span></a></li>
         </ul>
     </nav>
     <div class="all_users">
         <form action="" method="post">
-            Search user: <input type="email" placeholder="enter email" rows="1" name="email" onkeydown="pressed(event)"></input>
+            Search user: <input type="email" placeholder="enter email" rows="1" name="email" onkeydown="pressed(event)"
+                                required></input>
+            <button class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney"
+                    type="submit">Search
+            </button>
         </form>
-        <?php if (!empty($user) && $user) { ?>
-            <div class="usersWrapper">
-                <?php
-                echo '<div class="user_box">
+        <?php if (!empty($_POST['email'])) {
+            if ($user) { ?>
+                <div class="usersWrapper">
+                    <?php
+                    echo '<div class="user_box">
                                 <div class="user_img"><img src="' . $user['avatar'] . '" alt="Profile image"></div>
                                 <div class="user_info"><span>' . $user['username'] . '</span>
                                 <span><a href="user_profile.php?id=' . $user['id'] . '" class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button" style="float: right">See profile</a></div>
                             </div>';
-                ?>
-            </div>
-        <?php } else { ?>
-            <p>empty</p>
-        <?php } ?>
+                    ?>
+                </div>
+            <?php } else { ?>
+                <p>there is no such user</p>
+            <?php }
+        } ?>
         <script>
             function pressed(e) {
                 // Has the enter key been pressed?
