@@ -54,6 +54,14 @@ class Connect_Database {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getPaymentById($id)
+    {
+        $sql = "SELECT * FROM payments WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getChat($send_id, $receive_id)
     {
         $sql = "SELECT * FROM chat WHERE (send_id = :send_id and receive_id = :receive_id) or (receive_id = :send_id and send_id = :receive_id)";

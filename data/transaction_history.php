@@ -23,7 +23,7 @@ $stmt->execute();
             <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                 <ul class='cw_tile-itemList'>
                     <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
-                        <a class='cw_tile-itemListLink'>
+                        <a href="detail.php?id=<?php echo $row['id']; ?>" class='cw_tile-itemListLink'>
                             <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
