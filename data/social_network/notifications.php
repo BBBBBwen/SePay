@@ -32,6 +32,7 @@ $get_all_req_sender = $friend->requestNotification($_SESSION['id'], true);
     <nav>
         <ul>
             <li><a href="profile.php" rel="noopener noreferrer">Home</a></li>
+            <li><a href="search.php" rel="noopener noreferrer">Search</a></li>
             <li><a href="notifications.php" rel="noopener noreferrer" class="active">Requests<span class="badge <?php
                     if($get_req_num > 0){
                         echo 'redBadge';
