@@ -73,7 +73,7 @@ $stmt->execute();
                 <ul class='cw_tile-itemList'>
                     <?php for ($i = 0; $i < 3; $i++) { ?>
                     <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
-                        <a class='cw_tile-itemListLink'>
+                        <a href="detail.php?id=<?php echo $row['id'];?>" class='cw_tile-itemListLink'>
                             <div aria-hidden="true" class='ppvx_container-fluid'>
                                 <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                     <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
