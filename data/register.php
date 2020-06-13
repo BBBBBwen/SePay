@@ -8,6 +8,8 @@ require 'vendor/autoload.php';
 define('AWS_KEY', 'AKIAJW4PWBT7J6EX2RXQ');
 define('AWS_SECRET_KEY', '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');
 $_SESSION['message'] = '';
+if (!empty($_POST['username'])) $username = $_POST['username'];
+if (!empty($_POST['email'])) $email = $_POST['email'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $haveError = true;
     $avatar_path = (time() . $_FILES['avatar']['name']);
@@ -73,8 +75,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Create an account</h1>
         <form class="form" action="register.php" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="alert alert-error"><?php echo $_SESSION['message']; ?></div>
-            <input type="text" placeholder="User Name" name="username" required/>
-            <input type="email" placeholder="Email" name="email" required/>
+            <?php if (!empty($username)) { ?>
+                <input type="text" placeholder="<?php echo $username; ?>" name="username"
+                       value="<?php echo $username; ?>" required/>
+            <?php } else { ?>
+                <input type="text" placeholder="User Name" name="username" required/>
+            <?php } ?>
+            <?php if (!empty($email)) { ?>
+                <input type="text" placeholder="<?php echo $email; ?>" name="email" value="<?php echo $email; ?>"
+                       required/>
+            <?php } else { ?>
+                <input type="text" placeholder="Email" name="email" required/>
+            <?php } ?>
             <input type="password" id="password" placeholder="Password" name="password" autocomplete="new-password"
                    onkeyup="CheckPassword()" required/>
             <input type="password" placeholder="Confirm Password" id="confirmed_password" name="confirmed_password"
