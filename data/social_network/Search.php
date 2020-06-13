@@ -45,7 +45,7 @@ $get_frnd_num = $friend->getAllFriends($_SESSION['id'], false);
     </nav>
     <div class="all_users">
         <form action="" method="post">
-            Search user: <input placeholder="enter email" rows="1" name="email" onkeydown="pressed(event)"></input>
+            Search user: <input type="email" placeholder="enter email" rows="1" name="email" onkeydown="pressed(event)"></input>
         </form>
         <?php if (!empty($user) && $user) { ?>
             <div class="usersWrapper">
