@@ -36,7 +36,6 @@ $stmt->execute();
                                         <p><i class=""></i> Date <?php echo $user['reg_date'] ?></p>
                                     </div>
                                 </span>
-
                             <div>
                                 <a role="button" href="pay_form.php"
                                    class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney">Send</a>
@@ -79,26 +78,26 @@ $stmt->execute();
                 <?php for ($i = 0; $i < 3; $i++) { ?>
                     <ul class='cw_tile-itemList'>
                         <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
-                            <a href="detail.php?id=<?php echo $row['id']; ?>" class='cw_tile-itemListLink'>
-                                <div aria-hidden="true" class='ppvx_container-fluid'>
-                                <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
-                                    <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                                    <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
-                                    <?php if ($_SESSION['id'] == $row['user_id']) { ?>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
-                                    <?php } else {
-                                        $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
-                                        $stmt1 = $db->prepare($sql);
-                                        $stmt1->execute();
-                                        $transfer = $stmt1->fetch(PDO::FETCH_ASSOC);
-                                        ?>
-                                        <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
-                                    <?php } ?>
-                                    <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['currency'] . ' ' . $row['amount'];
-                                        } ?></p>
-                                </span>
-                                </div>
-                            </a>
+                            <div aria-hidden="true" class='ppvx_container-fluid'>
+                                <?php if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+                                <a href="detail.php?id=<?php echo $row['id']; ?>" class='cw_tile-itemListLink'>
+                                    <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
+                                        <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
+                                            <?php if ($_SESSION['id'] == $row['user_id']) { ?>
+                                                <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['description']; ?></p>
+                                            <?php } else {
+                                                $sql = "SELECT * FROM users WHERE id = '" . $row['user_id'] . "'";
+                                                $stmt1 = $db->prepare($sql);
+                                                $stmt1->execute();
+                                                $transfer = $stmt1->fetch(PDO::FETCH_ASSOC);
+                                                ?>
+                                                <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
+                                            <?php } ?>
+                                        <p class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['currency'] . ' ' . $row['amount']; ?></p>
+                                    </span>
+                                </a>
+                            </div>
+                            <?php } ?>
                         </li>
                     </ul>
                 <?php } ?>
