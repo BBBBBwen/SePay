@@ -30,6 +30,11 @@ Admin account
 Email: admin@admin.com
 password: 123456
 
+
+Other account for test:
+customer@test.com  123123
+demo@demo.com      123456
+
 Release log
 V1(Sprint 2):
 Allow user secure register and login, then they could view their dashboard
