@@ -1,11 +1,18 @@
 Release log
-V1(Sprint 2):
-Allow user secure register and login, then they could view their dashboard
-Allow user top up money into account
-Allow user upload their avatar
-Allow internal transfer
-Allow user logout
-User could see their transaction history
+
+
+V3(Sprint 4):
+Users are able to add friends and chat with friends
+Provide a simple API function
+Mobile friendly
+Code refactor
+TODO:
+1. Improve interface of admin page
+2. Improve security of our API
+3. User interface could be improved
+4. Could allow user select an avatar from avatar pool
+5. Add more function to Bpay if get access of Bpay Production API
+
 
 V2(Sprint 3):
 Update user interface
@@ -14,17 +21,15 @@ Implement 3 different currencies
 Add admin management function
 Improve security function
 
-V3(Sprint 4):
-Users are able to add friends and chat with friends
-Provide a simple API function
-Mobile friendly
-Code refactor
 
-TODO:
-1. Improve interface of admin page
-2. Improve security of our API
-3. User interface could be improved
-4. Could allow user select an avatar from avatar pool
-5. Add more function to Bpay if get access of Bpay Production API
+V1(Sprint 2):
+Allow user secure register and login, then they could view their dashboard
+Allow user top up money into account
+Allow user upload their avatar
+Allow internal transfer
+Allow user logout
+User could see their transaction history
+
+
 
 	  
