@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+
 <head>
     <meta charset="UTF8">
     <title>SePay</title>
@@ -10,15 +11,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <style>
-        html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Open Sans", sans-serif
+        }
+
     </style>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php"><img src="assets/images/home.png" style="height:20px;width:20px"
-                                                      alt="Avatar"> SePay</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.php"><img src="assets/images/home.png" style="height:20px;width:20px" alt="Avatar"> SePay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -53,5 +61,8 @@ if(isset($_SESSION['username'])) {
     echo "<div style='text-align:center'><h1>welcome! ".$_SESSION['username'];
     echo '</h1><br>';
     ?>
-    <span class="user"><img src='<?= $_SESSION['avatar'] ?>'></span></div>
-<?php } ?>
+<span class="user"><img src='<?= $_SESSION['avatar'] ?>'></span></div>
+<?php }else{
+    header("Location:data/login.php");
+}
+?>

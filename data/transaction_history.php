@@ -20,11 +20,12 @@ $stmt->execute();
             </div>
             <h3 class='cw_tile-header'>Transaction History</h3>
             <br>
-            <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                <ul class='cw_tile-itemList'>
-                    <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
-                        <a class='cw_tile-itemListLink'>
-                            <div aria-hidden="true" class='ppvx_container-fluid'>
+            <?php if ($stmt->rowCount() != 0) { ?>
+                <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <ul class='cw_tile-itemList'>
+                        <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
+                            <a href="detail.php?id=<?php echo $row['id']; ?>" class='cw_tile-itemListLink'>
+                                <div aria-hidden="true" class='ppvx_container-fluid'>
                                     <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
                                         <p class='ppvx_col-1 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo $row['captured_at']; ?></p>
                                         <?php if ($row['user_id'] == $_SESSION['id']) { ?>
@@ -38,12 +39,23 @@ $stmt->execute();
                                             <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'><?php echo 'receive money from ' . $transfer["username"]; ?></p>
                                         <?php } ?>
                                         <div class='ppvx_col-3 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>
-                                            <p><?php echo $row['currency'].' ' . $row['amount']; ?></p>
+                                            <p><?php echo $row['currency'] . ' ' . $row['amount']; ?></p>
                                             <p><?php echo $row['payment_status']; ?></p>
                                         </div>
                                     </span>
-                            </div>
-                        </a>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                <?php } ?>
+            <?php } else { ?>
+                <ul class='cw_tile-itemList'>
+                    <li class="cw_tile-itemListContainer cw_tile-itemListContainer_hover  ">
+                        <div aria-hidden="true" class='ppvx_container-fluid'>
+                                    <span class='ppvx_row cw_tile-itemListRow cw_tile-activityListRow'>
+                                            <p class='ppvx_col-2 cw_tile-itemListCol cw_tile__activity-txnDateContainer test_activity-txnDateContainer'>currently have no history</p>
+                        </div>
+                        </span>
                     </li>
                 </ul>
             <?php } ?>

@@ -24,9 +24,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
 
         if ($recovered_des == $recovered_client) {
             if (!$receiver) {
-                echo 'there is no such user';
+                $error = 'there is no such user';
             } else if ($amount > $userBalance[$currency] || $amount < 0) {
-                echo 'there is no enough balance';
+                $error = 'there is no enough balance';
             } else {
                 $receiverBalance = $db->getUserBalance($receiver['id']);
                 $isPaymentExist = $db->getPayment($payment_id);
@@ -41,10 +41,10 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                 echo "<script> alert('Payment is successful. Your payment id is: " . $payment_id . "');parent.location.href='wallet.php'; </script>";
             }
         } else {
-            echo "Please enter correct payment password";
+            $error = "Please enter correct payment password";
         }
     } catch (Exception $e) {
-        echo 'Wrong';
+        $error = "encryption error";
     }
 }
 ?>
@@ -54,6 +54,9 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
         <div>
             <div class="card" style="margin: 10%">
                 <h2>Send money</h2>
+                <?php if(!empty($error)) { ?>
+                    <div style="color: red"><?php echo $error; ?></div>
+                <?php }?>
                 <div>
                     <div>
                         <div>
@@ -66,7 +69,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                                     <label>Amount:</label>
                                     <input type="text" placeholder="amount" id="amount" name="amount" required/>
                                     <div>
-                                        <label>to:</label>
+                                        <label>Currency:</label>
 
                                         <select name="to">
                                             <option value="EUR">EUR</option>
@@ -84,7 +87,7 @@ if (isset($_SESSION['id']) && isset($_POST['email'])) {
                         </div>
                     </div>
                 </div>
-                <button type="submit" onclick="DES_encryption();">Confirm Payment</button>
+                <button class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button test_balance_btn-transferMoney" type="submit" onclick="DES_encryption();">Confirm Payment</button>
             </div>
         </div>
     </form>

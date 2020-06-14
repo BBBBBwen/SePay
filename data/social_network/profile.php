@@ -1,16 +1,12 @@
 <?php
 require 'friend.php';
-
-if(isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
     $user_data = $db->getUserInfoById($_SESSION['id']);
-    if($user_data ===  false){
+    if ($user_data === false) {
         header('Location: ../logout.php');
         exit;
     }
-    // FETCH ALL USERS WHERE ID IS NOT EQUAL TO MY ID
-    $all_users = $db->getAllUsers($_SESSION['id']);
-}
-else{
+} else {
     header('Location: ../logout.php');
     exit;
 }
@@ -28,38 +24,31 @@ $get_frnd_num = $friend->getAllFriends($_SESSION['id'], false);
         <div class="img">
             <img src="<?php echo $user_data['avatar']; ?>" alt="Profile image">
         </div>
-        <h1><?php echo  $user_data['username'];?></h1>
+        <h1><?php echo $user_data['username']; ?></h1>
     </div>
     <nav>
         <ul>
             <li><a href="profile.php" rel="noopener noreferrer" class="active">Home</a></li>
+            <li><a href="search.php" rel="noopener noreferrer">Search</a></li>
             <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
-                    if($get_req_num > 0){
+                    if ($get_req_num > 0) {
                         echo 'redBadge';
                     }
-                    ?>"><?php echo $get_req_num;?></span></a></li>
-            <li><a href="friends.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
+                    ?>"><?php echo $get_req_num; ?></span></a></li>
+            <li><a href="friends.php" rel="noopener noreferrer">Friends<span
+                            class="badge"><?php echo $get_frnd_num; ?></span></a></li>
         </ul>
     </nav>
     <div class="all_users">
-        <h3>All Users</h3>
-        <div class="usersWrapper">
+        <div style="margin-left: 25%">
             <?php
-            if($all_users){
-                foreach($all_users as $row){
-                    echo '<div class="user_box">
-                                <div class="user_img"><img src="'.$row->avatar.'" alt="Profile image"></div>
-                                <div class="user_info"><span>'.$row->username.'</span>
-                                <span><a href="user_profile.php?id='.$row->id.'" class="ppvx_btn ppvx_btn--secondary ppvx_btn--size_sm cw_tile-button" style="float: right">See profile</a></div>
-                            </div>';
-                }
-            }
-            else{
-                echo '<h4>There is no user!</h4>';
-            }
+            echo '<div>
+                       Email: <span>' . $user_data['email'] . '</span><br>
+                       Name: <span>' . $user_data['username'] . '</span><br>
+                       Registration date: <span>' . $user_data['reg_date'] . '</span>
+                  </div>';
             ?>
         </div>
     </div>
-</div>
 </body>
 </html>
