@@ -36,13 +36,11 @@ customer@test.com  123123
 demo@demo.com      123456
 
 Release log
-V1(Sprint 2):
-Allow user secure register and login, then they could view their dashboard
-Allow user top up money into account
-Allow user upload their avatar
-Allow internal transfer
-Allow user logout
-User could see their transaction history
+V3(Sprint 4):
+Users are able to add friends and chat with friends
+Provide a simple API function
+Mobile friendly
+Code refactor
 
 V2(Sprint 3):
 Update user interface
@@ -51,9 +49,14 @@ Implement 3 different currencies
 Add admin management function
 Improve security function
 
-V3(Sprint 4):
-Users are able to add friends and chat with friends
-Provide a simple API function
-Mobile friendly
-Code refactor
+V1(Sprint 2):
+Allow user secure register and login, then they could view their dashboard
+Allow user top up money into account
+Allow user upload their avatar
+Allow internal transfer
+Allow user logout
+User could see their transaction history
+
+
+
 
